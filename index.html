@@ -32,7 +32,7 @@
       }
       body {
         margin: 0; background: var(--bg); color: var(--ink);
-        font-family: "Noto Sans SC", "Noto Sans KR", "Noto Sans JP", "Noto Sans Thai", "Noto Sans Arabic", "Noto Sans Myanmar", system-ui, -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif;
+        font-family: "Noto Sans SC", "Noto Sans KR", "Noto Sans JP", "Noto Sans Thai", "Noto Sans Arabic", "Noto Sans Myanmar", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Source Han Sans SC", system-ui, -apple-system, sans-serif;
         line-height: 1.6; -webkit-font-smoothing: antialiased;
       }
       button, select, input { font: inherit; color: var(--ink); }
@@ -222,13 +222,15 @@
       @media (max-width: 860px) { .a-box { width: 100%; } }
       .lesson-mid .lm-tag { display: inline-block; font-size: 13.5px; font-weight: 700; background: #fff; border: 1.5px solid var(--line); border-radius: 999px; padding: 3px 13px; margin-bottom: 10px; }
       .lesson-mid .lm-say { font-size: 18.5px; font-weight: 500; color: #3f4756; margin: 0; }
-      .tones { display: grid; grid-template-columns: repeat(auto-fit, minmax(126px, 1fr)); gap: 10px; margin-top: 16px; }
+      .tones { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-top: 16px; }
       .tone-chip {
-        border: 1.5px solid var(--line); background: #fff; border-radius: 12px; min-height: 88px;
+        border: 1.5px solid var(--line); background: #fff; border-radius: 12px; min-height: 92px;
         padding: 12px 8px; display: flex; flex-direction: column; align-items: center; justify-content: center;
         line-height: 1.3; text-align: center;
       }
-      .tone-chip b { font-size: 36px; font-weight: 900; line-height: 1.2; }
+      .tone-chip b { font-size: 36px; font-weight: 900; line-height: 1.2; color: var(--ink); }
+      .tone-chip .tone-name { font-size: 14px; font-weight: 500; color: var(--ink-2); margin-top: 4px; line-height: 1.35; text-align: center; }
+      .tone-chip .tone-name .i18n-main { display: block; }
       .tone-chip:hover { border-color: var(--blue); }
       .tone-chip.playing { background: var(--tint); border-color: var(--blue); }
       .lesson-side { display: flex; align-items: center; gap: 26px; }
@@ -319,8 +321,6 @@
       .rm-stage.unlocked .rs-n { background: var(--blue); color: #fff; }
       .rm-stage .rs-body { flex: 1; min-width: 0; }
       .rm-stage h3 { margin: 0; font-size: 18.5px; font-weight: 900; line-height: 1.3; }
-      .rm-stage .rs-latin { font-size: 13.5px; font-weight: 500; color: var(--ink-3); line-height: 1.35; }
-      body.lang-other .rs-latin { display: none; }
       .rm-stage-meta { margin: 5px 0 0; font-size: 14px; color: var(--ink-2); font-weight: 500; }
       .rm-stage-meta .zh-sub { font-size: 12px; }
       .rs-status { display: inline-flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 700; margin-top: 7px; }
@@ -340,6 +340,13 @@
       .rm-test-btn { background: #fff; color: var(--ink); border: 0; border-radius: 12px; padding: 11px 26px; font-size: 16px; font-weight: 700; min-height: 48px; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.3; flex: none; }
       .rm-test-btn:hover { background: var(--tint); }
       body.keep-zh .rm-test-btn .zh-sub { color: var(--blue); }
+      /* interface-pinyin lines inside the roadmap's right-hand area:
+         light on the dark test banner, soft white on the blue start
+         button, soft blue on the plain action links */
+      .rm-test .py { color: rgba(255, 255, 255, .62); }
+      .rm-start-btn .py { color: rgba(255, 255, 255, .75); }
+      .rm-actions .linklike .py { color: rgba(0, 69, 250, .55); }
+      .rm-actions .linklike { text-align: start; }
       .rm-node { display: flex; align-items: center; }
       .rm-node.flip { flex-direction: row-reverse; }
       .rm-circle { flex: none; width: 88px; height: 88px; border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; font-size: 25px; font-weight: 900; line-height: 1.1; position: relative; z-index: 1; }
@@ -379,6 +386,134 @@
         .rm-join { margin: 0 31px; height: 28px; }
         .rm-test { padding: 19px 20px; }
       }
+
+      /* ---------- pinyin intro (roadmap node 00 + lesson 1 preview) ---------- */
+      .intro-strip { background: #fff; border: 1.5px solid var(--line); border-radius: 12px; padding: 16px 20px; margin-bottom: 22px; }
+      .intro-title { margin: 0; font-size: 19px; font-weight: 900; line-height: 1.35; }
+      .intro-title .py { margin-bottom: 1px; }
+      .intro-body { margin: 5px 0 0; font-size: 15.5px; color: var(--ink-2); font-weight: 500; }
+      .modal .intro-p { font-size: 15.5px; color: var(--ink-2); font-weight: 500; margin: 8px 0; line-height: 1.65; }
+      .intro-ex { display: flex; align-items: center; gap: 14px; background: var(--tint-2); border-radius: 12px; padding: 12px 16px; margin-top: 14px; }
+      .intro-ex .ex-item { display: inline-flex; flex-direction: column; align-items: center; line-height: 1.25; }
+      .intro-ex .ex-item i { font-style: normal; font-size: 12.5px; color: var(--blue); font-weight: 700; order: -1; }
+      .intro-ex .ex-item b { font-size: 24px; font-weight: 900; }
+      .intro-ex .ex-arrow { color: var(--ink-3); font-size: 18px; }
+      .intro-ex .ex-word { font-size: 17px; font-weight: 900; }
+      .rm-card .rm-desc { margin: 5px 0 0; font-size: 14.5px; color: var(--ink-2); font-weight: 500; }
+      .rm-card.locked .rm-desc { color: var(--ink-3); }
+
+      /* ---------- lesson 00: 什么是汉语拼音 (full page, replaces the intro modal) ---------- */
+      .l00-page { padding: 26px 0 72px; }
+      .l00-inner { max-width: 980px; margin: 0 auto; }
+      .l00-topbar { display: flex; align-items: center; justify-content: space-between; gap: 14px 22px; flex-wrap: wrap; margin-bottom: 26px; }
+      .l00-back {
+        border: 1.8px solid var(--blue); background: #fff; color: var(--blue); border-radius: 12px;
+        padding: 9px 20px; font-size: 15.5px; font-weight: 700; min-height: 46px;
+        display: inline-flex; align-items: center; gap: 8px; line-height: 1.3;
+      }
+      .l00-back:hover { background: var(--tint); }
+      body.keep-zh .l00-back .zh-sub { color: var(--blue); }
+      .l00-top-meta { display: flex; align-items: center; gap: 14px; font-size: 15px; font-weight: 700; color: var(--ink-2); flex-wrap: wrap; }
+      .l00-prog { width: 130px; height: 8px; border-radius: 99px; background: var(--tint-2); overflow: hidden; flex: none; }
+      .l00-prog i { display: block; height: 100%; border-radius: 99px; background: var(--blue); transition: width .3s; }
+      .l00-head .l00-eyebrow { font-size: 13.5px; font-weight: 900; letter-spacing: 2.5px; color: var(--blue); }
+      .l00-title { font-size: clamp(30px, 4vw, 42px); font-weight: 900; letter-spacing: .6px; line-height: 1.25; margin: 6px 0 0; }
+      .l00-title .zh-sub { font-size: clamp(15px, .5em, 21px); }
+      .l00-en { font-size: 17px; font-weight: 700; color: var(--ink-2); margin: 6px 0 0; }
+      /* Chinese interface = Chinese only: inline English labels inside
+         otherwise-Chinese lines (· Initial / · Final / · Tone, Pinyin
+         Chart, Initials / Finals / Whole Syllables / Tones) are hidden
+         while the interface language is Chinese (body has no .lang-other
+         then); they come back with any other interface language. */
+      body:not(.lang-other) .l00-en-part { display: none; }
+      /* interface-pinyin wrappers on lesson 00: pinyin line stacks above
+         its Chinese line, same pattern as the rest of the site */
+      .l00-col { display: inline-flex; flex-direction: column; line-height: 1.3; }
+      .l00-title .py { font-size: 15px; margin-bottom: 4px; }
+      .l00-chart h4 { flex-wrap: wrap; }
+      .l00-chart h3 .py, .l00-chart h4 .py { width: 100%; margin-bottom: 2px; }
+      /* "keep Chinese" off + another interface language: hide lesson 00's
+         Chinese interface copy (Chinese body paragraphs, the why-card
+         Chinese titles, the chart's Chinese rhyme notes). The selected
+         language stays; Chinese learning content (hanzi, pinyin, the
+         chart's letters and hanzi examples) stays as content. */
+      body.lang-other:not(.keep-zh) .l00-zh,
+      body.lang-other:not(.keep-zh) .l00-why-card h3,
+      body.lang-other:not(.keep-zh) .l00-chip .c-note { display: none; }
+      .l00-sec { margin-top: 44px; }
+      .l00-sec-title { display: flex; align-items: center; gap: 13px; margin: 0; font-size: clamp(21px, 2.6vw, 26px); font-weight: 900; letter-spacing: .4px; line-height: 1.3; }
+      .l00-sec-title .zh-sub { font-size: 13px; }
+      .l00-sec-num { flex: none; width: 38px; height: 38px; border-radius: 50%; background: var(--blue); color: #fff; display: grid; place-items: center; font-size: 15.5px; font-weight: 900; }
+      .l00-sec .u-amber { margin: 10px 0 20px 51px; }
+      [dir="rtl"] .l00-sec .u-amber { margin-left: 0; margin-right: 51px; }
+      .l00-panel { background: var(--tint-2); border-radius: 16px; padding: 26px 28px; display: grid; grid-template-columns: 230px 1fr; gap: 28px; align-items: stretch; }
+      @media (max-width: 720px) { .l00-panel { grid-template-columns: 1fr; padding: 22px 20px; } }
+      .l00-hello { background: #fff; border-radius: 14px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 22px 14px; text-align: center; }
+      .l00-hello-hz { font-size: 46px; font-weight: 900; line-height: 1.2; }
+      .l00-hello-py { font-size: 21px; font-weight: 700; color: var(--blue); margin-top: 4px; }
+      .l00-hello-gl { font-size: 16px; font-weight: 500; color: var(--ink-2); margin-top: 2px; }
+      .l00-what h3 { margin: 2px 0 0; font-size: 21px; font-weight: 900; line-height: 1.35; }
+      .l00-what h3 .zh-sub { font-size: 13.5px; }
+      .l00-zh { font-size: 16.5px; font-weight: 500; color: #3f4756; margin: 10px 0 0; line-height: 1.75; }
+      .l00-aux { font-size: 15.5px; font-weight: 500; color: var(--ink-2); margin: 10px 0 0; line-height: 1.7; }
+      .l00-aux.small { font-size: 14.5px; margin-top: 6px; }
+      .l00-why { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+      @media (max-width: 720px) { .l00-why { grid-template-columns: 1fr; } }
+      .l00-why-card { border: 1.5px solid var(--line); border-radius: 16px; padding: 22px 20px; background: #fff; }
+      .l00-why-ic { width: 52px; height: 52px; border-radius: 50%; background: var(--tint); color: var(--blue); display: grid; place-items: center; margin-bottom: 14px; }
+      .l00-why-ic svg { width: 27px; height: 27px; }
+      .l00-why-card h3 { margin: 0; font-size: 19.5px; font-weight: 900; line-height: 1.35; }
+      .l00-why-card p { margin: 6px 0 0; font-size: 15px; color: var(--ink-2); font-weight: 500; line-height: 1.6; }
+      .l00-words { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; margin-top: 18px; }
+      @media (max-width: 720px) { .l00-words { grid-template-columns: repeat(2, 1fr); } }
+      .l00-word { background: var(--tint-2); border-radius: 14px; padding: 18px 12px 16px; text-align: center; }
+      .l00-word .w-hz { font-size: 33px; font-weight: 900; line-height: 1.25; }
+      .l00-word .w-py { font-size: 17.5px; font-weight: 700; color: var(--blue); margin-top: 3px; }
+      .l00-word .w-gl { font-size: 14.5px; font-weight: 500; color: var(--ink-2); margin-top: 2px; }
+      .l00-formula { display: flex; align-items: stretch; justify-content: center; gap: 12px; flex-wrap: wrap; margin-top: 6px; }
+      .l00-fbox { background: #fff; border: 1.5px solid var(--line); border-radius: 14px; min-width: 118px; padding: 16px 14px 13px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; }
+      .l00-fbox b { font-size: 42px; font-weight: 900; line-height: 1.15; }
+      .l00-fbox span { font-size: 14px; font-weight: 700; color: var(--ink-2); margin-top: 5px; }
+      .l00-fbox.result { background: var(--tint); border-color: transparent; }
+      .l00-fbox.result b { color: var(--blue); }
+      .l00-op { align-self: center; font-size: 26px; font-weight: 900; color: var(--ink-3); }
+      .l00-chart { border: 1.5px solid var(--line); border-radius: 16px; padding: 24px 26px 26px; background: #fff; }
+      @media (max-width: 640px) { .l00-chart { padding: 20px 16px 22px; } }
+      .l00-chart h3 { margin: 0; font-size: 19.5px; font-weight: 900; line-height: 1.35; display: flex; align-items: baseline; gap: 9px; flex-wrap: wrap; }
+      .l00-chart h3 .c-en { font-size: 14.5px; font-weight: 700; color: var(--ink-3); }
+      .l00-count { font-size: 13px; font-weight: 700; color: #fff; background: var(--blue); border-radius: 999px; padding: 2px 11px; text-align: center; }
+      body.keep-zh .l00-count .zh-sub { color: rgba(255, 255, 255, .88); }
+      .l00-chart .c-group { margin-top: 22px; }
+      .l00-chart .c-group:first-of-type { margin-top: 16px; }
+      .l00-chart h4 { margin: 16px 0 0; font-size: 16px; font-weight: 900; display: flex; align-items: baseline; gap: 8px; }
+      .l00-chart h4 .c-n { font-size: 13px; font-weight: 700; color: var(--ink-3); }
+      .l00-chips { display: grid; grid-template-columns: repeat(auto-fill, minmax(64px, 1fr)); gap: 8px; margin-top: 10px; }
+      .l00-chips.syll { grid-template-columns: repeat(auto-fill, minmax(86px, 1fr)); }
+      .l00-chips.nasal-back { grid-template-columns: repeat(auto-fill, minmax(128px, 1fr)); }
+      .l00-chip { background: var(--tint-2); border-radius: 10px; padding: 7px 4px 9px; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+      .l00-chip .c-read { display: block; font-size: 12.5px; font-weight: 500; color: var(--ink-3); line-height: 1.3; letter-spacing: .2px; }
+      .l00-chip .c-main { display: flex; align-items: baseline; justify-content: center; gap: 5px; margin-top: 1px; }
+      .l00-chip .c-py { font-size: 19px; font-weight: 900; line-height: 1.3; }
+      .l00-chip .c-hz { font-size: 18px; font-weight: 600; line-height: 1.3; }
+      .l00-chip .c-note { display: block; font-size: 13.5px; font-weight: 500; color: var(--ink-2); line-height: 1.45; margin-top: 2px; }
+      .l00-tones { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; margin-top: 12px; }
+      @media (max-width: 640px) { .l00-tones { grid-template-columns: repeat(2, 1fr); } }
+      .l00-finish { margin-top: 48px; background: var(--tint); border-radius: 16px; padding: 24px 28px; display: flex; align-items: center; justify-content: space-between; gap: 18px 26px; flex-wrap: wrap; }
+      .l00-next-lbl { font-size: 13.5px; font-weight: 700; color: var(--blue); letter-spacing: .3px; }
+      .l00-next-lbl .zh-sub { font-size: 11.5px; }
+      .l00-next-name { margin: 3px 0 0; font-size: 21px; font-weight: 900; line-height: 1.35; }
+      .l00-next-state { margin: 4px 0 0; font-size: 14.5px; font-weight: 500; color: var(--ink-2); display: flex; align-items: center; gap: 6px; }
+      .l00-next-state svg { width: 15px; height: 15px; flex: none; }
+      .l00-next-state.unlocked { color: #1e9e5a; font-weight: 700; }
+      .l00-finish-actions { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+      .l00-complete.done { background: #1e9e5a; box-shadow: none; cursor: default; }
+      .l00-complete.done:hover { background: #1e9e5a; }
+      .l00-nextgo { background: #fff; color: var(--blue); border: 1.8px solid var(--blue); border-radius: 12px; padding: 11px 24px; font-size: 16px; font-weight: 700; min-height: 50px; display: inline-flex; flex-direction: column; align-items: center; justify-content: center; line-height: 1.3; }
+      .l00-nextgo:hover { background: var(--tint-2); }
+      /* the class sets display:inline-flex, which would otherwise
+         override the hidden attribute and show the button early */
+      .l00-nextgo[hidden] { display: none; }
+      body.keep-zh .l00-nextgo .zh-sub { color: var(--blue); }
 
       /* ---------- records modal + toast ---------- */
       .modal-back { position: fixed; inset: 0; background: rgba(10, 36, 86, .45); display: none; place-items: center; z-index: 100; padding: 20px; }
@@ -464,10 +599,10 @@
               <span class="py">Líng jīchǔ Hànyǔ kèchéng</span>
               <p class="kicker"><span data-i18n="kicker">零基础汉语课程</span></p>
             </div>
-            <span class="py py-title">Cóng pīnyīn kāishǐ, xìtǒng xuéhuì Hànyǔ</span>
+            <span class="py py-title">Cóng pīnyīn kāishǐ，xìtǒng xuéhuì Hànyǔ</span>
             <h1 data-i18n-html="heroTitle">从拼音开始，<br />系统学会汉语</h1>
             <p class="hero-sub" data-i18n="heroSub">听标准发音、看口型提示、跟读练习，按自己的节奏逐课进步。</p>
-            <span class="py py-sub">Tīng biāozhǔn fāyīn, kàn kǒuxíng tíshì, gēndú liànxí, àn zìjǐ de jiézòu zhú kè jìnbù.</span>
+            <span class="py py-sub">Tīng biāozhǔn fāyīn，kàn kǒuxíng tíshì，gēndú liànxí，àn zìjǐ de jiézòu zhú kè jìnbù。</span>
             <div class="hero-ctas">
               <a class="btn-primary" href="#lesson" id="ctaStart"><span class="py">Kāishǐ dì yī kè</span><span data-i18n="ctaStart">开始第一课</span></a>
               <a class="link-arrow" href="#path" id="ctaPath"><span class="py">Chákàn xuéxí lùjìng</span><span data-i18n="ctaPath">查看学习路径</span></a>
@@ -501,7 +636,7 @@
               <span class="w-div" aria-hidden="true"></span>
               <div>
                 <h3><span class="py">Zhú kè jìnjiē</span><span data-i18n="way2Title">逐课进阶</span></h3>
-                <p><span class="py">Wánchéng yī kè, zài jiěsuǒ xià yī kè</span><span data-i18n="way2Desc">完成一课，再解锁下一课</span></p>
+                <p><span class="py">Wánchéng yī kè，zài jiěsuǒ xià yī kè</span><span data-i18n="way2Desc">完成一课，再解锁下一课</span></p>
               </div>
             </div>
             <div class="way">
@@ -532,7 +667,7 @@
               <span class="st-n" aria-hidden="true">01</span>
               <div>
                 <h3><span class="py">Pīnyīn</span><span data-i18n="st1Name">拼音</span></h3>
-                <p><span class="py">Zhǎngwò Hànyǔ pīnyīn, néng zhèngquè pīndú fāyīn</span><span data-i18n="st1Desc">掌握汉语拼音，能正确拼读发音</span></p>
+                <p><span class="py">Zhǎngwò Hànyǔ pīnyīn，néng zhèngquè pīndú fāyīn</span><span data-i18n="st1Desc">掌握汉语拼音，能正确拼读发音</span></p>
               </div>
             </div>
             <span class="path-arrow" aria-hidden="true">→</span>
@@ -540,7 +675,7 @@
               <span class="st-n" aria-hidden="true">02</span>
               <div>
                 <h3><span class="py">Rìcháng Hànyǔ</span><span data-i18n="st2Name">日常汉语</span></h3>
-                <p><span class="py">Xuéhuì chángyòng cíjù, jìnxíng jiǎndān jiāoliú</span><span data-i18n="st2Desc">学会常用词句，进行简单交流</span></p>
+                <p><span class="py">Xuéhuì chángyòng cíjù，jìnxíng jiǎndān jiāoliú</span><span data-i18n="st2Desc">学会常用词句，进行简单交流</span></p>
               </div>
             </div>
             <span class="path-arrow" aria-hidden="true">→</span>
@@ -548,13 +683,13 @@
               <span class="st-n" aria-hidden="true">03</span>
               <div>
                 <h3><span data-i18n="st3Name">HSK</span></h3>
-                <p><span class="py">Tíshēng Hànyǔ nénglì, xiánjiē HSK kǎoshì</span><span data-i18n="st3Desc">提升汉语能力，衔接HSK考试</span></p>
+                <p><span class="py">Tíshēng Hànyǔ nénglì，xiánjiē HSK kǎoshì</span><span data-i18n="st3Desc">提升汉语能力，衔接HSK考试</span></p>
               </div>
             </div>
           </div>
           <p class="path-note">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 11v5" stroke-linecap="round"/><circle cx="12" cy="7.8" r="1.15" fill="currentColor" stroke="none"/></svg>
-            <span><span class="py">Měi ge jiēduàn chāi chéng duǎn kè, wánchéng dāngqián kèchéng hòu jìxù xià yī kè.</span><span data-i18n="pathNote">每个阶段拆成短课，完成当前课程后继续下一课。</span></span>
+            <span><span class="py">Měi ge jiēduàn chāi chéng duǎn kè，wánchéng dāngqián kèchéng hòu jìxù xià yī kè。</span><span data-i18n="pathNote">每个阶段拆成短课，完成当前课程后继续下一课。</span></span>
           </p>
         </div>
       </section>
@@ -568,17 +703,21 @@
               <h2 class="sec-title" id="lesson-title" data-i18n="lessonTitle">第一课预览 · 认识 a</h2>
               <div class="u-amber" aria-hidden="true"></div>
             </div>
+            <div class="intro-strip">
+              <h3 class="intro-title"><span class="py">Shénme shì pīnyīn？</span><span data-i18n="rmIntroTitle">什么是拼音？</span></h3>
+              <p class="intro-body"><span data-i18n="rmIntroBody1">拼音是用拉丁字母给汉字注音的工具，帮你读出汉字的发音。</span><span data-i18n="rmIntroBody2">学会拼音，你就能自己拼读汉字，不用死记硬背。</span></p>
+            </div>
             <div class="lesson-body">
               <button class="a-box" type="button" id="aBox" data-snd="sndA" data-i18n-aria="aBoxAria" aria-label="播放 a 的发音">a</button>
               <div class="lesson-mid">
                 <span class="py">Dān yùnmǔ a</span>
                 <span class="lm-tag" data-i18n="lessonTag">单韵母 a</span>
-                <p class="lm-say"><span class="py">Shìzhe zhāngkāi zuǐ, qīngchǔ de fāchū a.</span><span data-i18n="lessonSay">试着张开嘴，清楚地发出 a。</span></p>
+                <p class="lm-say"><span class="py">Shìzhe zhāngkāi zuǐ，qīngchǔ de fāchū a。</span><span data-i18n="lessonSay">试着张开嘴，清楚地发出 a。</span></p>
                 <div class="tones" role="group" data-i18n-aria="tonesAria" aria-label="a 的四个声调，点按试听">
-                  <button class="tone-chip" type="button" data-snd="sndA" aria-label="ā，点按试听"><b>ā</b></button>
-                  <button class="tone-chip" type="button" data-snd="sndA2" aria-label="á，点按试听"><b>á</b></button>
-                  <button class="tone-chip" type="button" data-snd="sndA3" aria-label="ǎ，点按试听"><b>ǎ</b></button>
-                  <button class="tone-chip" type="button" data-snd="sndA4" aria-label="à，点按试听"><b>à</b></button>
+                  <button class="tone-chip" type="button" data-snd="sndA" aria-label="ā 第一声，点按试听"><b>ā</b><span class="tone-name" data-i18n="tone1">第一声</span></button>
+                  <button class="tone-chip" type="button" data-snd="sndA2" aria-label="á 第二声，点按试听"><b>á</b><span class="tone-name" data-i18n="tone2">第二声</span></button>
+                  <button class="tone-chip" type="button" data-snd="sndA3" aria-label="ǎ 第三声，点按试听"><b>ǎ</b><span class="tone-name" data-i18n="tone3">第三声</span></button>
+                  <button class="tone-chip" type="button" data-snd="sndA4" aria-label="à 第四声，点按试听"><b>à</b><span class="tone-name" data-i18n="tone4">第四声</span></button>
                 </div>
               </div>
               <div class="lesson-side">
@@ -595,17 +734,6 @@
       </section>
     </main>
 
-    <footer id="pageFooter">
-      <div class="wrap foot-in">
-        <p class="foot-note"><span class="py">Wánchéng pīnyīn jīchǔ hòu, jìxù xuéxí rìcháng Hànyǔ.</span><span data-i18n="footNote">完成拼音基础后，继续学习日常汉语。</span></p>
-        <nav class="foot-links" data-i18n-aria="footNavAria" aria-label="页尾链接">
-          <a href="#top"><span class="py">Bāngzhù zhōngxīn</span><span data-i18n="footHelp">帮助中心</span></a><span class="sep" aria-hidden="true">/</span>
-          <a href="#top"><span class="py">Yǐnsī zhèngcè</span><span data-i18n="footPrivacy">隐私政策</span></a><span class="sep" aria-hidden="true">/</span>
-          <a href="#top"><span class="py">Liánxì wǒmen</span><span data-i18n="footContact">联系我们</span></a>
-        </nav>
-      </div>
-    </footer>
-
     <!-- ============ 学习路线图 ============ -->
     <div id="roadmapView" hidden>
       <div class="wrap rm-page">
@@ -614,7 +742,7 @@
             <div class="rm-side-head">
               <svg class="rm-panda" viewBox="0 0 64 64" fill="none" aria-hidden="true"><circle cx="14" cy="13" r="8" fill="#0a2456"/><circle cx="50" cy="13" r="8" fill="#0a2456"/><ellipse cx="32" cy="36" rx="24" ry="21" fill="#ffffff" stroke="#d7dee9" stroke-width="2"/><ellipse cx="21.5" cy="32" rx="5.4" ry="7" fill="#0a2456"/><ellipse cx="42.5" cy="32" rx="5.4" ry="7" fill="#0a2456"/><circle cx="21.5" cy="32" r="2.6" fill="#050b1d"/><circle cx="42.5" cy="32" r="2.6" fill="#050b1d"/><circle cx="20.8" cy="31.3" r="1" fill="#ffffff"/><circle cx="41.8" cy="31.3" r="1" fill="#ffffff"/><ellipse cx="32" cy="40.5" rx="3.4" ry="2.4" fill="#0a2456"/><path d="M27 47.5c1.6 1.5 3.4 2.2 5 2.2s3.4-.7 5-2.2" stroke="#0a2456" stroke-width="2" stroke-linecap="round"/></svg>
               <div>
-                <h2 id="rmSideTitle" data-i18n="rmStageTitle">选择学习阶段</h2>
+                <h2 id="rmSideTitle"><span class="py">Xuǎnzé xuéxí jiēduàn</span><span data-i18n="rmStageTitle">选择学习阶段</span></h2>
                 <div class="u-amber" aria-hidden="true"></div>
               </div>
             </div>
@@ -622,8 +750,7 @@
             <div class="rm-stage current" id="rmStage1Card">
               <span class="rs-n" aria-hidden="true">01</span>
               <div class="rs-body">
-                <h3><span data-i18n="st1Name">拼音</span></h3>
-                <div class="rs-latin" aria-hidden="true">Pinyin</div>
+                <h3><span class="py">Pīnyīn</span><span data-i18n="st1Name">拼音</span></h3>
                 <p class="rm-stage-meta" id="rmStage1Meta">19 课 · 进度 40%</p>
                 <span class="rs-status on" id="rmStage1Status">进行中</span>
                 <div class="rm-prog" aria-hidden="true"><i id="rmStage1Bar" style="width:40%"></i></div>
@@ -633,8 +760,7 @@
             <div class="rm-stage" id="rmStage2Card">
               <span class="rs-n" aria-hidden="true">02</span>
               <div class="rs-body">
-                <h3><span data-i18n="st2Name">日常汉语</span></h3>
-                <div class="rs-latin" aria-hidden="true">Daily Chinese</div>
+                <h3><span class="py">Rìcháng Hànyǔ</span><span data-i18n="st2Name">日常汉语</span></h3>
                 <p class="rm-stage-meta" id="rmStage2Meta">24 课</p>
                 <span class="rs-status off" id="rmStage2Status"></span>
               </div>
@@ -657,12 +783,175 @@
             </div>
             <div class="rm-test">
               <div>
-                <h3 data-i18n="rmTestTitle">拼音水平测试</h3>
-                <p data-i18n="rmTestSub">测测你的拼音水平，完成后解锁下一阶段</p>
+                <h3><span class="py">Pīnyīn shuǐpíng cèshì</span><span data-i18n="rmTestTitle">拼音水平测试</span></h3>
+                <p><span class="py">Cècè nǐ de pīnyīn shuǐpíng，wánchéng hòu jiěsuǒ xià yī jiēduàn</span><span data-i18n="rmTestSub">测测你的拼音水平，完成后解锁下一阶段</span></p>
               </div>
-              <button class="rm-test-btn" type="button" id="rmTestBtn" data-i18n="rmTestBtn">参加测试</button>
+              <button class="rm-test-btn" type="button" id="rmTestBtn"><span class="py">Cānjiā cèshì</span><span data-i18n="rmTestBtn">参加测试</span></button>
             </div>
             <div id="rmTrack"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ 第 00 课：什么是汉语拼音（整页，路线图 00 节点入口） ============ -->
+    <div id="lesson00View" hidden>
+      <div class="wrap l00-page">
+        <div class="l00-inner">
+          <div class="l00-topbar">
+            <button class="l00-back" type="button" id="l00BackBtn"><span aria-hidden="true">←</span><span class="l00-col"><span class="py">Fǎnhuí xuéxí lùjìng</span><span data-l00aux="l00Back" data-zh="返回学习路径">返回学习路径</span></span></button>
+            <div class="l00-top-meta">
+              <span class="l00-col"><span class="py">Jìndù</span><span id="l00ProgText">进度 0/9</span></span>
+              <span class="l00-prog" aria-hidden="true"><i id="l00ProgBar" style="width:0%"></i></span>
+              <span class="l00-col"><span class="py">5 fēnzhōng xuéwán běn kè</span><span data-l00aux="l00MetaMin" data-zh="5 分钟学完本课">5 分钟学完本课</span></span>
+            </div>
+          </div>
+
+          <header class="l00-head">
+            <span class="l00-eyebrow" id="l00Eyebrow" aria-hidden="true">LESSON 00</span>
+            <h1 class="l00-title"><span class="py">Shénme shì Hànyǔ pīnyīn？</span><span aria-hidden="true">00 · </span><span data-l00aux="l00Title" data-zh="什么是汉语拼音？">什么是汉语拼音？</span></h1>
+            <p class="l00-en" id="l00EnSub">Lesson 00 · What Is Pinyin?</p>
+            <div class="u-amber" aria-hidden="true"></div>
+          </header>
+
+          <!-- 01 · 认识拼音 -->
+          <section class="l00-sec" aria-labelledby="l00S1">
+            <h2 class="l00-sec-title" id="l00S1"><span class="l00-sec-num" aria-hidden="true">01</span><span class="l00-col"><span class="py">Rènshi pīnyīn</span><span data-l00aux="l00S1Title" data-zh="认识拼音">认识拼音</span></span></h2>
+            <div class="u-amber" aria-hidden="true"></div>
+            <div class="l00-panel">
+              <div class="l00-hello">
+                <div class="l00-hello-hz">你好！</div>
+                <div class="l00-hello-py">nǐ hǎo</div>
+                <div class="l00-hello-gl" data-l00aux="l00Hello">Hello!</div>
+              </div>
+              <div class="l00-what">
+                <h3><span class="l00-col"><span class="py">Shénme shì Hànyǔ pīnyīn？</span><span data-l00aux="l00WhatQ" data-zh="什么是汉语拼音？">什么是汉语拼音？</span></span></h3>
+                <p class="l00-zh"><span class="py">Hànyǔ pīnyīn shì yī tào bāngzhù wǒmen xuéxí pǔtōnghuà fāyīn de xìtǒng。Tā shǐyòng Lādīng zìmǔ hé shēngdiào fúhào lái biǎoshì hànzì de dúyīn。</span>汉语拼音是一套帮助我们学习普通话发音的系统。它使用拉丁字母和声调符号来表示汉字的读音。</p>
+                <p class="l00-aux" data-l00aux="l00WhatAux">What is Pinyin? Pinyin is a system that uses Latin letters and tone marks to show how Mandarin Chinese is pronounced.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 02 · 为什么要学习拼音？ -->
+          <section class="l00-sec" aria-labelledby="l00S2">
+            <h2 class="l00-sec-title" id="l00S2"><span class="l00-sec-num" aria-hidden="true">02</span><span class="l00-col"><span class="py">Wèishéme yào xuéxí pīnyīn？</span><span data-l00aux="l00S2Title" data-zh="为什么要学习拼音？">为什么要学习拼音？</span></span></h2>
+            <div class="u-amber" aria-hidden="true"></div>
+            <div class="l00-why">
+              <div class="l00-why-card">
+                <span class="l00-why-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.5 8.5 0 0 1-8.5 8.5c-1.5 0-3-.4-4.2-1.1L3 20l1.1-5.3A8.5 8.5 0 1 1 21 11.5Z"/><path d="M8.5 10.5h7M8.5 13.5h4.5"/></svg></span>
+                <h3><span class="py">Xuéhuì shuō Zhōngwén</span>学会说中文</h3>
+                <p data-l00aux="l00Why1">Learn how to pronounce Chinese words.</p>
+              </div>
+              <div class="l00-why-card">
+                <span class="l00-why-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M12 6.5C9.8 5 6.8 4.4 4 4.8v13.4c2.8-.4 5.8.2 8 1.7 2.2-1.5 5.2-2.1 8-1.7V4.8c-2.8-.4-5.8.2-8 1.7Zm0 0v13.4"/></svg></span>
+                <h3><span class="py">Dú dǒng hànzì de fāyīn</span>读懂汉字的发音</h3>
+                <p data-l00aux="l00Why2">Learn how to read Chinese characters aloud.</p>
+              </div>
+              <div class="l00-why-card">
+                <span class="l00-why-ic" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="2.5" y="6" width="19" height="12" rx="2.5"/><path d="M6 10h.01M10 10h.01M14 10h.01M18 10h.01M6 14h.01M18 14h.01M9 14h6"/></svg></span>
+                <h3><span class="py">Yòng pīnyīn dǎzì</span>用拼音打字</h3>
+                <p data-l00aux="l00Why3">Type Chinese characters on your phone or computer.</p>
+              </div>
+            </div>
+          </section>
+
+          <!-- 03 · 发现生活中的拼音 -->
+          <section class="l00-sec" aria-labelledby="l00S3">
+            <h2 class="l00-sec-title" id="l00S3"><span class="l00-sec-num" aria-hidden="true">03</span><span class="l00-col"><span class="py">Fāxiàn shēnghuó zhōng de pīnyīn</span><span data-l00aux="l00S3Title" data-zh="发现生活中的拼音">发现生活中的拼音</span></span></h2>
+            <div class="u-amber" aria-hidden="true"></div>
+            <p class="l00-zh" style="margin-top:0;"><span class="py">Zhōngguó de dàxué shēnghuó zhōng，nǐ huì jiēchù dào xǔduō xīn cí。</span>中国的大学生活中，你会接触到许多新词。</p>
+            <p class="l00-aux small" data-l00aux="l00LifeIntroAux">In university life in China, you will come across many new words.</p>
+            <div class="l00-words">
+              <div class="l00-word"><div class="w-hz">学校</div><div class="w-py">xuéxiào</div><div class="w-gl" data-l00aux="l00W1">School</div></div>
+              <div class="l00-word"><div class="w-hz">食堂</div><div class="w-py">shítáng</div><div class="w-gl" data-l00aux="l00W2">Cafeteria</div></div>
+              <div class="l00-word"><div class="w-hz">宿舍</div><div class="w-py">sùshè</div><div class="w-gl" data-l00aux="l00W3">Dormitory</div></div>
+              <div class="l00-word"><div class="w-hz">地铁</div><div class="w-py">dìtiě</div><div class="w-gl" data-l00aux="l00W4">Subway</div></div>
+            </div>
+            <p class="l00-zh"><span class="py">Zhèxiē shì wǒmen yǐhòu huì xuéxí de chángyòng cí。Xiànzài bùyòng jì zhù tāmen，zhǐ xūyào guānchá hànzì yǔ pīnyīn zhī jiān de guānxì。</span>这些是我们以后会学习的常用词。现在不用记住它们，只需要观察汉字与拼音之间的关系。</p>
+            <p class="l00-aux small" data-l00aux="l00LifeNoteAux">These are common words you will learn later. You don't need to remember them now — just observe the relationship between the characters and their pinyin.</p>
+          </section>
+
+          <!-- 04 · 认识拼音的组成 -->
+          <section class="l00-sec" aria-labelledby="l00S4">
+            <h2 class="l00-sec-title" id="l00S4"><span class="l00-sec-num" aria-hidden="true">04</span><span class="l00-col"><span class="py">Rènshi pīnyīn de zǔchéng</span><span data-l00aux="l00S4Title" data-zh="认识拼音的组成">认识拼音的组成</span></span></h2>
+            <div class="u-amber" aria-hidden="true"></div>
+            <p class="l00-zh" style="margin-top:0;"><span class="py">Yǐ “mā”（mā）wéi lì：</span>以“妈”（mā）为例：</p>
+            <p class="l00-aux small" data-l00aux="l00S4IntroAux">Let's take “妈” (mā) as an example:</p>
+            <div class="l00-formula" style="margin-top:16px;">
+              <div class="l00-fbox"><b>m</b><span class="py">shēngmǔ</span><span>声母<span class="l00-en-part"> · Initial</span></span></div>
+              <span class="l00-op" aria-hidden="true">+</span>
+              <div class="l00-fbox"><b>a</b><span class="py">yùnmǔ</span><span>韵母<span class="l00-en-part"> · Final</span></span></div>
+              <span class="l00-op" aria-hidden="true">+</span>
+              <div class="l00-fbox"><b>¯</b><span class="py">shēngdiào</span><span>声调<span class="l00-en-part"> · Tone</span></span></div>
+              <span class="l00-op" aria-hidden="true">=</span>
+              <div class="l00-fbox result"><b>mā</b><span>妈</span></div>
+            </div>
+            <p class="l00-zh"><span class="py">Bùtóng de shēngdiào kěnéng gǎibiàn cíyǔ de yìsi，suǒyǐ xuéxí pīnyīn bùjǐn yào rènshi zìmǔ，hái yào xuéhuì biànbié shēngdiào。</span>不同的声调可能改变词语的意思，所以学习拼音不仅要认识字母，还要学会辨别声调。</p>
+            <p class="l00-aux small" data-l00aux="l00S4NoteAux">Different tones can change the meaning of a word, so learning pinyin is not only about recognising the letters — you also need to learn to tell the tones apart.</p>
+          </section>
+
+          <!-- 05 · 拼音总表 -->
+          <section class="l00-sec" aria-labelledby="l00S5">
+            <h2 class="l00-sec-title" id="l00S5"><span class="l00-sec-num" aria-hidden="true">05</span><span class="l00-col"><span class="py">Pīnyīn zǒng biǎo</span><span data-l00aux="l00S5Title" data-zh="拼音总表">拼音总表</span></span><span class="l00-en-part" style="font-size:.62em;font-weight:700;color:var(--ink-3);">Pinyin Chart</span></h2>
+            <div class="u-amber" aria-hidden="true"></div>
+            <div class="l00-chart">
+              <div class="c-group">
+                <h3><span class="l00-col"><span class="py">shēngmǔ</span><span data-l00aux="l00GInitials" data-zh="声母">声母</span></span> <span class="l00-count" data-l00aux="l00Cnt23" data-zh="23个">23个</span></h3>
+                <div class="l00-chips">
+                  <span class="l00-chip"><span class="c-read">bō</span><span class="c-main"><b class="c-py">b</b><span class="c-hz">玻</span></span></span><span class="l00-chip"><span class="c-read">pō</span><span class="c-main"><b class="c-py">p</b><span class="c-hz">泼</span></span></span><span class="l00-chip"><span class="c-read">mō</span><span class="c-main"><b class="c-py">m</b><span class="c-hz">摸</span></span></span><span class="l00-chip"><span class="c-read">fó</span><span class="c-main"><b class="c-py">f</b><span class="c-hz">佛</span></span></span><span class="l00-chip"><span class="c-read">dé</span><span class="c-main"><b class="c-py">d</b><span class="c-hz">的</span></span></span><span class="l00-chip"><span class="c-read">tè</span><span class="c-main"><b class="c-py">t</b><span class="c-hz">特</span></span></span><span class="l00-chip"><span class="c-read">ne</span><span class="c-main"><b class="c-py">n</b><span class="c-hz">呢</span></span></span><span class="l00-chip"><span class="c-read">lè</span><span class="c-main"><b class="c-py">l</b><span class="c-hz">乐</span></span></span><span class="l00-chip"><span class="c-read">gē</span><span class="c-main"><b class="c-py">g</b><span class="c-hz">歌</span></span></span><span class="l00-chip"><span class="c-read">kē</span><span class="c-main"><b class="c-py">k</b><span class="c-hz">蝌</span></span></span><span class="l00-chip"><span class="c-read">hē</span><span class="c-main"><b class="c-py">h</b><span class="c-hz">喝</span></span></span><span class="l00-chip"><span class="c-read">jī</span><span class="c-main"><b class="c-py">j</b><span class="c-hz">机</span></span></span><span class="l00-chip"><span class="c-read">qī</span><span class="c-main"><b class="c-py">q</b><span class="c-hz">七</span></span></span><span class="l00-chip"><span class="c-read">xī</span><span class="c-main"><b class="c-py">x</b><span class="c-hz">西</span></span></span><span class="l00-chip"><span class="c-read">zhī</span><span class="c-main"><b class="c-py">zh</b><span class="c-hz">枝</span></span></span><span class="l00-chip"><span class="c-read">chī</span><span class="c-main"><b class="c-py">ch</b><span class="c-hz">吃</span></span></span><span class="l00-chip"><span class="c-read">shī</span><span class="c-main"><b class="c-py">sh</b><span class="c-hz">师</span></span></span><span class="l00-chip"><span class="c-read">rì</span><span class="c-main"><b class="c-py">r</b><span class="c-hz">日</span></span></span><span class="l00-chip"><span class="c-read">zì</span><span class="c-main"><b class="c-py">z</b><span class="c-hz">字</span></span></span><span class="l00-chip"><span class="c-read">cì</span><span class="c-main"><b class="c-py">c</b><span class="c-hz">刺</span></span></span><span class="l00-chip"><span class="c-read">sī</span><span class="c-main"><b class="c-py">s</b><span class="c-hz">司</span></span></span><span class="l00-chip"><span class="c-read">yī</span><span class="c-main"><b class="c-py">y</b><span class="c-hz">衣</span></span></span><span class="l00-chip"><span class="c-read">wū</span><span class="c-main"><b class="c-py">w</b><span class="c-hz">屋</span></span></span>
+                </div>
+              </div>
+              <div class="c-group">
+                <h3><span class="l00-col"><span class="py">yùnmǔ</span><span data-l00aux="l00GFinals" data-zh="韵母">韵母</span></span></h3>
+                <h4><span class="l00-col"><span class="py">dān yùnmǔ</span><span data-l00aux="l00GSimple" data-zh="单韵母">单韵母</span></span> <span class="c-n" data-l00aux="l00Cnt6" data-zh="6个">6个</span></h4>
+                <div class="l00-chips">
+                  <span class="l00-chip"><span class="c-read">ā</span><span class="c-main"><b class="c-py">a</b><span class="c-hz">阿</span></span></span><span class="l00-chip"><span class="c-read">ó</span><span class="c-main"><b class="c-py">o</b><span class="c-hz">哦</span></span></span><span class="l00-chip"><span class="c-read">é</span><span class="c-main"><b class="c-py">e</b><span class="c-hz">鹅</span></span></span><span class="l00-chip"><span class="c-read">yī</span><span class="c-main"><b class="c-py">i</b><span class="c-hz">衣</span></span></span><span class="l00-chip"><span class="c-read">wū</span><span class="c-main"><b class="c-py">u</b><span class="c-hz">乌</span></span></span><span class="l00-chip"><span class="c-read">yú</span><span class="c-main"><b class="c-py">ü</b><span class="c-hz">鱼</span></span></span>
+                </div>
+                <h4><span class="l00-col"><span class="py">fù yùnmǔ</span><span data-l00aux="l00GCompound" data-zh="复韵母">复韵母</span></span> <span class="c-n" data-l00aux="l00Cnt9" data-zh="9个">9个</span></h4>
+                <div class="l00-chips">
+                  <span class="l00-chip"><span class="c-read">ài</span><span class="c-main"><b class="c-py">ai</b><span class="c-hz">爱</span></span></span><span class="l00-chip"><span class="c-read">èi</span><span class="c-main"><b class="c-py">ei</b><span class="c-hz">诶</span></span></span><span class="l00-chip"><span class="c-read">wéi</span><span class="c-main"><b class="c-py">ui</b><span class="c-hz">围</span></span></span><span class="l00-chip"><span class="c-read">ào</span><span class="c-main"><b class="c-py">ao</b><span class="c-hz">傲</span></span></span><span class="l00-chip"><span class="c-read">ōu</span><span class="c-main"><b class="c-py">ou</b><span class="c-hz">偶</span></span></span><span class="l00-chip"><span class="c-read">yòu</span><span class="c-main"><b class="c-py">iu</b><span class="c-hz">又</span></span></span><span class="l00-chip"><span class="c-read">yè</span><span class="c-main"><b class="c-py">ie</b><span class="c-hz">叶</span></span></span><span class="l00-chip"><span class="c-read">yuè</span><span class="c-main"><b class="c-py">üe</b><span class="c-hz">月</span></span></span><span class="l00-chip"><span class="c-read">ěr</span><span class="c-main"><b class="c-py">er</b><span class="c-hz">耳</span></span></span>
+                </div>
+                <h4><span class="l00-col"><span class="py">qián bí yùnmǔ</span><span data-l00aux="l00GNasalFront" data-zh="前鼻韵母">前鼻韵母</span></span> <span class="c-n" data-l00aux="l00Cnt5" data-zh="5个">5个</span></h4>
+                <div class="l00-chips">
+                  <span class="l00-chip"><span class="c-read">ān</span><span class="c-main"><b class="c-py">an</b><span class="c-hz">安</span></span></span><span class="l00-chip"><span class="c-read">ēn</span><span class="c-main"><b class="c-py">en</b><span class="c-hz">恩</span></span></span><span class="l00-chip"><span class="c-read">yìn</span><span class="c-main"><b class="c-py">in</b><span class="c-hz">印</span></span></span><span class="l00-chip"><span class="c-read">wēn</span><span class="c-main"><b class="c-py">un</b><span class="c-hz">温</span></span></span><span class="l00-chip"><span class="c-read">yún</span><span class="c-main"><b class="c-py">ün</b><span class="c-hz">云</span></span></span>
+                </div>
+                <h4><span class="l00-col"><span class="py">hòu bí yùnmǔ</span><span data-l00aux="l00GNasalBack" data-zh="后鼻韵母">后鼻韵母</span></span> <span class="c-n" data-l00aux="l00Cnt4" data-zh="4个">4个</span></h4>
+                <div class="l00-chips nasal-back">
+                  <span class="l00-chip"><span class="c-read">āng</span><span class="c-main"><b class="c-py">ang</b><span class="c-hz">肮</span></span></span><span class="l00-chip"><span class="c-read">yīng</span><span class="c-main"><b class="c-py">ing</b><span class="c-hz">英</span></span></span><span class="l00-chip"><span class="c-main"><b class="c-py">eng</b></span><span class="c-note">（“蜂”的韵母）</span></span><span class="l00-chip"><span class="c-main"><b class="c-py">ong</b></span><span class="c-note">（“钟”的韵母）</span></span>
+                </div>
+              </div>
+              <div class="c-group">
+                <h3><span class="l00-col"><span class="py">zhěngtǐ rèn dú yīnjié</span><span data-l00aux="l00GWhole" data-zh="整体认读音节">整体认读音节</span></span> <span class="l00-count" data-l00aux="l00Cnt16" data-zh="16个">16个</span></h3>
+                <div class="l00-chips syll">
+                  <span class="l00-chip"><span class="c-read">zhī</span><span class="c-main"><b class="c-py">zhi</b><span class="c-hz">知</span></span></span><span class="l00-chip"><span class="c-read">chī</span><span class="c-main"><b class="c-py">chi</b><span class="c-hz">翅</span></span></span><span class="l00-chip"><span class="c-read">shì</span><span class="c-main"><b class="c-py">shi</b><span class="c-hz">是</span></span></span><span class="l00-chip"><span class="c-read">rì</span><span class="c-main"><b class="c-py">ri</b><span class="c-hz">日</span></span></span><span class="l00-chip"><span class="c-read">zì</span><span class="c-main"><b class="c-py">zi</b><span class="c-hz">自</span></span></span><span class="l00-chip"><span class="c-read">cì</span><span class="c-main"><b class="c-py">ci</b><span class="c-hz">次</span></span></span><span class="l00-chip"><span class="c-read">sī</span><span class="c-main"><b class="c-py">si</b><span class="c-hz">司</span></span></span><span class="l00-chip"><span class="c-read">yì</span><span class="c-main"><b class="c-py">yi</b><span class="c-hz">易</span></span></span><span class="l00-chip"><span class="c-read">wù</span><span class="c-main"><b class="c-py">wu</b><span class="c-hz">物</span></span></span><span class="l00-chip"><span class="c-read">yǔ</span><span class="c-main"><b class="c-py">yu</b><span class="c-hz">雨</span></span></span><span class="l00-chip"><span class="c-read">yè</span><span class="c-main"><b class="c-py">ye</b><span class="c-hz">夜</span></span></span><span class="l00-chip"><span class="c-read">yuè</span><span class="c-main"><b class="c-py">yue</b><span class="c-hz">越</span></span></span><span class="l00-chip"><span class="c-read">yuán</span><span class="c-main"><b class="c-py">yuan</b><span class="c-hz">圆</span></span></span><span class="l00-chip"><span class="c-read">yīn</span><span class="c-main"><b class="c-py">yin</b><span class="c-hz">音</span></span></span><span class="l00-chip"><span class="c-read">yùn</span><span class="c-main"><b class="c-py">yun</b><span class="c-hz">运</span></span></span><span class="l00-chip"><span class="c-read">yìng</span><span class="c-main"><b class="c-py">ying</b><span class="c-hz">应</span></span></span>
+                </div>
+              </div>
+              <div class="c-group">
+                <h3><span class="l00-col"><span class="py">shēngdiào</span><span data-l00aux="l00GTones" data-zh="声调">声调</span></span> <span class="l00-count" data-l00aux="l00Cnt4" data-zh="4个">4个</span></h3>
+                <div class="l00-tones" role="group" data-i18n-aria="tonesAria" aria-label="四个声调符号，点按试听 a 的发音">
+                  <button class="tone-chip" type="button" data-snd="sndA" aria-label="第一声，点按试听"><b>¯</b><span class="py">Dì yī shēng</span><span class="tone-name" data-i18n="tone1">第一声</span></button>
+                  <button class="tone-chip" type="button" data-snd="sndA2" aria-label="第二声，点按试听"><b>´</b><span class="py">Dì èr shēng</span><span class="tone-name" data-i18n="tone2">第二声</span></button>
+                  <button class="tone-chip" type="button" data-snd="sndA3" aria-label="第三声，点按试听"><b>ˇ</b><span class="py">Dì sān shēng</span><span class="tone-name" data-i18n="tone3">第三声</span></button>
+                  <button class="tone-chip" type="button" data-snd="sndA4" aria-label="第四声，点按试听"><b>`</b><span class="py">Dì sì shēng</span><span class="tone-name" data-i18n="tone4">第四声</span></button>
+                </div>
+              </div>
+            </div>
+            <p class="l00-zh"><span class="py">Xiànzài bùyòng jì zhù zhěng zhāng biǎo，xiān kàn kàn pīnyīn zhǎng shénme yàng，rènshi a zhīhòu wǒmen yī kè yī kè xué。</span>现在不用记住整张表，先看看拼音长什么样，认识 a 之后我们一课一课学。</p>
+            <p class="l00-aux small" data-l00aux="l00ChartHintAux">You don't need to memorise the whole chart now. Just take a look at what pinyin looks like — after we meet a, we will learn it lesson by lesson.</p>
+          </section>
+
+          <!-- 完成本课 / 下一课 -->
+          <div class="l00-finish">
+            <div>
+              <span class="l00-next-lbl l00-col"><span class="py">Xià yī kè</span><span data-l00aux="l00NextLabel" data-zh="下一课">下一课</span></span>
+              <span class="py">01 · Rènshi a</span>
+              <h3 class="l00-next-name" id="l00NextName">01 · 认识 a</h3>
+              <p class="l00-next-state" id="l00NextState">完成本课后解锁</p>
+            </div>
+            <div class="l00-finish-actions">
+              <span class="l00-col" id="l00NextGoWrap" style="display:none"><span class="py">Kāishǐ xià yī kè</span><button class="l00-nextgo" type="button" id="l00NextGo" hidden data-i18n="l00StartNext">开始下一课</button></span>
+              <span class="l00-col"><span class="py">Wánchéng běn kè</span><button class="btn-primary l00-complete" type="button" id="l00CompleteBtn">完成本课</button></span>
+            </div>
           </div>
         </div>
       </div>
@@ -746,6 +1035,17 @@
         </div>
       </div>
     </div>
+
+    <footer id="pageFooter">
+      <div class="wrap foot-in">
+        <p class="foot-note"><span class="py">Wánchéng pīnyīn jīchǔ hòu，jìxù xuéxí rìcháng Hànyǔ。</span><span data-i18n="footNote">完成拼音基础后，继续学习日常汉语。</span></p>
+        <nav class="foot-links" data-i18n-aria="footNavAria" aria-label="页尾链接">
+          <a href="#top"><span class="py">Bāngzhù zhōngxīn</span><span data-i18n="footHelp">帮助中心</span></a><span class="sep" aria-hidden="true">/</span>
+          <a href="#top"><span class="py">Yǐnsī zhèngcè</span><span data-i18n="footPrivacy">隐私政策</span></a><span class="sep" aria-hidden="true">/</span>
+          <a href="#top"><span class="py">Liánxì wǒmen</span><span data-i18n="footContact">联系我们</span></a>
+        </nav>
+      </div>
+    </footer>
 
     <!-- ============ 学习记录弹窗 ============ -->
     <div class="modal-back" id="recModal">
@@ -1462,7 +1762,7 @@
 
         /* ---- roadmap strings, merged into every language dictionary ---- */
         var RM_I18N = {
-          zh: { rmStageTitle: "选择学习阶段", rmInProgress: "进行中", rmLocked: "未解锁", rmUnlocked: "已解锁", rmLessonCount: "{n} 课", rmProgress: "进度 {n}%", rmTestTitle: "拼音水平测试", rmTestSub: "测测你的拼音水平，完成后解锁下一阶段", rmTestBtn: "参加测试", rmDone: "已完成", rmCurrent: "当前学习", rmViewResult: "查看结果", rmRedo: "重修课程", rmStart: "开始学习", rmUnlockHint: "完成上一课即可解锁", rmL1: "认识 a", rmL2: "认识 o", rmL3: "认识 e", rmL4: "声调 ā á ǎ à", rmL5: "认识 i", rmL6: "认识 u", rmL7: "认识 ü", rmL8: "拼读练习", toastLessonDone: "完成「{name}」，下一课已解锁", toastAllDone: "拼音课程全部完成，「日常汉语」已解锁", toastTestSoon: "拼音水平测试即将开放", toastRedo: "重修「{name}」", toastResult: "「{name}」已完成，做得很好" },
+          zh: { rmStageTitle: "选择学习阶段", rmInProgress: "进行中", rmLocked: "未解锁", rmUnlocked: "已解锁", rmLessonCount: "{n} 课", rmProgress: "进度 {n}%", rmTestTitle: "拼音水平测试", rmTestSub: "测测你的拼音水平，完成后解锁下一阶段", rmTestBtn: "参加测试", rmDone: "已完成", rmCurrent: "当前学习", rmViewResult: "查看结果", rmRedo: "重修课程", rmStart: "开始学习", rmUnlockHint: "完成上一课即可解锁", rmL1: "认识 a", rmL2: "认识 o", rmL3: "认识 e", rmL4: "声调 ā á ǎ à", rmL5: "认识 i", rmL6: "认识 u", rmL7: "认识 ü", rmL8: "拼读练习", toastLessonDone: "完成“{name}”，下一课已解锁", toastAllDone: "拼音课程全部完成，“日常汉语”已解锁", toastTestSoon: "拼音水平测试即将开放", toastRedo: "重修“{name}”", toastResult: "“{name}”已完成，做得很好" },
           en: { rmStageTitle: "Choose a stage", rmInProgress: "In progress", rmLocked: "Locked", rmUnlocked: "Unlocked", rmLessonCount: "{n} lessons", rmProgress: "Progress {n}%", rmTestTitle: "Pinyin level test", rmTestSub: "Check your pinyin level — finish it to unlock the next stage", rmTestBtn: "Take the test", rmDone: "Completed", rmCurrent: "Current lesson", rmViewResult: "View result", rmRedo: "Retake lesson", rmStart: "Start learning", rmUnlockHint: "Finish the previous lesson to unlock", rmL1: "Meet a", rmL2: "Meet o", rmL3: "Meet e", rmL4: "Tones ā á ǎ à", rmL5: "Meet i", rmL6: "Meet u", rmL7: "Meet ü", rmL8: "Blending practice", toastLessonDone: "Finished “{name}” — the next lesson is unlocked", toastAllDone: "All pinyin lessons done — Everyday Chinese is unlocked", toastTestSoon: "The pinyin level test is coming soon", toastRedo: "Retaking “{name}”", toastResult: "“{name}” completed — well done" },
           vi: { rmStageTitle: "Chọn giai đoạn học", rmInProgress: "Đang học", rmLocked: "Chưa mở khóa", rmUnlocked: "Đã mở khóa", rmLessonCount: "{n} bài", rmProgress: "Tiến độ {n}%", rmTestTitle: "Bài kiểm tra trình độ pinyin", rmTestSub: "Kiểm tra trình độ pinyin của bạn, hoàn thành để mở khóa giai đoạn tiếp theo", rmTestBtn: "Làm bài kiểm tra", rmDone: "Đã hoàn thành", rmCurrent: "Bài đang học", rmViewResult: "Xem kết quả", rmRedo: "Học lại bài", rmStart: "Bắt đầu học", rmUnlockHint: "Hoàn thành bài trước để mở khóa", rmL1: "Làm quen với a", rmL2: "Làm quen với o", rmL3: "Làm quen với e", rmL4: "Thanh điệu ā á ǎ à", rmL5: "Làm quen với i", rmL6: "Làm quen với u", rmL7: "Làm quen với ü", rmL8: "Luyện ghép âm", toastLessonDone: "Đã hoàn thành “{name}” — bài tiếp theo đã mở khóa", toastAllDone: "Đã hoàn thành tất cả bài pinyin — Tiếng Trung hằng ngày đã mở khóa", toastTestSoon: "Bài kiểm tra trình độ pinyin sắp mở", toastRedo: "Đang học lại “{name}”", toastResult: "Đã hoàn thành “{name}” — làm tốt lắm" },
           th: { rmStageTitle: "เลือกขั้นการเรียน", rmInProgress: "กำลังเรียน", rmLocked: "ยังไม่ปลดล็อก", rmUnlocked: "ปลดล็อกแล้ว", rmLessonCount: "{n} บท", rmProgress: "ความคืบหน้า {n}%", rmTestTitle: "แบบทดสอบระดับพินอิน", rmTestSub: "ทดสอบระดับพินอินของคุณ ทำให้เสร็จเพื่อปลดล็อกขั้นถัดไป", rmTestBtn: "ทำแบบทดสอบ", rmDone: "เรียนจบแล้ว", rmCurrent: "บทที่กำลังเรียน", rmViewResult: "ดูผลลัพธ์", rmRedo: "เรียนซ้ำ", rmStart: "เริ่มเรียน", rmUnlockHint: "เรียนบทก่อนหน้าให้จบเพื่อปลดล็อก", rmL1: "รู้จัก a", rmL2: "รู้จัก o", rmL3: "รู้จัก e", rmL4: "วรรณยุกต์ ā á ǎ à", rmL5: "รู้จัก i", rmL6: "รู้จัก u", rmL7: "รู้จัก ü", rmL8: "ฝึกประสมเสียง", toastLessonDone: "เรียนจบ “{name}” แล้ว — ปลดล็อกบทถัดไปแล้ว", toastAllDone: "เรียนพินอินครบทุกบทแล้ว — ปลดล็อกภาษาจีนในชีวิตประจำวันแล้ว", toastTestSoon: "แบบทดสอบระดับพินอินจะเปิดเร็ว ๆ นี้", toastRedo: "กำลังเรียนซ้ำ “{name}”", toastResult: "เรียนจบ “{name}” แล้ว — เก่งมาก" },
@@ -1480,6 +1780,79 @@
         Object.keys(RM_I18N).forEach(function (code) {
           if (!I18N[code]) return;
           Object.keys(RM_I18N[code]).forEach(function (k) { I18N[code][k] = RM_I18N[code][k]; });
+        });
+
+        /* ---- node 00 "什么是拼音" strings, merged the same way ---- */
+        var RM0_I18N = {
+          zh: { rmL0: "什么是拼音", rmL0Desc: "拼音是用拉丁字母给汉字注音的工具", rmIntroTitle: "什么是拼音？", rmIntroBody1: "拼音是用拉丁字母给汉字注音的工具，帮你读出汉字的发音。", rmIntroBody2: "学会拼音，你就能自己拼读汉字，不用死记硬背。", rmIntroDone: "看完了，完成这一课", rmIntroClose: "关闭" },
+          en: { rmL0: "What is pinyin?", rmL0Desc: "Pinyin uses Latin letters to show how Chinese characters sound", rmIntroTitle: "What is pinyin?", rmIntroBody1: "Pinyin uses Latin letters to show how Chinese characters sound, so you can read their pronunciation.", rmIntroBody2: "Once you learn pinyin, you can sound out Chinese characters by yourself — no need to memorise every character's reading by rote.", rmIntroDone: "I've read it — finish this lesson", rmIntroClose: "Close" },
+          vi: { rmL0: "Pinyin là gì?", rmL0Desc: "Pinyin dùng chữ cái Latinh để ghi âm chữ Hán", rmIntroTitle: "Pinyin là gì?", rmIntroBody1: "Pinyin dùng chữ cái Latinh để ghi âm chữ Hán, giúp bạn đọc được cách phát âm của chữ.", rmIntroBody2: "Học pinyin rồi, bạn có thể tự ghép âm và đọc chữ Hán, không cần học thuộc lòng từng chữ.", rmIntroDone: "Đã đọc xong — hoàn thành bài này", rmIntroClose: "Đóng" },
+          th: { rmL0: "พินอินคืออะไร", rmL0Desc: "พินอินใช้ตัวอักษรละตินกำกับเสียงตัวอักษรจีน", rmIntroTitle: "พินอินคืออะไร?", rmIntroBody1: "พินอินใช้ตัวอักษรละตินกำกับเสียงตัวอักษรจีน ช่วยให้คุณอ่านออกเสียงตัวอักษรได้", rmIntroBody2: "เมื่อเรียนพินอินแล้ว คุณจะประสมเสียงอ่านตัวอักษรจีนได้เอง ไม่ต้องท่องจำทีละตัว", rmIntroDone: "อ่านจบแล้ว — จบบทนี้", rmIntroClose: "ปิด" },
+          id: { rmL0: "Apa itu pinyin?", rmL0Desc: "Pinyin memakai huruf Latin untuk menandai bunyi aksara Mandarin", rmIntroTitle: "Apa itu pinyin?", rmIntroBody1: "Pinyin memakai huruf Latin untuk menandai bunyi aksara Mandarin, membantu Anda membaca pelafalannya.", rmIntroBody2: "Setelah menguasai pinyin, Anda bisa mengeja dan membaca aksara Mandarin sendiri, tanpa menghafal satu per satu.", rmIntroDone: "Sudah dibaca — selesaikan pelajaran ini", rmIntroClose: "Tutup" },
+          my: { rmL0: "ပင်းယင်းဆိုတာ ဘာလဲ", rmL0Desc: "ပင်းယင်းသည် လက်တင်အက္ခရာဖြင့် တရုတ်စာလုံးများ၏ အသံကို မှတ်သားပေးသည်", rmIntroTitle: "ပင်းယင်းဆိုတာ ဘာလဲ?", rmIntroBody1: "ပင်းယင်းသည် လက်တင်အက္ခရာဖြင့် တရုတ်စာလုံးများ၏ အသံထွက်ကို မှတ်သားပေးပြီး စာလုံးများကို ဖတ်နိုင်အောင် ကူညီပေးသည်။", rmIntroBody2: "ပင်းယင်းကို သင်ယူပြီးပါက တရုတ်စာလုံးများကို ကိုယ်တိုင် အသံပေါင်း၍ ဖတ်နိုင်ပြီး တစ်လုံးချင်း အလွတ်ကျက်ရန် မလိုတော့ပါ။", rmIntroDone: "ဖတ်ပြီးပါပြီ — ဤသင်ခန်းစာကို ပြီးဆုံးပါ", rmIntroClose: "ပိတ်ပါ" },
+          fr: { rmL0: "Qu'est-ce que le pinyin ?", rmL0Desc: "Le pinyin utilise l'alphabet latin pour noter les sons des caractères chinois", rmIntroTitle: "Qu'est-ce que le pinyin ?", rmIntroBody1: "Le pinyin utilise l'alphabet latin pour noter la prononciation des caractères chinois et vous aide à les lire.", rmIntroBody2: "Une fois le pinyin appris, vous pourrez déchiffrer les caractères chinois par vous-même, sans tout apprendre par cœur.", rmIntroDone: "J'ai lu — terminer cette leçon", rmIntroClose: "Fermer" },
+          ar: { rmL0: "ما هو البينيين؟", rmL0Desc: "يستخدم البينيين الحروف اللاتينية لتدوين أصوات المقاطع الصينية", rmIntroTitle: "ما هو البينيين؟", rmIntroBody1: "يستخدم البينيين الحروف اللاتينية لتدوين نطق المقاطع الصينية، فيساعدك على قراءة نطقها.", rmIntroBody2: "عندما تتعلم البينيين، ستتمكن من تهجئة المقاطع الصينية وقراءتها بنفسك، دون حفظ نطق كل مقطع عن ظهر قلب.", rmIntroDone: "قرأتُه — إنهاء هذا الدرس", rmIntroClose: "إغلاق" },
+          ko: { rmL0: "병음이란 무엇인가요", rmL0Desc: "병음은 라틴 문자로 한자의 소리를 적는 도구예요", rmIntroTitle: "병음이란 무엇인가요?", rmIntroBody1: "병음은 라틴 문자로 한자의 발음을 적는 도구로, 한자를 소리 내어 읽을 수 있게 도와줘요.", rmIntroBody2: "병음을 배우면 한자를 스스로 소리 내어 읽을 수 있어, 하나하나 외울 필요가 없어요.", rmIntroDone: "다 읽었어요 — 이 수업 마치기", rmIntroClose: "닫기" },
+          ja: { rmL0: "ピンインとは？", rmL0Desc: "ピンインはラテン文字で漢字の読み方を示す道具です", rmIntroTitle: "ピンインとは？", rmIntroBody1: "ピンインはラテン文字で漢字の発音を示す道具で、漢字の読み方が分かるようになります。", rmIntroBody2: "ピンインを覚えれば、漢字を自分でつづって読めるようになり、一つひとつ暗記する必要がありません。", rmIntroDone: "読み終わった — このレッスンを完了する", rmIntroClose: "閉じる" },
+          ru: { rmL0: "Что такое пиньинь?", rmL0Desc: "Пиньинь записывает звуки китайских иероглифов латинскими буквами", rmIntroTitle: "Что такое пиньинь?", rmIntroBody1: "Пиньинь записывает произношение китайских иероглифов латинскими буквами и помогает читать их вслух.", rmIntroBody2: "Выучив пиньинь, вы сможете сами читать иероглифы по звукам, не заучивая чтение каждого наизусть.", rmIntroDone: "Прочитано — завершить урок", rmIntroClose: "Закрыть" },
+          es: { rmL0: "¿Qué es el pinyin?", rmL0Desc: "El pinyin usa letras latinas para anotar los sonidos de los caracteres chinos", rmIntroTitle: "¿Qué es el pinyin?", rmIntroBody1: "El pinyin usa letras latinas para anotar la pronunciación de los caracteres chinos y te ayuda a leerlos.", rmIntroBody2: "Cuando aprendas pinyin, podrás deletrear y leer los caracteres chinos por tu cuenta, sin memorizar cada uno.", rmIntroDone: "Ya lo leí: terminar esta lección", rmIntroClose: "Cerrar" },
+          de: { rmL0: "Was ist Pinyin?", rmL0Desc: "Pinyin schreibt die Laute chinesischer Zeichen mit lateinischen Buchstaben", rmIntroTitle: "Was ist Pinyin?", rmIntroBody1: "Pinyin schreibt die Aussprache chinesischer Schriftzeichen mit lateinischen Buchstaben und hilft Ihnen, sie zu lesen.", rmIntroBody2: "Wenn Sie Pinyin gelernt haben, können Sie chinesische Zeichen selbst laut lesen, ohne jedes einzeln auswendig zu lernen.", rmIntroDone: "Gelesen — diese Lektion abschließen", rmIntroClose: "Schließen" },
+          pt: { rmL0: "O que é pinyin?", rmL0Desc: "O pinyin usa letras latinas para anotar os sons dos caracteres chineses", rmIntroTitle: "O que é pinyin?", rmIntroBody1: "O pinyin usa letras latinas para anotar a pronúncia dos caracteres chineses e ajuda você a lê-los.", rmIntroBody2: "Depois de aprender pinyin, você poderá soletrar e ler os caracteres chineses sozinho, sem decorar um por um.", rmIntroDone: "Já li — concluir esta lição", rmIntroClose: "Fechar" }
+        };
+        Object.keys(RM0_I18N).forEach(function (code) {
+          if (!I18N[code]) return;
+          Object.keys(RM0_I18N[code]).forEach(function (k) { I18N[code][k] = RM0_I18N[code][k]; });
+        });
+
+        /* ---- lesson 00 page strings, merged the same way ----
+           Two kinds of keys: UI / section titles (zh value = Chinese) and
+           auxiliary explanations (zh value = the English auxiliary text,
+           because in Chinese mode the English line is what shows under the
+           Chinese content). Chinese learning content itself — hanzi,
+           pinyin, the Chinese paragraphs and the chart — is NOT in here:
+           it stays the same in every language. */
+        var L00_I18N = {
+          zh: { l00Back: "返回学习路径", l00Title: "什么是汉语拼音？", l00MetaMin: "5 分钟学完本课", l00Progress: "进度 {done}/{total}", l00Complete: "完成本课", l00Completed: "已完成本课", l00NextLabel: "下一课", l00NextLocked: "完成本课后解锁", l00NextUnlocked: "已解锁", l00StartNext: "开始下一课", l00S1Title: "认识拼音", l00Hello: "Hello!", l00WhatQ: "什么是汉语拼音？", l00WhatAux: "What is Pinyin? Pinyin is a system that uses Latin letters and tone marks to show how Mandarin Chinese is pronounced.", l00S2Title: "为什么要学习拼音？", l00Why1: "Learn how to pronounce Chinese words.", l00Why2: "Learn how to read Chinese characters aloud.", l00Why3: "Type Chinese characters on your phone or computer.", l00S3Title: "发现生活中的拼音", l00LifeIntroAux: "In university life in China, you will come across many new words.", l00W1: "School", l00W2: "Cafeteria", l00W3: "Dormitory", l00W4: "Subway", l00LifeNoteAux: "These are common words you will learn later. You don't need to remember them now — just observe the relationship between the characters and their pinyin.", l00S4Title: "认识拼音的组成", l00S4IntroAux: "Let's take “妈” (mā) as an example:", l00S4NoteAux: "Different tones can change the meaning of a word, so learning pinyin is not only about recognising the letters — you also need to learn to tell the tones apart.", l00S5Title: "拼音总表", l00ChartHintAux: "You don't need to memorise the whole chart now. Just take a look at what pinyin looks like — after we meet a, we will learn it lesson by lesson." },
+          en: { l00Back: "Back to learning path", l00Title: "What Is Pinyin?", l00MetaMin: "Finish this lesson in 5 minutes", l00Progress: "Progress {done}/{total}", l00Complete: "Finish this lesson", l00Completed: "Lesson completed", l00NextLabel: "Next lesson", l00NextLocked: "Finish this lesson to unlock it", l00NextUnlocked: "Unlocked", l00StartNext: "Start the next lesson", l00S1Title: "Meet Pinyin", l00Hello: "Hello!", l00WhatQ: "What is Hanyu Pinyin?", l00WhatAux: "What is Pinyin? Pinyin is a system that uses Latin letters and tone marks to show how Mandarin Chinese is pronounced.", l00S2Title: "Why learn pinyin?", l00Why1: "Learn how to pronounce Chinese words.", l00Why2: "Learn how to read Chinese characters aloud.", l00Why3: "Type Chinese characters on your phone or computer.", l00S3Title: "Pinyin in daily life", l00LifeIntroAux: "In university life in China, you will come across many new words.", l00W1: "School", l00W2: "Cafeteria", l00W3: "Dormitory", l00W4: "Subway", l00LifeNoteAux: "These are common words you will learn later. You don't need to remember them now — just observe the relationship between the characters and their pinyin.", l00S4Title: "What a Pinyin Syllable Is Made Of", l00S4IntroAux: "Let's take “妈” (mā) as an example:", l00S4NoteAux: "Different tones can change the meaning of a word, so learning pinyin is not only about recognising the letters — you also need to learn to tell the tones apart.", l00S5Title: "Pinyin Chart", l00ChartHintAux: "You don't need to memorise the whole chart now. Just take a look at what pinyin looks like — after we meet a, we will learn it lesson by lesson." },
+          vi: { l00Back: "Quay lại lộ trình học", l00Title: "Pinyin là gì?", l00MetaMin: "Học xong bài này trong 5 phút", l00Progress: "Tiến độ {done}/{total}", l00Complete: "Hoàn thành bài này", l00Completed: "Đã hoàn thành bài này", l00NextLabel: "Bài tiếp theo", l00NextLocked: "Hoàn thành bài này để mở khóa", l00NextUnlocked: "Đã mở khóa", l00StartNext: "Bắt đầu bài tiếp theo", l00S1Title: "Làm quen với pinyin", l00Hello: "Xin chào!", l00WhatQ: "Hán ngữ pinyin là gì?", l00WhatAux: "Pinyin là gì? Pinyin là hệ thống dùng chữ cái Latinh và dấu thanh điệu để ghi cách phát âm tiếng Trung phổ thông.", l00S2Title: "Vì sao nên học pinyin?", l00Why1: "Học cách phát âm từ tiếng Trung.", l00Why2: "Học cách đọc chữ Hán thành tiếng.", l00Why3: "Gõ chữ Hán trên điện thoại hoặc máy tính.", l00S3Title: "Khám phá pinyin trong đời sống", l00LifeIntroAux: "Trong đời sống đại học ở Trung Quốc, bạn sẽ gặp nhiều từ mới.", l00W1: "Trường học", l00W2: "Nhà ăn", l00W3: "Ký túc xá", l00W4: "Tàu điện ngầm", l00LifeNoteAux: "Đây là những từ thông dụng chúng ta sẽ học sau này. Bây giờ chưa cần ghi nhớ, chỉ cần quan sát mối quan hệ giữa chữ Hán và pinyin.", l00S4Title: "Cấu tạo của pinyin", l00S4IntroAux: "Lấy “妈” (mā) làm ví dụ:", l00S4NoteAux: "Thanh điệu khác nhau có thể làm thay đổi nghĩa của từ, vì vậy học pinyin không chỉ là nhận biết chữ cái mà còn phải học phân biệt thanh điệu.", l00S5Title: "Bảng pinyin đầy đủ", l00ChartHintAux: "Bây giờ chưa cần ghi nhớ cả bảng, hãy xem pinyin trông như thế nào trước — sau khi làm quen với a, chúng ta sẽ học từng bài một." },
+          th: { l00Back: "กลับไปเส้นทางการเรียน", l00Title: "พินอินคืออะไร?", l00MetaMin: "เรียนจบบทนี้ใน 5 นาที", l00Progress: "ความคืบหน้า {done}/{total}", l00Complete: "จบบทนี้", l00Completed: "เรียนจบบทนี้แล้ว", l00NextLabel: "บทถัดไป", l00NextLocked: "เรียนบทนี้ให้จบเพื่อปลดล็อก", l00NextUnlocked: "ปลดล็อกแล้ว", l00StartNext: "เริ่มบทถัดไป", l00S1Title: "รู้จักพินอิน", l00Hello: "สวัสดี!", l00WhatQ: "พินอินภาษาจีนคืออะไร?", l00WhatAux: "พินอินคืออะไร? พินอินเป็นระบบที่ใช้ตัวอักษรละตินและเครื่องหมายวรรณยุกต์เพื่อแสดงการออกเสียงภาษาจีนกลาง", l00S2Title: "ทำไมต้องเรียนพินอิน?", l00Why1: "เรียนรู้วิธีออกเสียงคำภาษาจีน", l00Why2: "เรียนรู้วิธีอ่านตัวอักษรจีนออกเสียง", l00Why3: "พิมพ์ตัวอักษรจีนบนโทรศัพท์หรือคอมพิวเตอร์", l00S3Title: "ค้นพบพินอินในชีวิตประจำวัน", l00LifeIntroAux: "ในชีวิตมหาวิทยาลัยที่ประเทศจีน คุณจะได้พบคำใหม่มากมาย", l00W1: "โรงเรียน", l00W2: "โรงอาหาร", l00W3: "หอพัก", l00W4: "รถไฟใต้ดิน", l00LifeNoteAux: "คำเหล่านี้เป็นคำที่ใช้บ่อยซึ่งเราจะเรียนกันต่อไป ตอนนี้ยังไม่ต้องจำ เพียงสังเกตความสัมพันธ์ระหว่างตัวอักษรจีนกับพินอิน", l00S4Title: "ส่วนประกอบของพินอิน", l00S4IntroAux: "ดูตัวอย่าง “妈” (mā):", l00S4NoteAux: "วรรณยุกต์ที่ต่างกันอาจเปลี่ยนความหมายของคำได้ ดังนั้นการเรียนพินอินไม่ใช่แค่รู้จักตัวอักษร แต่ต้องแยกแยะวรรณยุกต์ได้ด้วย", l00S5Title: "ตารางพินอินทั้งหมด", l00ChartHintAux: "ตอนนี้ยังไม่ต้องจำทั้งตาราง ดูให้รู้ก่อนว่าพินอินหน้าตาเป็นอย่างไร หลังจากรู้จัก a แล้วเราจะเรียนกันทีละบท" },
+          id: { l00Back: "Kembali ke jalur belajar", l00Title: "Apa itu Pinyin?", l00MetaMin: "Selesaikan pelajaran ini dalam 5 menit", l00Progress: "Kemajuan {done}/{total}", l00Complete: "Selesaikan pelajaran ini", l00Completed: "Pelajaran selesai", l00NextLabel: "Pelajaran berikutnya", l00NextLocked: "Selesaikan pelajaran ini untuk membukanya", l00NextUnlocked: "Sudah terbuka", l00StartNext: "Mulai pelajaran berikutnya", l00S1Title: "Mengenal pinyin", l00Hello: "Halo!", l00WhatQ: "Apa itu Hanyu Pinyin?", l00WhatAux: "Apa itu Pinyin? Pinyin adalah sistem yang menggunakan huruf Latin dan tanda nada untuk menunjukkan cara pengucapan bahasa Mandarin.", l00S2Title: "Mengapa belajar pinyin?", l00Why1: "Belajar mengucapkan kata-kata Mandarin.", l00Why2: "Belajar membaca aksara Mandarin dengan bersuara.", l00Why3: "Mengetik aksara Mandarin di ponsel atau komputer.", l00S3Title: "Menemukan pinyin dalam kehidupan sehari-hari", l00LifeIntroAux: "Dalam kehidupan kampus di Tiongkok, Anda akan menemukan banyak kata baru.", l00W1: "Sekolah", l00W2: "Kantin", l00W3: "Asrama", l00W4: "Kereta bawah tanah", l00LifeNoteAux: "Ini adalah kata-kata umum yang akan kita pelajari nanti. Sekarang Anda tidak perlu menghafalnya — cukup amati hubungan antara aksara dan pinyin-nya.", l00S4Title: "Susunan pinyin", l00S4IntroAux: "Ambil contoh “妈” (mā):", l00S4NoteAux: "Nada yang berbeda dapat mengubah arti kata, jadi belajar pinyin bukan hanya mengenal huruf, tetapi juga belajar membedakan nada.", l00S5Title: "Tabel Pinyin Lengkap", l00ChartHintAux: "Sekarang Anda tidak perlu menghafal seluruh tabel. Lihat dulu seperti apa pinyin itu — setelah mengenal a, kita akan mempelajarinya pelajaran demi pelajaran." },
+          my: { l00Back: "သင်ယူမှု လမ်းကြောင်းသို့ ပြန်သွားပါ", l00Title: "ပင်းယင်းဆိုတာ ဘာလဲ?", l00MetaMin: "ဤသင်ခန်းစာကို ၅ မိနစ်အတွင်း သင်ယူပြီးမြောက်ပါ", l00Progress: "တိုးတက်မှု {done}/{total}", l00Complete: "ဤသင်ခန်းစာကို ပြီးဆုံးပါ", l00Completed: "ဤသင်ခန်းစာ ပြီးဆုံးပြီး", l00NextLabel: "နောက် သင်ခန်းစာ", l00NextLocked: "ဖွင့်ရန် ဤသင်ခန်းစာကို ပြီးဆုံးပါ", l00NextUnlocked: "ဖွင့်ပြီးပါပြီ", l00StartNext: "နောက် သင်ခန်းစာကို စတင်ပါ", l00S1Title: "ပင်းယင်းနှင့် မိတ်ဆက်ပါ", l00Hello: "မင်္ဂလာပါ!", l00WhatQ: "တရုတ် ပင်းယင်းဆိုတာ ဘာလဲ?", l00WhatAux: "ပင်းယင်းဆိုတာ ဘာလဲ? ပင်းယင်းသည် လက်တင်အက္ခရာနှင့် အသံနေအသံထား သင်္ကေတများကို သုံး၍ တရုတ်စကား အသံထွက်ကို ပြသသော စနစ်တစ်ခု ဖြစ်သည်။", l00S2Title: "ပင်းယင်းကို ဘာကြောင့် သင်ယူရတာလဲ?", l00Why1: "တရုတ်စကားလုံးများ အသံထွက်နည်းကို သင်ယူပါ။", l00Why2: "တရုတ်စာလုံးများကို အသံထွက် ဖတ်နည်းကို သင်ယူပါ။", l00Why3: "ဖုန်း သို့မဟုတ် ကွန်ပျူတာတွင် တရုတ်စာလုံးများ ရိုက်ထည့်ပါ။", l00S3Title: "နေ့စဉ်ဘဝထဲက ပင်းယင်းကို ရှာဖွေပါ", l00LifeIntroAux: "တရုတ်နိုင်ငံ တက္ကသိုလ်ဘဝတွင် စကားလုံးအသစ်များစွာနှင့် ထိတွေ့ရပါမည်။", l00W1: "ကျောင်း", l00W2: "စားသောက်ခန်း", l00W3: "အဆောင်", l00W4: "မြေအောက်ရထား", l00LifeNoteAux: "ဤစကားလုံးများသည် နောင်တွင် သင်ယူရမည့် အသုံးများသော စကားလုံးများ ဖြစ်သည်။ ယခု အလွတ်ကျက်ရန် မလိုပါ၊ တရုတ်စာလုံးနှင့် ပင်းယင်း၏ ဆက်နွယ်မှုကို လေ့လာကြည့်ရုံသာ ဖြစ်သည်။", l00S4Title: "ပင်းယင်း၏ ဖွဲ့စည်းပုံ", l00S4IntroAux: "“妈” (mā) ကို ဥပမာအဖြစ် ကြည့်ပါ:", l00S4NoteAux: "အသံနေအသံထား ကွဲပြားပါက စကားလုံး၏ အဓိပ္ပာယ် ပြောင်းလဲနိုင်သောကြောင့် ပင်းယင်း သင်ယူခြင်းသည် အက္ခရာများကို သိရုံသာမက အသံနေအသံထားများကို ခွဲခြားတတ်ရန်လည်း လိုအပ်သည်။", l00S5Title: "ပင်းယင်း ဇယား အပြည့်အစုံ", l00ChartHintAux: "ယခု ဇယားတစ်ခုလုံးကို အလွတ်ကျက်ရန် မလိုပါ။ ပင်းယင်း ဘယ်လိုပုံစံရှိသည်ကို အရင် ကြည့်ပါ — a နှင့် မိတ်ဆက်ပြီးနောက် တစ်ခန်းချင်း သင်ယူသွားပါမည်။" },
+          fr: { l00Back: "Retour au parcours d'apprentissage", l00Title: "Qu'est-ce que le pinyin ?", l00MetaMin: "Terminez cette leçon en 5 minutes", l00Progress: "Progression {done}/{total}", l00Complete: "Terminer cette leçon", l00Completed: "Leçon terminée", l00NextLabel: "Leçon suivante", l00NextLocked: "Terminez cette leçon pour la débloquer", l00NextUnlocked: "Débloquée", l00StartNext: "Commencer la leçon suivante", l00S1Title: "Découvrir le pinyin", l00Hello: "Bonjour !", l00WhatQ: "Qu'est-ce que le Hanyu Pinyin ?", l00WhatAux: "Qu'est-ce que le pinyin ? Le pinyin est un système qui utilise l'alphabet latin et des marques de ton pour montrer comment se prononce le chinois mandarin.", l00S2Title: "Pourquoi apprendre le pinyin ?", l00Why1: "Apprendre à prononcer les mots chinois.", l00Why2: "Apprendre à lire les caractères chinois à voix haute.", l00Why3: "Saisir des caractères chinois sur votre téléphone ou votre ordinateur.", l00S3Title: "Le pinyin dans la vie quotidienne", l00LifeIntroAux: "Dans la vie universitaire en Chine, vous rencontrerez beaucoup de mots nouveaux.", l00W1: "École", l00W2: "Cantine", l00W3: "Dortoir", l00W4: "Métro", l00LifeNoteAux: "Ce sont des mots courants que nous apprendrons plus tard. Vous n'avez pas besoin de les mémoriser maintenant — observez simplement le lien entre les caractères et leur pinyin.", l00S4Title: "De quoi se compose le pinyin", l00S4IntroAux: "Prenons « 妈 » (mā) comme exemple :", l00S4NoteAux: "Des tons différents peuvent changer le sens d'un mot ; apprendre le pinyin, ce n'est donc pas seulement connaître les lettres, il faut aussi apprendre à distinguer les tons.", l00S5Title: "Tableau complet du pinyin", l00ChartHintAux: "Vous n'avez pas besoin de mémoriser tout le tableau maintenant. Regardez simplement à quoi ressemble le pinyin — après avoir découvert le a, nous l'apprendrons leçon par leçon." },
+          ar: { l00Back: "العودة إلى مسار التعلم", l00Title: "ما هو البينيين؟", l00MetaMin: "أنهِ هذا الدرس في 5 دقائق", l00Progress: "التقدّم {done}/{total}", l00Complete: "إنهاء هذا الدرس", l00Completed: "اكتمل هذا الدرس", l00NextLabel: "الدرس التالي", l00NextLocked: "أكمل هذا الدرس لفتحه", l00NextUnlocked: "مفتوح", l00StartNext: "ابدأ الدرس التالي", l00S1Title: "التعرّف على البينيين", l00Hello: "مرحبًا!", l00WhatQ: "ما هو هانيو بينيين؟", l00WhatAux: "ما هو البينيين؟ البينيين نظام يستخدم الحروف اللاتينية وعلامات النغمات لبيان كيفية نطق الصينية الماندرين.", l00S2Title: "لماذا نتعلّم البينيين؟", l00Why1: "تعلّم كيفية نطق الكلمات الصينية.", l00Why2: "تعلّم كيفية قراءة المقاطع الصينية بصوت عالٍ.", l00Why3: "كتابة المقاطع الصينية على هاتفك أو حاسوبك.", l00S3Title: "اكتشف البينيين في الحياة اليومية", l00LifeIntroAux: "في الحياة الجامعية في الصين، ستقابل الكثير من الكلمات الجديدة.", l00W1: "مدرسة", l00W2: "مقصف", l00W3: "سكن جامعي", l00W4: "مترو الأنفاق", l00LifeNoteAux: "هذه كلمات شائعة سنتعلمها لاحقًا. لا تحتاج إلى حفظها الآن — لاحظ فقط العلاقة بين المقاطع والبينيين الخاص بها.", l00S4Title: "مكوّنات البينيين", l00S4IntroAux: "لنأخذ «妈» (mā) مثالًا:", l00S4NoteAux: "قد تغيّر النغمات المختلفة معنى الكلمة، لذا فإن تعلّم البينيين لا يقتصر على معرفة الحروف، بل يجب أيضًا تعلّم التمييز بين النغمات.", l00S5Title: "جدول البينيين الكامل", l00ChartHintAux: "لا تحتاج إلى حفظ الجدول كله الآن. انظر فقط إلى شكل البينيين — وبعد أن نتعرّف على a، سنتعلمه درسًا بعد درس." },
+          ko: { l00Back: "학습 경로로 돌아가기", l00Title: "병음이란 무엇인가요?", l00MetaMin: "5분 만에 이 수업 끝내기", l00Progress: "진도 {done}/{total}", l00Complete: "이 수업 마치기", l00Completed: "이 수업을 마쳤어요", l00NextLabel: "다음 수업", l00NextLocked: "이 수업을 마치면 열려요", l00NextUnlocked: "열림", l00StartNext: "다음 수업 시작하기", l00S1Title: "병음 알아보기", l00Hello: "안녕하세요!", l00WhatQ: "한어병음이란 무엇인가요?", l00WhatAux: "병음이란 무엇인가요? 병음은 라틴 문자와 성조 부호를 사용해 중국어 발음을 나타내는 체계예요.", l00S2Title: "왜 병음을 배워야 할까요?", l00Why1: "중국어 단어 발음법을 배워요.", l00Why2: "한자를 소리 내어 읽는 법을 배워요.", l00Why3: "휴대폰이나 컴퓨터로 한자를 입력해요.", l00S3Title: "생활 속 병음 발견하기", l00LifeIntroAux: "중국의 대학 생활에서는 새로운 단어를 많이 만나게 돼요.", l00W1: "학교", l00W2: "식당", l00W3: "기숙사", l00W4: "지하철", l00LifeNoteAux: "이 단어들은 앞으로 배울 자주 쓰는 단어예요. 지금 외울 필요는 없고, 한자와 병음의 관계를 살펴보기만 하면 돼요.", l00S4Title: "병음의 구성 알아보기", l00S4IntroAux: "“妈”(mā)를 예로 들어 볼게요:", l00S4NoteAux: "성조가 다르면 단어의 뜻이 달라질 수 있어요. 그래서 병음 학습은 문자를 아는 것뿐 아니라 성조를 구별하는 법도 배워야 해요.", l00S5Title: "병음 전체 표", l00ChartHintAux: "지금 표 전체를 외울 필요는 없어요. 병음이 어떻게 생겼는지 먼저 살펴보세요. a를 알아본 뒤 한 과씩 배워 나갈 거예요." },
+          ja: { l00Back: "学習パスに戻る", l00Title: "ピンインとは？", l00MetaMin: "5分でこのレッスンを終えよう", l00Progress: "進捗 {done}/{total}", l00Complete: "このレッスンを完了する", l00Completed: "このレッスンは完了済みです", l00NextLabel: "次のレッスン", l00NextLocked: "このレッスンを終えると開きます", l00NextUnlocked: "解放済み", l00StartNext: "次のレッスンを始める", l00S1Title: "ピンインを知ろう", l00Hello: "こんにちは！", l00WhatQ: "漢語ピンインとは？", l00WhatAux: "ピンインとは？ピンインは、ラテン文字と声調記号を使って中国語（普通話）の発音を表す仕組みです。", l00S2Title: "なぜピンインを学ぶの？", l00Why1: "中国語の単語の発音を学びます。", l00Why2: "漢字を声に出して読む方法を学びます。", l00Why3: "スマホやパソコンで漢字を入力します。", l00S3Title: "生活の中のピンインを見つけよう", l00LifeIntroAux: "中国の大学生活では、たくさんの新しい言葉に出会います。", l00W1: "学校", l00W2: "食堂", l00W3: "寮", l00W4: "地下鉄", l00LifeNoteAux: "これらはこれから学ぶよく使う言葉です。今は覚えなくて大丈夫です。漢字とピンインの関係を観察してみましょう。", l00S4Title: "ピンインの成り立ち", l00S4IntroAux: "「妈」（mā）を例に見てみましょう：", l00S4NoteAux: "声調が違うと単語の意味が変わることがあります。だからピンインの学習は、文字を覚えるだけでなく、声調を聞き分けることも大切です。", l00S5Title: "ピンイン総表", l00ChartHintAux: "今は表全体を覚えなくて大丈夫です。まずピンインがどんなものか見てみましょう。a を知ったあと、1課ずつ学んでいきます。" },
+          ru: { l00Back: "Вернуться к маршруту обучения", l00Title: "Что такое пиньинь?", l00MetaMin: "Пройдите этот урок за 5 минут", l00Progress: "Прогресс {done}/{total}", l00Complete: "Завершить урок", l00Completed: "Урок завершён", l00NextLabel: "Следующий урок", l00NextLocked: "Завершите этот урок, чтобы открыть его", l00NextUnlocked: "Открыт", l00StartNext: "Начать следующий урок", l00S1Title: "Знакомимся с пиньинем", l00Hello: "Привет!", l00WhatQ: "Что такое ханьюй пиньинь?", l00WhatAux: "Что такое пиньинь? Пиньинь — это система, которая использует латинские буквы и знаки тонов, чтобы показать, как произносится китайский язык (путунхуа).", l00S2Title: "Зачем учить пиньинь?", l00Why1: "Научиться произносить китайские слова.", l00Why2: "Научиться читать китайские иероглифы вслух.", l00Why3: "Печатать китайские иероглифы на телефоне или компьютере.", l00S3Title: "Пиньинь в повседневной жизни", l00LifeIntroAux: "В университетской жизни в Китае вы встретите много новых слов.", l00W1: "Школа", l00W2: "Столовая", l00W3: "Общежитие", l00W4: "Метро", l00LifeNoteAux: "Это распространённые слова, которые мы выучим позже. Сейчас запоминать их не нужно — просто понаблюдайте за связью между иероглифами и их пиньинем.", l00S4Title: "Из чего состоит пиньинь", l00S4IntroAux: "Возьмём в качестве примера «妈» (mā):", l00S4NoteAux: "Разные тоны могут менять значение слова, поэтому изучение пиньиня — это не только знание букв, но и умение различать тоны.", l00S5Title: "Полная таблица пиньиня", l00ChartHintAux: "Сейчас запоминать всю таблицу не нужно. Просто посмотрите, как выглядит пиньинь, — после знакомства с a мы будем учить его урок за уроком." },
+          es: { l00Back: "Volver a la ruta de aprendizaje", l00Title: "¿Qué es el pinyin?", l00MetaMin: "Termina esta lección en 5 minutos", l00Progress: "Progreso {done}/{total}", l00Complete: "Terminar esta lección", l00Completed: "Lección completada", l00NextLabel: "Lección siguiente", l00NextLocked: "Termina esta lección para desbloquearla", l00NextUnlocked: "Desbloqueada", l00StartNext: "Empezar la lección siguiente", l00S1Title: "Conoce el pinyin", l00Hello: "¡Hola!", l00WhatQ: "¿Qué es el Hanyu Pinyin?", l00WhatAux: "¿Qué es el pinyin? El pinyin es un sistema que utiliza letras latinas y marcas de tono para mostrar cómo se pronuncia el chino mandarín.", l00S2Title: "¿Por qué aprender pinyin?", l00Why1: "Aprende a pronunciar palabras chinas.", l00Why2: "Aprende a leer los caracteres chinos en voz alta.", l00Why3: "Escribe caracteres chinos en tu teléfono u ordenador.", l00S3Title: "Descubre el pinyin en la vida diaria", l00LifeIntroAux: "En la vida universitaria en China encontrarás muchas palabras nuevas.", l00W1: "Escuela", l00W2: "Comedor", l00W3: "Residencia", l00W4: "Metro", l00LifeNoteAux: "Son palabras comunes que aprenderemos más adelante. No necesitas memorizarlas ahora: solo observa la relación entre los caracteres y su pinyin.", l00S4Title: "De qué se compone el pinyin", l00S4IntroAux: "Tomemos «妈» (mā) como ejemplo:", l00S4NoteAux: "Los tonos diferentes pueden cambiar el significado de una palabra, así que aprender pinyin no es solo conocer las letras: también hay que aprender a distinguir los tonos.", l00S5Title: "Tabla completa de pinyin", l00ChartHintAux: "No necesitas memorizar toda la tabla ahora. Solo mira qué aspecto tiene el pinyin: después de conocer la a, lo aprenderemos lección a lección." },
+          de: { l00Back: "Zurück zum Lernpfad", l00Title: "Was ist Pinyin?", l00MetaMin: "Diese Lektion in 5 Minuten abschließen", l00Progress: "Fortschritt {done}/{total}", l00Complete: "Diese Lektion abschließen", l00Completed: "Lektion abgeschlossen", l00NextLabel: "Nächste Lektion", l00NextLocked: "Schließen Sie diese Lektion ab, um sie freizuschalten", l00NextUnlocked: "Freigeschaltet", l00StartNext: "Nächste Lektion starten", l00S1Title: "Pinyin kennenlernen", l00Hello: "Hallo!", l00WhatQ: "Was ist Hanyu Pinyin?", l00WhatAux: "Was ist Pinyin? Pinyin ist ein System, das lateinische Buchstaben und Tonzeichen verwendet, um zu zeigen, wie Mandarin-Chinesisch ausgesprochen wird.", l00S2Title: "Warum Pinyin lernen?", l00Why1: "Lernen, wie man chinesische Wörter ausspricht.", l00Why2: "Lernen, chinesische Schriftzeichen laut zu lesen.", l00Why3: "Chinesische Schriftzeichen auf dem Handy oder Computer tippen.", l00S3Title: "Pinyin im Alltag entdecken", l00LifeIntroAux: "Im Universitätsleben in China werden Sie vielen neuen Wörtern begegnen.", l00W1: "Schule", l00W2: "Mensa", l00W3: "Wohnheim", l00W4: "U-Bahn", l00LifeNoteAux: "Das sind gebräuchliche Wörter, die wir später lernen werden. Sie müssen sie jetzt nicht auswendig lernen – beobachten Sie nur, wie Schriftzeichen und Pinyin zusammenhängen.", l00S4Title: "Woraus Pinyin besteht", l00S4IntroAux: "Nehmen wir „妈“ (mā) als Beispiel:", l00S4NoteAux: "Unterschiedliche Töne können die Bedeutung eines Wortes verändern. Pinyin zu lernen heißt also nicht nur, die Buchstaben zu kennen, sondern auch, die Töne zu unterscheiden.", l00S5Title: "Die vollständige Pinyin-Tabelle", l00ChartHintAux: "Sie müssen jetzt nicht die ganze Tabelle auswendig lernen. Schauen Sie sich nur an, wie Pinyin aussieht – nachdem wir das a kennengelernt haben, lernen wir es Lektion für Lektion." },
+          pt: { l00Back: "Voltar à rota de aprendizagem", l00Title: "O que é pinyin?", l00MetaMin: "Conclua esta lição em 5 minutos", l00Progress: "Progresso {done}/{total}", l00Complete: "Concluir esta lição", l00Completed: "Lição concluída", l00NextLabel: "Próxima lição", l00NextLocked: "Conclua esta lição para desbloqueá-la", l00NextUnlocked: "Desbloqueada", l00StartNext: "Começar a próxima lição", l00S1Title: "Conheça o pinyin", l00Hello: "Olá!", l00WhatQ: "O que é o Hanyu Pinyin?", l00WhatAux: "O que é pinyin? O pinyin é um sistema que usa letras latinas e marcas de tom para mostrar como se pronuncia o chinês mandarim.", l00S2Title: "Por que aprender pinyin?", l00Why1: "Aprenda a pronunciar palavras chinesas.", l00Why2: "Aprenda a ler caracteres chineses em voz alta.", l00Why3: "Digite caracteres chineses no celular ou no computador.", l00S3Title: "Descubra o pinyin na vida diária", l00LifeIntroAux: "Na vida universitária na China, você encontrará muitas palavras novas.", l00W1: "Escola", l00W2: "Refeitório", l00W3: "Dormitório", l00W4: "Metrô", l00LifeNoteAux: "São palavras comuns que aprenderemos mais tarde. Você não precisa memorizá-las agora — apenas observe a relação entre os caracteres e o pinyin.", l00S4Title: "Do que o pinyin é composto", l00S4IntroAux: "Vamos tomar “妈” (mā) como exemplo:", l00S4NoteAux: "Tons diferentes podem mudar o significado de uma palavra, por isso aprender pinyin não é só conhecer as letras — também é preciso aprender a distinguir os tons.", l00S5Title: "Tabela completa de pinyin", l00ChartHintAux: "Você não precisa memorizar a tabela inteira agora. Apenas veja como o pinyin é — depois de conhecer o a, aprenderemos lição a lição." }
+        };
+        /* Chart group headings of section 05: names and counts go through
+           the same [data-l00aux] language switch as the rest of lesson 00,
+           so with "keep Chinese" off only the selected language shows. */
+        var L00_CHART_I18N = {
+          zh: { l00GInitials: "声母", l00GFinals: "韵母", l00GSimple: "单韵母", l00GCompound: "复韵母", l00GNasalFront: "前鼻韵母", l00GNasalBack: "后鼻韵母", l00GWhole: "整体认读音节", l00GTones: "声调", l00Cnt23: "23个", l00Cnt16: "16个", l00Cnt9: "9个", l00Cnt6: "6个", l00Cnt5: "5个", l00Cnt4: "4个" },
+          en: { l00GInitials: "Initials", l00GFinals: "Finals", l00GSimple: "Simple Finals", l00GCompound: "Compound Finals", l00GNasalFront: "Front Nasal Finals", l00GNasalBack: "Back Nasal Finals", l00GWhole: "Whole Syllables", l00GTones: "Tones", l00Cnt23: "23", l00Cnt16: "16", l00Cnt9: "9", l00Cnt6: "6", l00Cnt5: "5", l00Cnt4: "4" },
+          vi: { l00GInitials: "Thanh mẫu", l00GFinals: "Vận mẫu", l00GSimple: "Đơn vận mẫu", l00GCompound: "Phức vận mẫu", l00GNasalFront: "Vận mẫu mũi trước", l00GNasalBack: "Vận mẫu mũi sau", l00GWhole: "Âm tiết nhận đọc toàn thể", l00GTones: "Thanh điệu", l00Cnt23: "23", l00Cnt16: "16", l00Cnt9: "9", l00Cnt6: "6", l00Cnt5: "5", l00Cnt4: "4" },
+          th: { l00GInitials: "พยัญชนะต้น", l00GFinals: "ส่วนท้ายพยางค์", l00GSimple: "สระเดี่ยว", l00GCompound: "สระประสม", l00GNasalFront: "สระลงท้ายเสียงนาสิกหน้า", l00GNasalBack: "สระลงท้ายเสียงนาสิกหลัง", l00GWhole: "พยางค์ที่จำทั้งพยางค์", l00GTones: "วรรณยุกต์", l00Cnt23: "23", l00Cnt16: "16", l00Cnt9: "9", l00Cnt6: "6", l00Cnt5: "5", l00Cnt4: "4" },
+          id: { l00GInitials: "Konsonan Awal", l00GFinals: "Final", l00GSimple: "Final Tunggal", l00GCompound: "Final Majemuk", l00GNasalFront: "Final Nasal Depan", l00GNasalBack: "Final Nasal Belakang", l00GWhole: "Suku Kata Utuh", l00GTones: "Nada", l00Cnt23: "23", l00Cnt16: "16", l00Cnt9: "9", l00Cnt6: "6", l00Cnt5: "5", l00Cnt4: "4" },
+          my: { l00GInitials: "အစသံ", l00GFinals: "အဆုံးသံ", l00GSimple: "တစ်ခုတည်းသော အဆုံးသံ", l00GCompound: "ပေါင်းစပ် အဆုံးသံ", l00GNasalFront: "နှာသံ ရှေ့ အဆုံးသံ", l00GNasalBack: "နှာသံ နောက် အဆုံးသံ", l00GWhole: "တစ်လုံးလုံး မှတ်ရသော အသံထွက်", l00GTones: "အသံနေ အသံထား", l00Cnt23: "23", l00Cnt16: "16", l00Cnt9: "9", l00Cnt6: "6", l00Cnt5: "5", l00Cnt4: "4" },
+          fr: { l00GInitials: "Initiales", l00GFinals: "Finales", l00GSimple: "Finales simples", l00GCompound: "Finales composées", l00GNasalFront: "Finales nasales avant", l00GNasalBack: "Finales nasales arrière", l00GWhole: "Syllabes entières", l00GTones: "Tons", l00Cnt23: "23", l00Cnt16: "16", l00Cnt9: "9", l00Cnt6: "6", l00Cnt5: "5", l00Cnt4: "4" },
+          ar: { l00GInitials: "الأصوات الابتدائية", l00GFinals: "الأصوات الختامية", l00GSimple: "ختامية بسيطة", l00GCompound: "ختامية مركّبة", l00GNasalFront: "ختامية أنفية أمامية", l00GNasalBack: "ختامية أنفية خلفية", l00GWhole: "مقاطع كاملة", l00GTones: "النغمات", l00Cnt23: "23", l00Cnt16: "16", l00Cnt9: "9", l00Cnt6: "6", l00Cnt5: "5", l00Cnt4: "4" },
+          ko: { l00GInitials: "성모", l00GFinals: "운모", l00GSimple: "단운모", l00GCompound: "복운모", l00GNasalFront: "전비운모", l00GNasalBack: "후비운모", l00GWhole: "전체로 익히는 음절", l00GTones: "성조", l00Cnt23: "23개", l00Cnt16: "16개", l00Cnt9: "9개", l00Cnt6: "6개", l00Cnt5: "5개", l00Cnt4: "4개" },
+          ja: { l00GInitials: "声母", l00GFinals: "韻母", l00GSimple: "単韻母", l00GCompound: "複韻母", l00GNasalFront: "前鼻韻母", l00GNasalBack: "後鼻韻母", l00GWhole: "全体で覚える音節", l00GTones: "声調", l00Cnt23: "23個", l00Cnt16: "16個", l00Cnt9: "9個", l00Cnt6: "6個", l00Cnt5: "5個", l00Cnt4: "4個" },
+          ru: { l00GInitials: "Инициали", l00GFinals: "Финали", l00GSimple: "Простые финали", l00GCompound: "Сложные финали", l00GNasalFront: "Передненосовые финали", l00GNasalBack: "Задненосовые финали", l00GWhole: "Целые слоги", l00GTones: "Тоны", l00Cnt23: "23", l00Cnt16: "16", l00Cnt9: "9", l00Cnt6: "6", l00Cnt5: "5", l00Cnt4: "4" },
+          es: { l00GInitials: "Iniciales", l00GFinals: "Finales", l00GSimple: "Finales simples", l00GCompound: "Finales compuestas", l00GNasalFront: "Finales nasales anteriores", l00GNasalBack: "Finales nasales posteriores", l00GWhole: "Sílabas completas", l00GTones: "Tonos", l00Cnt23: "23", l00Cnt16: "16", l00Cnt9: "9", l00Cnt6: "6", l00Cnt5: "5", l00Cnt4: "4" },
+          de: { l00GInitials: "Anlaute", l00GFinals: "Auslaute", l00GSimple: "Einfache Auslaute", l00GCompound: "Zusammengesetzte Auslaute", l00GNasalFront: "Vordere Nasalauslaute", l00GNasalBack: "Hintere Nasalauslaute", l00GWhole: "Ganze Silben", l00GTones: "Töne", l00Cnt23: "23", l00Cnt16: "16", l00Cnt9: "9", l00Cnt6: "6", l00Cnt5: "5", l00Cnt4: "4" },
+          pt: { l00GInitials: "Iniciais", l00GFinals: "Finais", l00GSimple: "Finais simples", l00GCompound: "Finais compostas", l00GNasalFront: "Finais nasais anteriores", l00GNasalBack: "Finais nasais posteriores", l00GWhole: "Sílabas inteiras", l00GTones: "Tons", l00Cnt23: "23", l00Cnt16: "16", l00Cnt9: "9", l00Cnt6: "6", l00Cnt5: "5", l00Cnt4: "4" }
+        };
+        Object.keys(L00_CHART_I18N).forEach(function (code) {
+          if (!L00_I18N[code]) return;
+          Object.keys(L00_CHART_I18N[code]).forEach(function (k) { L00_I18N[code][k] = L00_CHART_I18N[code][k]; });
+        });
+        Object.keys(L00_I18N).forEach(function (code) {
+          if (!I18N[code]) return;
+          Object.keys(L00_I18N[code]).forEach(function (k) { I18N[code][k] = L00_I18N[code][k]; });
         });
 
         var curLang = "zh";
@@ -1801,7 +2174,7 @@
         document.getElementById("menuLogout").addEventListener("click", function () {
           clearSession();
           refreshAuthUI();
-          if (!document.getElementById("roadmapView").hidden) showHome();
+          if (!document.getElementById("roadmapView").hidden || !document.getElementById("lesson00View").hidden) showHome();
           showToast(t("toastLogout"));
         });
 
@@ -1860,6 +2233,7 @@
         function showAuth(tab) {
           topbar.hidden = true; mainView.hidden = true; pageFooter.hidden = true;
           document.getElementById("roadmapView").hidden = true;
+          document.getElementById("lesson00View").hidden = true;
           authView.hidden = false;
           setTab(tab || "login");
           window.scrollTo(0, 0);
@@ -1867,6 +2241,7 @@
         function showHome() {
           authView.hidden = true;
           document.getElementById("roadmapView").hidden = true;
+          document.getElementById("lesson00View").hidden = true;
           topbar.hidden = false; mainView.hidden = false; pageFooter.hidden = false;
           setNavActive("home");
         }
@@ -1966,7 +2341,46 @@
         /* ================= learning roadmap ================= */
         var roadmapView = document.getElementById("roadmapView");
         var rmTrack = document.getElementById("rmTrack");
-        var RM_LESSONS = ["rmL1", "rmL2", "rmL3", "rmL4", "rmL5", "rmL6", "rmL7", "rmL8"];
+        var RM_ITEMS = [
+          { id: 0, key: "rmL0" },
+          { id: 1, key: "rmL1" },
+          { id: 2, key: "rmL2" },
+          { id: 3, key: "rmL3" },
+          { id: 4, key: "rmL4" },
+          { id: 5, key: "rmL5" },
+          { id: 6, key: "rmL6" },
+          { id: 7, key: "rmL7" },
+          { id: 8, key: "rmL8" }
+        ];
+        function rmKeyFor(id) {
+          for (var i = 0; i < RM_ITEMS.length; i++) { if (RM_ITEMS[i].id === id) return RM_ITEMS[i].key; }
+          return "rmL1";
+        }
+        /* interface-pinyin lines for the roadmap's right-hand area, keyed
+           by the same i18n keys as the Chinese strings they annotate.
+           Learning content inside a title (the a / o / e / i / u / ü
+           letters and the ā á ǎ à tone marks) is not re-annotated: for
+           声调 only the word itself gets a line ("Shēngdiào"). */
+        var RM_PY = {
+          rmHead: "Pīnyīn — Zhǎngwò Hànyǔ pīnyīn，néng zhèngquè pīndú fāyīn",
+          rmL0: "Shénme shì pīnyīn",
+          rmL0Desc: "Pīnyīn shì yòng Lādīng zìmǔ gěi Hànzì zhùyīn de gōngjù",
+          rmL1: "Rènshi a",
+          rmL2: "Rènshi o",
+          rmL3: "Rènshi e",
+          rmL4: "Shēngdiào",
+          rmL5: "Rènshi i",
+          rmL6: "Rènshi u",
+          rmL7: "Rènshi ü",
+          rmL8: "Pīndú liànxí",
+          rmDone: "Yǐ wánchéng",
+          rmCurrent: "Dāngqián xuéxí",
+          rmLocked: "Wèi jiěsuǒ",
+          rmViewResult: "Chákàn jiéguǒ",
+          rmRedo: "Chóngxiū kèchéng",
+          rmStart: "Kāishǐ xuéxí",
+          rmUnlockHint: "Wánchéng shàng yī kè jí kě jiěsuǒ"
+        };
         var SVG_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 6.5"/></svg>';
         var SVG_CHECK_SM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 6.5"/></svg>';
         var SVG_LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>';
@@ -1984,10 +2398,29 @@
           if (curLang === "zh") { el.textContent = mainStr; return; }
           fillBilingual(el, mainStr, zhStr, false);
         }
+        /* biText plus an interface-pinyin line: in Chinese mode the .py
+           span rides above the text and follows the 界面拼音 switch like
+           every other .py on the site; other languages never show .py
+           lines, so they keep the plain bilingual rendering. */
+        function biTextPy(el, mainStr, zhStr, pyStr) {
+          if (curLang !== "zh") { fillBilingual(el, mainStr, zhStr, false); return; }
+          el.innerHTML = "";
+          var py = document.createElement("span");
+          py.className = "py";
+          py.textContent = pyStr;
+          el.appendChild(py);
+          el.appendChild(document.createTextNode(mainStr));
+        }
         function getRmDone() {
           var email = progressEmail();
           var p = getProgress(email);
-          if (!Array.isArray(p.rmDone)) { p.rmDone = [1, 2]; saveProgress(email, p); }
+          if (!Array.isArray(p.rmDone)) { p.rmDone = []; saveProgress(email, p); return p.rmDone; }
+          /* Node 00 "什么是拼音" now sits before 01 认识 a in the track:
+             anyone who had already finished 认识 a counts as having
+             seen the intro, so their unlock chain is not broken. */
+          if (p.rmDone.indexOf(1) !== -1 && p.rmDone.indexOf(0) === -1) {
+            p.rmDone.push(0); saveProgress(email, p);
+          }
           return p.rmDone;
         }
         function setRmDone(done) {
@@ -1997,58 +2430,64 @@
           saveProgress(email, p);
         }
         function rmPercent(doneCount) {
-          if (doneCount >= 8) return 100;
-          if (doneCount <= 2) return 40;
-          return 40 + (doneCount - 2) * 10;
+          if (doneCount >= RM_ITEMS.length) return 100;
+          return Math.round(doneCount / RM_ITEMS.length * 100);
         }
         function renderRoadmap() {
           var done = getRmDone();
-          var allDone = done.length >= RM_LESSONS.length;
+          var allDone = done.length >= RM_ITEMS.length;
           var currentId = null;
-          for (var i = 1; i <= RM_LESSONS.length; i++) { if (done.indexOf(i) === -1) { currentId = i; break; } }
+          for (var i = 0; i < RM_ITEMS.length; i++) { if (done.indexOf(RM_ITEMS[i].id) === -1) { currentId = RM_ITEMS[i].id; break; } }
 
           /* right-hand header */
-          biText(document.getElementById("rmHeadTitle"),
+          biTextPy(document.getElementById("rmHeadTitle"),
             "01 " + t("st1Name") + " — " + t("st1Desc"),
-            "01 " + I18N.zh.st1Name + " — " + I18N.zh.st1Desc);
+            "01 " + I18N.zh.st1Name + " — " + I18N.zh.st1Desc,
+            RM_PY.rmHead);
 
           /* sidebar stage cards */
           var pct = rmPercent(done.length);
-          biText(document.getElementById("rmStage1Meta"),
+          biTextPy(document.getElementById("rmStage1Meta"),
             t("rmLessonCount").replace("{n}", "19") + " · " + t("rmProgress").replace("{n}", String(pct)),
-            I18N.zh.rmLessonCount.replace("{n}", "19") + " · " + I18N.zh.rmProgress.replace("{n}", String(pct)));
+            I18N.zh.rmLessonCount.replace("{n}", "19") + " · " + I18N.zh.rmProgress.replace("{n}", String(pct)),
+            "19 kè · jìndù " + pct + "%");
           var s1 = document.getElementById("rmStage1Status");
           s1.className = "rs-status " + (allDone ? "done" : "on");
           s1.innerHTML = "";
           if (allDone) { var ck = document.createElement("span"); ck.innerHTML = SVG_CHECK_SM; ck.firstChild.style.width = "14px"; ck.firstChild.style.height = "14px"; s1.appendChild(ck); }
           var s1t = document.createElement("span"); s1.appendChild(s1t);
-          biText(s1t, allDone ? t("rmDone") : t("rmInProgress"), allDone ? I18N.zh.rmDone : I18N.zh.rmInProgress);
+          biTextPy(s1t, allDone ? t("rmDone") : t("rmInProgress"), allDone ? I18N.zh.rmDone : I18N.zh.rmInProgress,
+            allDone ? "Yǐ wánchéng" : "Jìnxíng zhōng");
           document.getElementById("rmStage1Bar").style.width = pct + "%";
 
-          biText(document.getElementById("rmStage2Meta"),
+          biTextPy(document.getElementById("rmStage2Meta"),
             t("rmLessonCount").replace("{n}", "24"),
-            I18N.zh.rmLessonCount.replace("{n}", "24"));
+            I18N.zh.rmLessonCount.replace("{n}", "24"),
+            "24 kè");
           var s2 = document.getElementById("rmStage2Status");
           s2.className = "rs-status " + (allDone ? "on" : "off");
           s2.innerHTML = "";
           if (!allDone) { var lk = document.createElement("span"); lk.innerHTML = SVG_LOCK; lk.firstChild.style.width = "14px"; lk.firstChild.style.height = "14px"; s2.appendChild(lk); }
           var s2t = document.createElement("span"); s2.appendChild(s2t);
-          biText(s2t, allDone ? t("rmUnlocked") : t("rmLocked"), allDone ? I18N.zh.rmUnlocked : I18N.zh.rmLocked);
+          biTextPy(s2t, allDone ? t("rmUnlocked") : t("rmLocked"), allDone ? I18N.zh.rmUnlocked : I18N.zh.rmLocked,
+            allDone ? "Yǐ jiěsuǒ" : "Wèi jiěsuǒ");
           document.getElementById("rmStage2Card").classList.toggle("unlocked", allDone);
 
-          biText(document.getElementById("rmStage3Meta"),
+          biTextPy(document.getElementById("rmStage3Meta"),
             t("rmLessonCount").replace("{n}", "30"),
-            I18N.zh.rmLessonCount.replace("{n}", "30"));
+            I18N.zh.rmLessonCount.replace("{n}", "30"),
+            "30 kè");
           var s3 = document.getElementById("rmStage3Status");
           s3.innerHTML = "";
           var lk3 = document.createElement("span"); lk3.innerHTML = SVG_LOCK; lk3.firstChild.style.width = "14px"; lk3.firstChild.style.height = "14px"; s3.appendChild(lk3);
           var s3t = document.createElement("span"); s3.appendChild(s3t);
-          biText(s3t, t("rmLocked"), I18N.zh.rmLocked);
+          biTextPy(s3t, t("rmLocked"), I18N.zh.rmLocked, "Wèi jiěsuǒ");
 
           /* lesson track: alternating nodes joined by dashed curves */
           rmTrack.innerHTML = "";
-          RM_LESSONS.forEach(function (key, idx) {
-            var id = idx + 1;
+          RM_ITEMS.forEach(function (item, idx) {
+            var key = item.key;
+            var id = item.id;
             var status = done.indexOf(id) !== -1 ? "done" : (id === currentId ? "current" : "locked");
             if (idx > 0) {
               var join = document.createElement("div");
@@ -2087,24 +2526,31 @@
             if (status === "done") { var ci = document.createElement("span"); ci.innerHTML = SVG_CHECK_SM; ci.firstChild.style.width = "14px"; ci.firstChild.style.height = "14px"; st.appendChild(ci); }
             if (status === "locked") { var li = document.createElement("span"); li.innerHTML = SVG_LOCK; li.firstChild.style.width = "14px"; li.firstChild.style.height = "14px"; st.appendChild(li); }
             var stt = document.createElement("span"); st.appendChild(stt);
-            biText(stt, status === "done" ? t("rmDone") : (status === "current" ? t("rmCurrent") : t("rmLocked")),
-              status === "done" ? I18N.zh.rmDone : (status === "current" ? I18N.zh.rmCurrent : I18N.zh.rmLocked));
+            var stKey = status === "done" ? "rmDone" : (status === "current" ? "rmCurrent" : "rmLocked");
+            biTextPy(stt, t(stKey), I18N.zh[stKey], RM_PY[stKey]);
             card.appendChild(st);
 
             var h3 = document.createElement("h3");
-            biText(h3, t(key), I18N.zh[key]);
+            biTextPy(h3, t(key), I18N.zh[key], RM_PY[key] || "");
             card.appendChild(h3);
+
+            if (id === 0) {
+              var desc0 = document.createElement("p");
+              desc0.className = "rm-desc";
+              biTextPy(desc0, t("rmL0Desc"), I18N.zh.rmL0Desc, RM_PY.rmL0Desc);
+              card.appendChild(desc0);
+            }
 
             if (status === "done") {
               var acts = document.createElement("div");
               acts.className = "rm-actions";
               var b1 = document.createElement("button");
               b1.type = "button"; b1.className = "linklike"; b1.setAttribute("data-act", "result"); b1.setAttribute("data-id", String(id));
-              biText(b1, t("rmViewResult"), I18N.zh.rmViewResult);
+              biTextPy(b1, t("rmViewResult"), I18N.zh.rmViewResult, RM_PY.rmViewResult);
               var sep = document.createElement("span"); sep.className = "sep"; sep.textContent = "·";
               var b2 = document.createElement("button");
               b2.type = "button"; b2.className = "linklike"; b2.setAttribute("data-act", "redo"); b2.setAttribute("data-id", String(id));
-              biText(b2, t("rmRedo"), I18N.zh.rmRedo);
+              biTextPy(b2, t("rmRedo"), I18N.zh.rmRedo, RM_PY.rmRedo);
               acts.appendChild(b1); acts.appendChild(sep); acts.appendChild(b2);
               card.appendChild(acts);
             } else if (status === "current") {
@@ -2112,23 +2558,125 @@
               acts2.className = "rm-actions";
               var sb = document.createElement("button");
               sb.type = "button"; sb.className = "rm-start-btn"; sb.setAttribute("data-act", "start"); sb.setAttribute("data-id", String(id));
-              biText(sb, t("rmStart"), I18N.zh.rmStart);
+              biTextPy(sb, t("rmStart"), I18N.zh.rmStart, RM_PY.rmStart);
               acts2.appendChild(sb);
               card.appendChild(acts2);
             } else {
               var hint = document.createElement("p");
               hint.className = "rm-hint";
-              biText(hint, t("rmUnlockHint"), I18N.zh.rmUnlockHint);
+              biTextPy(hint, t("rmUnlockHint"), I18N.zh.rmUnlockHint, RM_PY.rmUnlockHint);
               card.appendChild(hint);
             }
             node.appendChild(card);
             rmTrack.appendChild(node);
           });
         }
+        /* ---- lesson 00: 什么是汉语拼音 full page ----
+           The roadmap node 00 is the entrance to this page (it used to
+           open a small intro modal). Chinese learning content — hanzi,
+           pinyin, the Chinese paragraphs and the pinyin chart — is fixed
+           in the markup and identical in every language; only the
+           auxiliary explanations and the interface strings switch with
+           the interface language, via [data-l00aux] elements whose
+           data-zh attribute carries the Chinese line for the bilingual
+           "keep Chinese" sub-line. Finishing the lesson writes node 0
+           into the same rmDone progress the roadmap uses, which unlocks
+           01 认识 a. */
+        var lesson00View = document.getElementById("lesson00View");
+        /* Auxiliary-only lines of lesson 00: the English gloss under
+           你好！, the auxiliary explanation paragraphs, the why-card
+           lines, the word glosses and the chart hint. Their zh dictionary
+           entries hold the English text, so in a Chinese interface they
+           must be hidden outright — Chinese interface = Chinese only.
+           In any other interface language they show that language (with
+           the Chinese sub-line where data-zh provides one), and coming
+           back to Chinese hides them again. */
+        var L00_AUX_KEYS = { l00Hello: true, l00WhatAux: true, l00Why1: true, l00Why2: true, l00Why3: true, l00LifeIntroAux: true, l00W1: true, l00W2: true, l00W3: true, l00W4: true, l00LifeNoteAux: true, l00S4IntroAux: true, l00S4NoteAux: true, l00ChartHintAux: true };
+        function applyL00Text() {
+          document.querySelectorAll("[data-l00aux]").forEach(function (el) {
+            var key = el.getAttribute("data-l00aux");
+            if (curLang === "zh" && L00_AUX_KEYS[key]) { el.style.display = "none"; return; }
+            el.style.display = "";
+            var main = t(key);
+            var zh = el.getAttribute("data-zh");
+            if (curLang === "zh" || !zh) el.textContent = main;
+            else fillBilingual(el, main, zh, false);
+          });
+          var eyebrow = document.getElementById("l00Eyebrow");
+          if (eyebrow) eyebrow.style.display = curLang === "zh" ? "none" : "";
+          var enSub = document.getElementById("l00EnSub");
+          if (enSub) enSub.style.display = curLang === "en" ? "" : "none";
+          renderLesson00State();
+        }
+        function renderLesson00State() {
+          var done = getRmDone();
+          var isDone = done.indexOf(0) !== -1;
+          var prog = document.getElementById("l00ProgText");
+          if (prog) biText(prog,
+            t("l00Progress").replace("{done}", String(done.length)).replace("{total}", String(RM_ITEMS.length)),
+            I18N.zh.l00Progress.replace("{done}", String(done.length)).replace("{total}", String(RM_ITEMS.length)));
+          var bar = document.getElementById("l00ProgBar");
+          if (bar) bar.style.width = rmPercent(done.length) + "%";
+          var btn = document.getElementById("l00CompleteBtn");
+          if (btn) {
+            biText(btn, isDone ? t("l00Completed") : t("l00Complete"), isDone ? I18N.zh.l00Completed : I18N.zh.l00Complete);
+            btn.disabled = isDone;
+            btn.classList.toggle("done", isDone);
+          }
+          var nn = document.getElementById("l00NextName");
+          if (nn) biText(nn, "01 · " + t("rmL1"), "01 · " + I18N.zh.rmL1);
+          var ns = document.getElementById("l00NextState");
+          if (ns) {
+            ns.classList.toggle("unlocked", isDone);
+            ns.innerHTML = "";
+            var ic = document.createElement("span");
+            ic.innerHTML = isDone ? SVG_CHECK_SM : SVG_LOCK;
+            ic.firstChild.style.width = "15px"; ic.firstChild.style.height = "15px";
+            ns.appendChild(ic);
+            var nst = document.createElement("span"); ns.appendChild(nst);
+            biText(nst, isDone ? t("l00NextUnlocked") : t("l00NextLocked"), isDone ? I18N.zh.l00NextUnlocked : I18N.zh.l00NextLocked);
+          }
+          var go = document.getElementById("l00NextGo");
+          if (go) {
+            go.hidden = !isDone;
+            /* always re-render the label in the current language, like
+               the complete button above: only writing it when the lesson
+               is done left the hard-coded Chinese in place whenever the
+               button showed without a fresh completed-state render in
+               the newly selected language. */
+            biText(go, t("l00StartNext"), I18N.zh.l00StartNext);
+          }
+          var goWrap = document.getElementById("l00NextGoWrap");
+          if (goWrap) goWrap.style.display = isDone ? "" : "none";
+        }
+        function showLesson00() {
+          document.getElementById("authView").hidden = true;
+          roadmapView.hidden = true;
+          topbar.hidden = false; mainView.hidden = true; pageFooter.hidden = false;
+          lesson00View.hidden = false;
+          setNavActive("path");
+          applyL00Text();
+          markStarted();
+          window.scrollTo(0, 0);
+        }
+        document.getElementById("l00BackBtn").addEventListener("click", function () { showRoadmap(); });
+        document.getElementById("l00NextGo").addEventListener("click", function () { showRoadmap(); });
+        document.getElementById("l00CompleteBtn").addEventListener("click", function () {
+          var done = getRmDone();
+          if (done.indexOf(0) === -1) { done.push(0); setRmDone(done); }
+          renderLesson00State();
+          showToast(t("toastLessonDone").replace("{name}", t("rmL0")));
+        });
+        document.querySelectorAll(".lang-sel").forEach(function (sel) {
+          sel.addEventListener("change", function () { if (!lesson00View.hidden) applyL00Text(); });
+        });
+        pyToggle.addEventListener("change", function () { if (!lesson00View.hidden) applyL00Text(); });
+
         function showRoadmap() {
           /* DEV MODE: roadmap is open without login in the development
              stage. Restore the currentUser() gate here for launch. */
           document.getElementById("authView").hidden = true;
+          document.getElementById("lesson00View").hidden = true;
           topbar.hidden = false; mainView.hidden = true; pageFooter.hidden = false;
           roadmapView.hidden = false;
           setNavActive("path");
@@ -2147,9 +2695,10 @@
           var btn = e.target.closest ? e.target.closest("[data-act]") : null;
           if (!btn) return;
           var id = parseInt(btn.getAttribute("data-id"), 10);
-          var key = RM_LESSONS[id - 1];
+          var key = rmKeyFor(id);
           var name = t(key);
           var act = btn.getAttribute("data-act");
+          if (id === 0) { showLesson00(); return; }
           if (act === "start") {
             /* DEV MODE: guests can start/complete lessons too; progress
                is kept under the local guest profile (see progressEmail). */
@@ -2157,7 +2706,7 @@
             if (done.indexOf(id) === -1) done.push(id);
             setRmDone(done);
             renderRoadmap();
-            showToast(done.length >= RM_LESSONS.length
+            showToast(done.length >= RM_ITEMS.length
               ? t("toastAllDone")
               : t("toastLessonDone").replace("{name}", name));
           } else if (act === "result") {
