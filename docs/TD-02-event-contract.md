@@ -1,0 +1,458 @@
+# TD-02：学习事件与 API 契约
+
+**文档版本：** TD-02 v1.0
+**日期：** 2026 年 11 月 20 日
+**状态：** V0.0 开发前冻结
+**依据：** `docs/PRD-V2.2.md` 第六章（学习事件与教学评价）、第十二章（数据库与基础事件设计）、第十八章验收 AT01–AT06
+**前置关系：** 本文档是 V0.0 核心开发的前置条件；数据库实现见 TD-03，须与本文一致。
+**范围：** 只定义 V0.0 必须实现的最小闭环。完整课程事件、录音、书写、协作、AI 事件不在本文实现范围，只在事件字典里占位，不展开 Payload。
+
+> 原则：原始事件只记录行为，学习状态（内容完成、评价达标、任务完成）由服务端规则另行计算，不在事件里直接写结论。身份由服务端可信上下文确定，客户端不许自报身份。
+
+---
+
+## 1. 事件信封（Envelope）
+
+每条事件都是一个 JSON 对象。信封字段与 Payload 分开：信封管“这是什么事件、谁、在哪、什么时候”，Payload 管“这次行为的具体内容”。
+
+| 字段 | 类型 | 必填 | 来源 | 说明 |
+|---|---|---|---|---|
+| `event_id` | string，UUID v4 | 是 | 客户端生成 | 全局唯一。同一 `event_id` 只能代表同一条事件，见第 8 节幂等与冲突。 |
+| `event_type` | string，枚举 | 是 | 客户端 | 见第 2 节。未知类型直接拒绝，不存库。 |
+| `schema_version` | integer | 是 | 客户端 | 当前为 `1`。事件字典升级时递增，见第 13 节。 |
+| `session_id` | string，UUID v4 | 是 | 客户端 | 学习会话 ID。V0.0 为模拟会话，见 TD-03 `learning_sessions`。 |
+| `lesson_id` | string 或 null | V0.0 可空 | 客户端 | 课程 ID，如 `pinyin-intro`。V0.0 模拟活动可为 null，但字段必须出现，不许省略。真实课程阶段必填。 |
+| `lesson_version` | string 或 null | V0.0 可空 | 客户端 | 课程版本号，如 `1.0.0`。与 `lesson_id` 同进同出：`lesson_id` 为 null 时也为 null。 |
+| `activity_id` | string | 是 | 客户端 | 活动稳定 ID，如 `act-001`。同一课程内唯一，改名即换 ID，不复用旧 ID。 |
+| `occurred_at` | string，ISO 8601 UTC | 是 | 客户端 | 行为实际发生时间，见第 5 节。格式 `2026-11-20T09:00:00.123Z`，必须带 `Z`。 |
+| `received_at` | string，ISO 8601 UTC | 否（客户端不许传） | 服务端生成 | 服务端收到并校验通过后生成。客户端若传此字段，直接拒绝。 |
+| `payload` | object | 是 | 客户端 | 各事件的具体内容，见第 3 节。必须为对象，不许为 null、数组或字符串。 |
+
+校验失败一律不存库，返回 4xx，见第 7.4 节。
+
+**禁止字段：** Payload 与信封里不许出现 `user_id`、`student_id`、`teacher_id`、`role`、`is_admin` 等身份字段。身份只从服务端会话 / 测试身份上下文取，见第 6 节。客户端传了这些字段也一律忽略并拒绝——不静默丢弃，以免掩盖越权尝试。
+
+---
+
+## 2. 事件类型字典（v1）
+
+### 2.1 V0.0 必须实现（3 个）
+
+这 3 个只用于验证接口、存储、查询和实时通知，不代表已完成第一课的真实教学规则。
+
+| `event_type` | 含义 | V0.0 触发点 |
+|---|---|---|
+| `activity_entered` | 进入活动 | 模拟学生页面进入一个模拟活动时发一次 |
+| `answer_submitted` | 提交答案 | 模拟学生在模拟活动中提交一次作答 |
+| `hint_requested` | 请求提示 | 模拟学生点一次“提示” |
+
+### 2.2 已定义、V0.0 不实现（占位）
+
+来自 V2.2 第六章 6.3 节。TD-02 只登记类型名，不展开 Payload，不写实现。真实课程阶段（V0.1 起）按需逐个补 Payload Schema 并升级 `schema_version`。
+
+`session_started`、`lesson_entered`、`audio_started`、`audio_progress`、`audio_seeked`、`audio_completed`、`audio_validated`、`feedback_viewed`、`activity_completed`、`lesson_completed`、`session_ended`
+
+教师 / 任务事件（V0.2 起才展开）：`assignment_created`、`assignment_assigned`、`assignment_completed`、`teacher_feedback_created`、`teacher_feedback_published`、`teacher_feedback_viewed`
+
+书写、情境、协作、AI 事件不在 v1 字典里，需要时另开版本，不许在 V0.0 里自造类型名。
+
+---
+
+## 3. Payload Schema（V0.0 三个事件）
+
+以下用 JSON Schema 草案写法描述。`additionalProperties: false`：多余字段直接拒绝，不静默忽略。
+
+### 3.1 `activity_entered`
+
+```json
+{
+  "type": "object",
+  "required": ["activity_kind"],
+  "additionalProperties": false,
+  "properties": {
+    "activity_kind": {
+      "type": "string",
+      "enum": ["simulation", "choice", "match", "flashcard", "input"]
+    },
+    "entry_source": {
+      "type": "string",
+      "enum": ["lesson_flow", "retry", "resume"]
+    }
+  }
+}
+```
+
+- `activity_kind` 必填。V0.0 模拟活动用 `simulation`。
+- `entry_source` 可选：`lesson_flow`（正常进入）、`retry`（重做）、`resume`（恢复进度）。
+
+### 3.2 `answer_submitted`
+
+```json
+{
+  "type": "object",
+  "required": ["question_id", "answer"],
+  "additionalProperties": false,
+  "properties": {
+    "question_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "answer": {
+      "type": ["string", "number", "boolean", "array"],
+      "description": "作答内容。V0.0 不判对错，只原样记录。"
+    },
+    "attempt_no": { "type": "integer", "minimum": 1 },
+    "time_spent_ms": { "type": "integer", "minimum": 0 }
+  }
+}
+```
+
+- `question_id` 必填，同一活动内稳定。
+- `answer` 必填，类型不限（字符串 / 数字 / 布尔 / 数组），但必须是 JSON 值，不许为 null 或对象嵌套超过一层。
+- `attempt_no` 可选，从 1 开始，同一题多次提交递增。客户端不传时服务端不补——不猜第几次。
+- `time_spent_ms` 可选，≥0，从进入本题到提交的毫秒数。客户端自己计时，服务端不校验真实性，只校验范围。
+- **V0.0 不判对错。** 是否正确、得分多少是评价规则的事，不在事件里写 `is_correct`、`score`。V0.1 起如需判题，另加评价事件，不改本事件。
+
+### 3.3 `hint_requested`
+
+```json
+{
+  "type": "object",
+  "required": ["question_id"],
+  "additionalProperties": false,
+  "properties": {
+    "question_id": { "type": "string", "minLength": 1, "maxLength": 128 },
+    "hint_level": { "type": "integer", "minimum": 1, "maximum": 3 }
+  }
+}
+```
+
+- `question_id` 必填，与 `answer_submitted` 的同一题 ID 对应。
+- `hint_level` 可选，1–3，表示第几次提示。不传即视为第 1 级，服务端不推断。
+
+---
+
+## 4. 字段校验规则
+
+服务端对每条事件按以下顺序校验，任一步失败即拒绝，不存库：
+
+1. **JSON 合法：** 请求体必须是合法 JSON 对象，不是对象直接 400。
+2. **信封完整：** 第 1 节必填字段缺失、类型错误、空字符串，一律 422。
+3. **枚举与范围：** `event_type` 不在字典里、Payload 枚举值不在列表里、整数越界，一律 422。
+4. **Payload 结构：** 按第 3 节 Schema 校验，多余字段、缺必填字段、类型错误，一律 422。
+5. **时间戳：** 按第 5 节校验，超差一律 422。
+6. **会话存在：** `session_id` 在 `learning_sessions` 里不存在，一律 404（不是 422，避免把“会话不对”和“字段不对”混成一类）。
+7. **身份与权限：** 按第 6 节校验，未授权一律 401 / 403。
+
+校验错误响应必须包含 `code`、`message`、`field`（定位到具体字段，如 `payload.question_id`），不许只返回一句含糊的 `invalid request`。
+
+---
+
+## 5. 时间戳规则
+
+- `occurred_at` 必须为 ISO 8601 UTC，带毫秒可有可无，但必须带 `Z`，不接受 `+08:00` 这种带时区的写法——客户端统一转成 UTC 再发。
+- `received_at` 由服务端在校验通过、写入前生成，格式同上。`received_at >= occurred_at` 正常情况下成立；若客户端时钟超前，允许 `occurred_at` 比服务端当前时间最多超前 5 分钟，超过即 422（时钟偏差过大）。
+- `occurred_at` 早于服务端当前时间 7 天以上，直接 422（过期事件不补传，见第 10 节）。
+- 同一会话内事件的 `occurred_at` 不要求严格单调递增——允许乱序到达，排序以 `occurred_at` 为主、`received_at` 为辅，历史查询时按 `(occurred_at, received_at, event_id)` 排序，不按到达顺序。
+- 服务端不信任客户端时间做任何业务判定（比如会话超时、有效听音）。V0.0 只记录，判定留给后续规则引擎。
+
+---
+
+## 6. 身份与授权（V0.0）
+
+- V0.0 没有真实账号。身份来自 TD-03 的 `test_actors`：模拟学生、模拟教师各一个测试身份，由服务端测试会话上下文绑定。
+- 客户端请求时不传身份字段。服务端从测试会话里取 `actor_id`，写入事件的内部归属字段（不暴露在客户端可见的信封里，见 TD-03）。
+- 模拟学生只能写自己会话的事件，模拟教师只能读、不能写学生事件。越权写一律 403。
+- 真实账号阶段（V0.2 起）：身份改为服务端 session + HttpOnly Cookie 校验，规则不变——客户端身份字段依然禁止，教师只能读授权班级 / 任务的数据，见 V2.2 第三章。TD-02 不在此展开真实鉴权细节，只冻结“身份不来自客户端”这一条。
+
+---
+
+## 7. API 契约（V0.0）
+
+基础地址：`/api/v1`。全部返回 JSON，`Content-Type: application/json; charset=utf-8`。
+
+### 7.1 提交事件 `POST /api/v1/events`
+
+V0.0 一次只收一条事件，不收批量。批量是后续需求，不许在 V0.0 里自加。
+
+**请求：**
+
+```http
+POST /api/v1/events
+Content-Type: application/json
+
+{
+  "event_id": "3f8a2c1e-7b4d-4a9e-8c1f-2d5e6a7b8c9d",
+  "event_type": "answer_submitted",
+  "schema_version": 1,
+  "session_id": "9b1a2c3d-4e5f-4a6b-8c7d-1e2f3a4b5c6d",
+  "lesson_id": null,
+  "lesson_version": null,
+  "activity_id": "act-001",
+  "occurred_at": "2026-11-20T09:00:00.123Z",
+  "payload": {
+    "question_id": "q-001",
+    "answer": "a",
+    "attempt_no": 1,
+    "time_spent_ms": 4200
+  }
+}
+```
+
+**成功响应：**
+
+- 首次写入：`201 Created`
+- 重复提交同一 `event_id` 且内容完全一致：`200 OK`，返回已存的那条，不重复计分（见第 8 节）
+
+```json
+{
+  "event_id": "3f8a2c1e-7b4d-4a9e-8c1f-2d5e6a7b8c9d",
+  "event_type": "answer_submitted",
+  "schema_version": 1,
+  "session_id": "9b1a2c3d-4e5f-4a6b-8c7d-1e2f3a4b5c6d",
+  "lesson_id": null,
+  "lesson_version": null,
+  "activity_id": "act-001",
+  "occurred_at": "2026-11-20T09:00:00.123Z",
+  "received_at": "2026-11-20T09:00:00.350Z",
+  "status": "stored"
+}
+```
+
+**关键点：** 只有数据库持久化成功后才返回 201 / 200。写库失败、SSE 推送失败都不影响这个顺序——SSE 失败不导致事件写入失败，事件写入失败不许先返回成功再后台补写。
+
+### 7.2 查询单条事件 `GET /api/v1/events/{event_id}`
+
+- 存在：`200`，返回与 7.1 相同的事件对象。
+- 不存在：`404`，`{"code": "event_not_found", "message": "event not found"}`。
+
+### 7.3 查询会话历史 `GET /api/v1/sessions/{session_id}/events`
+
+用于教师端历史查询、SSE 断线补查、服务器重启后恢复。
+
+查询参数：
+
+| 参数 | 必填 | 说明 |
+|---|---|---|
+| `after_event_id` | 否 | 只返回该事件之后（按排序）的事件，用于断点续查 |
+| `after_occurred_at` | 否 | 只返回 `occurred_at` 晚于该时间的事件 |
+| `event_type` | 否 | 按类型过滤，逗号分隔，如 `answer_submitted,hint_requested` |
+| `limit` | 否 | 默认 100，最大 500，超过按 500 截断并在响应里注明 |
+
+响应：
+
+```json
+{
+  "session_id": "9b1a2c3d-4e5f-4a6b-8c7d-1e2f3a4b5c6d",
+  "events": [ { "event_id": "...", "...": "..." } ],
+  "next_after_event_id": "3f8a2c1e-7b4d-4a9e-8c1f-2d5e6a7b8c9d",
+  "has_more": false
+}
+```
+
+排序固定为 `(occurred_at ASC, received_at ASC, event_id ASC)`。不许按到达顺序或数据库自增 ID 排序——那是不可靠的。
+
+会话不存在返回 404。无权限返回 403。
+
+### 7.4 错误码表
+
+| HTTP | `code` | 含义 |
+|---|---|---|
+| 400 | `invalid_json` | 请求体不是合法 JSON 对象 |
+| 401 | `unauthorized` | 未提供有效测试会话 / 登录会话 |
+| 403 | `forbidden` | 身份无权写此会话 / 读此会话 |
+| 404 | `session_not_found` / `event_not_found` | 会话或事件不存在 |
+| 409 | `event_conflict` | 同一 `event_id` 内容不一致，见第 8 节 |
+| 422 | `validation_failed` | 字段、枚举、范围、时间戳校验失败，响应里带 `field` |
+| 500 | `internal_error` | 服务端异常，不暴露堆栈 |
+
+所有错误响应统一为 `{"code": "...", "message": "...", "field": "..."}`，`field` 只在 422 时必填。
+
+---
+
+## 8. 幂等与冲突（AT02、AT03）
+
+- `event_id` 在 `learning_events` 里是唯一键（见 TD-03）。数据库层兜底，不只靠应用层判断。
+- 客户端重试同一条事件时，必须原样重发同一个 `event_id` 和同一份内容，不许换新 ID——换 ID 就是新事件，会重复计分。
+- 服务端收到已存在的 `event_id` 时：
+  - 内容逐字段完全一致（含 `occurred_at`、Payload 每个字段）：返回 `200 OK`，返回已存事件，不写新行，不触发重复 SSE 推送。
+  - 内容有任何不一致：返回 `409 Conflict`，`code: event_conflict`，不覆盖、不更新、不写新行。客户端收到 409 后不许自动改 ID 重发——那是新事件，会掩盖冲突。要由人工 / 日志排查。
+- 比较“内容一致”时不比较 `received_at`（那是服务端生成的，每次都不一样），只比较客户端提交的全部字段。
+- 并发重复提交时以数据库唯一约束为准，先写入的胜出，后到的按上述规则返回 200 或 409，不许出现两条同 ID 的行。
+
+---
+
+## 9. 服务端确认
+
+- 客户端只有收到 201 / 200 才算“已确认”。收到 4xx / 5xx、超时、断网都算未确认，进补传队列（第 10 节）。
+- 服务端确认只代表“事件已持久化”，不代表“学习状态已更新”“教师已看到”“判题已完成”。V0.0 没有这些后置动作，不许把确认语义扩大。
+- 响应里的 `received_at` 是服务端写入时间，客户端收到后可用于本地排序参考，不许用它代替 `occurred_at` 做业务判定。
+
+---
+
+## 10. 客户端补传（AT06）
+
+- 客户端维护一个本地未确认事件队列（内存即可，V0.0 不要求 IndexedDB 持久化）。事件先入队、再发送，收到确认后出队。
+- 发送失败（网络断开、超时、5xx）时保留在队列里，按指数退避重试：1s、2s、4s、8s，上限 30s，超过 5 次仍失败即停止自动重试并在页面上提示用户，不许无限重试打爆服务端。
+- 网络恢复后按 `occurred_at` 顺序补传，不许乱序插队。补传时仍用原 `event_id`，服务端按第 8 节去重。
+- 超过 7 天未确认的事件直接丢弃并记一条本地日志，不许再发（服务端也会 422 拒绝，见第 5 节）。
+- 页面关闭 / 刷新时未确认事件在 V0.0 允许丢失——V0.0 是模拟验证，不要求跨页面持久化。真实课程阶段（V0.1 起）再做持久化队列。
+- 补传不许改 `occurred_at`。那是行为发生时间，不是发送时间。
+
+---
+
+## 11. SSE 实时推送（AT05）
+
+### 11.1 端点
+
+```
+GET /api/v1/sessions/{session_id}/stream
+Accept: text/event-stream
+```
+
+- V0.0 只给模拟教师端用：教师页面打开即订阅某一个模拟会话的流。
+- 服务端先推一次当前会话已有的全部历史事件（按 7.3 的排序），再推新增事件。这样即使教师晚加入，也能看到完整过程，不只看到加入后的部分。
+- 每个 SSE 消息格式：
+
+```
+event: learning_event
+id: 3f8a2c1e-7b4d-4a9e-8c1f-2d5e6a7b8c9d
+data: {"event_id": "...", "event_type": "answer_submitted", "...": "..."}
+```
+
+`id:` 就是 `event_id`，客户端断线重连时可用它做断点。
+
+- 心跳：每 15 秒发一次 `event: heartbeat`，`data: {}`，防止中间代理断开空闲连接。心跳不是学习事件，不写库、不计分。
+- SSE 只做通知，不做权威数据源。教师端收到 SSE 后仍以 7.3 的历史查询为准做最终展示——SSE 丢了、乱了、重复了，都靠历史查询纠正。
+
+### 11.2 断线与重连
+
+- 客户端断线后自动重连，重连时带 `Last-Event-ID`（浏览器原生支持）或查询参数 `after_event_id=<最后收到的 event_id>`。
+- 服务端收到重连请求后，从该断点之后补推缺失事件，再继续推新增事件。补推仍按排序，不许跳号。
+- 若断点事件已被删除 / 不存在，服务端返回当前全部历史（相当于重新同步），并在响应头 / 首条消息里注明 `resync: true`。
+- V0.0 验收标准（AT05）：断线 5 秒内重连并补查完成，教师端最终看到的事件列表与数据库一致，不多不少。
+
+---
+
+## 12. 历史补查与恢复（AT04）
+
+- 服务器重启后，事件不丢失、不重复、不乱序。重启后教师端重新打开历史查询（7.3）或重连 SSE（11.2），看到的内容与重启前一致。
+- 客户端不许把 SSE 当唯一历史来源。任何“教师端看到的列表”都必须能从 `GET /sessions/{id}/events` 复现，否则就是实现错误。
+- 数据库备份与恢复见 TD-03 与 V2.2 第十三章。恢复后 `event_id` 唯一性、排序、去重规则不变。
+
+---
+
+## 13. 版本管理
+
+- `schema_version` 当前为 `1`。每一次事件字典或 Payload Schema 的不兼容变更（删字段、改必填、改枚举、改类型）都必须递增版本号，并记入变更记录。
+- 兼容变更（只加可选字段）不强制升级版本号，但必须在变更记录里写清，且旧客户端不传新字段时服务端不报错。
+- 服务端必须同时接受当前版本和上一个版本（N 与 N-1），不接受更早的版本——更早的直接 422，`code: validation_failed`，`field: schema_version`。
+- 事件字典、Payload Schema、API 的唯一事实来源是本文 + `contracts/` 里的 Schema 文件（V0.0 起建）。代码里的校验逻辑必须从 Schema 生成或与 Schema 逐项对过，不许代码与文档各写一套。
+- 任何人改事件字典、Payload、API 契约，都必须先提 Issue、负责人同意（见 CONTRIBUTING.md 第 5 节），改完同步更新本文、`contracts/` 与测试，缺一不可。
+
+---
+
+## 14. 契约测试（对应 V2.2 第十八章）
+
+以下测试在 V0.0 开发完成前必须全部通过。测试用模拟学生页面 + 模拟教师页面 + 真实 PostgreSQL 跑，不用 Mock 数据库代替。
+
+| 编号 | 验收项 | 测试用例 |
+|---|---|---|
+| AT01 | 学习事件写入 | 依次发 `activity_entered`、`answer_submitted`、`hint_requested` 各 1 条，全部返回 201；查库三条都在，字段与发送一致；`GET /sessions/{id}/events` 能查到三条，顺序正确。 |
+| AT02 | 重复事件 | 同一条 `answer_submitted` 用同一 `event_id` 发两次：第一次 201，第二次 200；库里只有一条；教师端计数只算一次；SSE 只推一次。 |
+| AT03 | 同 ID 不同内容 | 同一 `event_id`，第一次发 `answer: "a"`，第二次发 `answer: "b"`：第二次返回 409，`code: event_conflict`；库里仍是第一次的内容，未被覆盖。 |
+| AT04 | 服务器重启 | 写 3 条事件后重启 FastAPI 与 PostgreSQL，再查历史：3 条都在，内容、顺序不变；`GET /events/{id}` 逐条可查。 |
+| AT05 | SSE 中断 | 教师端订阅后写 2 条事件，断开 SSE 5 秒，期间再写 1 条，重连后教师端最终看到 3 条，不多不少，顺序正确。 |
+| AT06 | 网络失败补传 | 断网后在客户端发 2 条事件（未确认），恢复网络后自动补传，全部返回 201 / 200；库里 2 条都在，无重复；`occurred_at` 仍是断网时的原始时间。 |
+
+**补充边界测试（V0.0 必做，不占 AT 编号）：**
+
+- T-01 未知类型：`event_type: "foo"` 返回 422，不存库。
+- T-02 多余字段：Payload 多传一个 `score: 100` 返回 422，不存库。
+- T-03 身份字段：信封或 Payload 里传 `user_id` 返回 422，不存库。
+- T-04 时间戳超差：`occurred_at` 比服务端时间超前 10 分钟返回 422；早于 7 天前返回 422。
+- T-05 会话不存在：`session_id` 随机 UUID 返回 404，不存库。
+- T-06 客户端传 `received_at` 返回 422，不存库。
+- T-07 排序乱序到达：先发 `occurred_at` 较晚的事件，再发较早的，历史查询仍按 `occurred_at` 排序，不按到达顺序。
+- T-08 越权写：模拟教师身份调用 `POST /events` 返回 403，不存库。
+- T-09 `limit` 越界：`limit=1000` 按 500 返回，并在响应里注明已截断。
+- T-10 空 `answer`：`answer: null` 返回 422；`answer: ""` 允许（空字符串是合法作答，判题时再处理）。
+
+---
+
+## 15. 与 TD-03 的接口
+
+TD-03 实现数据库时必须满足本文的要求，缺一不可：
+
+- `learning_events.event_id` 唯一键，`learning_sessions.session_id` 主键。
+- 事件全字段入库：信封 10 个字段 + Payload 原样 JSONB + 服务端归属的 `actor_id`（内部字段，不在 API 响应里暴露）。
+- 查询支持：按 `session_id` + `(occurred_at, received_at, event_id)` 排序分页；按 `event_id` 单查；按 `event_type` 过滤。
+- 写入必须是事务：校验通过 → 写入 → 返回确认，中间失败即回滚，不许“写了一半返回成功”。
+- 具体字段类型、索引、Alembic 迁移见 TD-03，本文只定契约，不定表结构。
+
+---
+
+## 16. 未决事项（不阻塞 V0.0）
+
+| 事项 | 说明 | 处理阶段 |
+|---|---|---|
+| 批量提交 | V0.0 一次一条。批量接口是否要、一次最多几条 | V0.1 前 |
+| 客户端持久化队列 | V0.0 内存队列即可，页面关闭允许丢失 | V0.1 前 |
+| 音频事件 Payload | `audio_*` 系列的具体字段（播放区间、覆盖率计算） | V0.1 有效听音实现前 |
+| 录音事件 | 录音上传与 COS 的关联字段 | V0.2 前 |
+| 真实鉴权 | session + Cookie + CSRF 的具体实现 | V0.2 前 |
+| 事件保留期限 | 普通学习事件存多久、什么时候归档 / 删除 | 真实学生数据采集前 |
+| SSE 鉴权 | 教师订阅流时如何校验授权班级 | V0.2 前 |
+
+---
+
+## 附录 A：完整示例（一次模拟学习）
+
+```http
+POST /api/v1/events
+```
+
+```json
+{
+  "event_id": "11111111-1111-4111-8111-111111111111",
+  "event_type": "activity_entered",
+  "schema_version": 1,
+  "session_id": "22222222-2222-4222-8222-222222222222",
+  "lesson_id": null,
+  "lesson_version": null,
+  "activity_id": "act-001",
+  "occurred_at": "2026-11-20T09:00:00.000Z",
+  "payload": { "activity_kind": "simulation", "entry_source": "lesson_flow" }
+}
+```
+
+```json
+{
+  "event_id": "33333333-3333-4333-8333-333333333333",
+  "event_type": "hint_requested",
+  "schema_version": 1,
+  "session_id": "22222222-2222-4222-8222-222222222222",
+  "lesson_id": null,
+  "lesson_version": null,
+  "activity_id": "act-001",
+  "occurred_at": "2026-11-20T09:00:05.000Z",
+  "payload": { "question_id": "q-001", "hint_level": 1 }
+}
+```
+
+```json
+{
+  "event_id": "44444444-4444-4444-8444-444444444444",
+  "event_type": "answer_submitted",
+  "schema_version": 1,
+  "session_id": "22222222-2222-4222-8222-222222222222",
+  "lesson_id": null,
+  "lesson_version": null,
+  "activity_id": "act-001",
+  "occurred_at": "2026-11-20T09:00:12.000Z",
+  "payload": { "question_id": "q-001", "answer": "a", "attempt_no": 1, "time_spent_ms": 7000 }
+}
+```
+
+三条都返回 201 后，教师端 `GET /api/v1/sessions/22222222-2222-4222-8222-222222222222/events` 应返回三条，按 `occurred_at` 排序；SSE 流也应先后推三条。
+
+---
+
+> 本文件冻结后，改动走 Issue + 负责人同意 + 同步更新 `contracts/` 与测试。V0.0 开发以本文为准，不以口头约定为准。
