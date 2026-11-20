@@ -1,5 +1,7 @@
 # 开发规范 CONTRIBUTING — 汉语起步 Hanyu Start
 
+**修订：** 2026-11-20 v1.1，基于项目审查：单人小改动可简化流程、补 Windows 命令、目录标注已存在 / 规划中。
+
 适用：当前 1 人开发，未来最多 4 人。负责人保留最终架构决策和生产发布权。
 
 执行基线见 `docs/PRD-V2.2.md`（V2.2 冻结版，执行基线 V1.5）。有冲突以 V2.2 为准，V2.2 没写的按本文件走。
@@ -19,24 +21,24 @@
 
 ```
 flyallz/ChineseLearn
-├── index.html              # 原型单文件版（已冻结，做回归对照用，别删）
-├── README.md               # 项目入口：这是什么、怎么跑、去哪看文档
-├── CONTRIBUTING.md         # 本文件
+├── index.html              # [已存在] 原型单文件版（已冻结，做回归对照用，别删）
+├── README.md               # [已存在] 项目入口：这是什么、怎么跑、去哪看文档
+├── CONTRIBUTING.md         # [已存在] 本文件
 ├── docs/
-│   ├── PRD-V2.2.md         # 冻结版需求基线
-│   ├── TD-01-first-lesson-audit.md
-│   ├── TD-02-event-contract.md
-│   ├── TD-03-database.md
-│   └── decisions/          # ADR：一条决策一小段，写清为什么
-├── frontend/               # React + TypeScript + Vite（V0.0 起）
-├── backend/                # FastAPI + Alembic（V0.0 起）
-├── courses/                # 课程 JSON：内容与组件分离
-├── contracts/              # 事件与 API 的 Schema（唯一事实来源）
-├── infra/                  # Nginx、备份/恢复脚本、部署说明
-└── .github/                # PR 模板、CI 检查
+│   ├── PRD-V2.2.md         # [已存在] 冻结版需求基线
+│   ├── TD-01-first-lesson-audit.md   # [规划中] 第一课审计，TD-01
+│   ├── TD-02-event-contract.md       # [已存在] 事件与 API 契约，v1.1
+│   ├── TD-03-database.md             # [规划中] 最小数据库设计，TD-03
+│   └── decisions/          # [规划中] ADR：一条决策一小段，写清为什么
+├── frontend/               # [规划中] React + TypeScript + Vite（V0.0 起）
+├── backend/                # [规划中] FastAPI + Alembic（V0.0 起）
+├── courses/                # [规划中] 课程 JSON：内容与组件分离
+├── contracts/              # [规划中] 事件与 API 的 Schema（唯一事实来源）
+├── infra/                  # [规划中] Nginx、备份/恢复脚本、部署说明
+└── .github/                # [规划中] PR 模板、CI 检查
 ```
 
-现在只有原型 + docs 是正常的，`frontend/`、`backend/` 按路线图 P0 / V0.0 再建，不提前搭空架子。
+现在已存在的是原型 + docs（PRD-V2.2、TD-02），其余标 [规划中] 的按路线图 P0 / V0.0 再建，不提前搭空架子。新开发者不要以为工程已经建好了。
 
 ## 3. 本地怎么跑
 
@@ -45,12 +47,24 @@ flyallz/ChineseLearn
 重构阶段（P0 / V0.0 起）：
 
 ```bash
-# 前端
+# 前端（macOS / Linux / Windows 通用）
 cd frontend && npm install && npm run dev
-# 后端
+```
+
+```bash
+# 后端 — macOS / Linux
 cd backend && python -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt && uvicorn app.main:app --reload
-# 数据库（本地）
+```
+
+```powershell
+# 后端 — Windows PowerShell
+cd backend; python -m venv .venv; .\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt; uvicorn app.main:app --reload
+```
+
+```bash
+# 数据库（本地，三系统通用）
 # 用本地 PostgreSQL，库名 hanyu_start_dev，只放模拟数据
 alembic upgrade head
 ```
@@ -66,12 +80,17 @@ alembic upgrade head
 - `dev`：开发版。两个人并行时开，`main` 只从 `dev` 合稳定内容。
 - 功能分支：从 `dev`（或当前开发分支）切，命名 `feat/xxx`、`fix/xxx`、`docs/xxx`，例如 `feat/audio-progress`。一个分支只做一件事。
 
-流程：
+流程（完整版，新成员加入时用）：
 1. 先在 GitHub Issue 里领任务，写清要做什么、验收标准是什么（对照 V2.2 第十八章 AT01–AT20）。
 2. 切分支开发，本地跑通类型检查和测试。
 3. 提 PR，写清：改了什么、为什么改、怎么测的、影响了哪些验收项。
 4. 负责人 review 通过才能合。没通过就按意见改，别自己合。
 5. 部署由负责人做，PR 合了不等于上线了。
+
+单人开发简化流程（只有负责人一人开发时用）：
+- 小改动可以不先开 Issue：文档错别字、单个组件、纯测试、小于约 100 行、不改契约 / 数据库 / API 的改动，直接开分支，PR 描述写清改了什么、怎么测的即可，PR 描述即任务记录。
+- 核心契约改动仍强制走完整流程：事件字典、API 契约、数据库迁移、PRD 冻结内容，必须先开 Issue、负责人同意（见第 5 节），否则不合。
+- 新成员（同学）加入后不适用单人简化，一律走完整流程：Issue 领任务 + PR + 负责人 review。
 
 提交信息：中文即可，一行说清，例如 `feat: 事件 API 增加幂等写入（AT02）`。别用 `update`、`fix bug` 这种空词。
 
