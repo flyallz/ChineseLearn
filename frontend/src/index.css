@@ -1,0 +1,9 @@
+:root { font-family: 'Noto Sans SC','PingFang SC','Microsoft YaHei',system-ui,sans-serif; color:#10264b; background:#fff; font-synthesis:none; text-rendering:optimizeLegibility; -webkit-font-smoothing:antialiased; }
+* { box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body { margin:0; min-width:320px; }
+button,a { font:inherit; }
+button { cursor:pointer; }
+a { color:inherit; }
+:focus-visible { outline:3px solid #e9952a; outline-offset:3px; }
+@media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } }
