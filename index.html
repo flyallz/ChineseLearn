@@ -363,6 +363,7 @@
       .rm-circle.done { background: #1e9e5a; color: #fff; box-shadow: 0 8px 18px rgba(30, 158, 90, .28); }
       .rm-circle.current { background: var(--blue); color: #fff; box-shadow: 0 0 0 7px var(--tint), 0 10px 20px rgba(0, 69, 250, .25); }
       .rm-circle.locked { background: #fff; border: 2px solid var(--line); color: var(--ink-3); }
+      .rm-circle.soon { background: #fff8ea; border: 2px dashed var(--amber); color: #92600a; }
       .rm-dash { flex: none; width: 34px; border-top: 2.5px dashed #b7c7e2; }
       .rm-card { flex: 1; min-width: 0; border: 1.5px solid var(--line); border-radius: 16px; padding: 17px 22px; background: #fff; }
       .rm-card.done { background: var(--tint-2); border-color: var(--line-soft); }
@@ -373,6 +374,8 @@
       .rm-status.done { color: #1e9e5a; }
       .rm-status.current { color: var(--blue); }
       .rm-status.locked { color: var(--ink-3); }
+      .rm-status.soon { color: #b45309; }
+      .rm-card.soon h3 { color: var(--ink); }
       .rm-card h3 { margin: 3px 0 0; font-size: 20.5px; font-weight: 900; line-height: 1.35; color: var(--ink); }
       .rm-card.locked h3 { color: #9aa3af; }
       .rm-card .rm-hint { margin: 5px 0 0; font-size: 14.5px; color: var(--ink-3); font-weight: 500; }
@@ -1108,7 +1111,7 @@
             <p class="hero-sub" data-i18n="heroSub">听标准发音、看口型提示、跟读练习，按自己的节奏逐课进步。</p>
             <span class="py py-sub">Tīng biāozhǔn fāyīn，kàn kǒuxíng tíshì，gēndú liànxí，àn zìjǐ de jiézòu zhú kè jìnbù。</span>
             <div class="hero-ctas">
-              <a class="btn-primary" href="#lesson" id="ctaStart"><span class="py">Kāishǐ dì yī kè</span><span data-i18n="ctaStart">开始第一课</span></a>
+              <a class="btn-primary" href="#" id="ctaStart"><span class="py">Kāishǐ dì yī kè</span><span data-i18n="ctaStart">开始第一课</span></a>
               <a class="link-arrow" href="#path" id="ctaPath"><span class="py">Chákàn xuéxí lùjìng</span><span data-i18n="ctaPath">查看学习路径</span></a>
             </div>
           </div>
@@ -1198,13 +1201,13 @@
         </div>
       </section>
 
-      <!-- ============ 第一课预览 ============ -->
+      <!-- ============ 发音体验 ============ -->
       <section id="lesson" aria-labelledby="lesson-title">
         <div class="wrap">
           <div class="lesson-panel">
             <div class="sec-title-wrap" style="margin-bottom:22px;">
-              <span class="py">Dì yī kè yùlǎn · Rènshi a</span>
-              <h2 class="sec-title" id="lesson-title" data-i18n="lessonTitle">第一课预览 · 认识 a</h2>
+              <span class="py">Fāyīn tǐyàn · a</span>
+              <h2 class="sec-title" id="lesson-title" data-i18n="lessonTitle">发音体验 · a</h2>
               <div class="u-amber" aria-hidden="true"></div>
             </div>
             <div class="intro-strip">
@@ -1230,7 +1233,7 @@
                   <span><span class="py">Tīng biāozhǔn fāyīn</span><span data-i18n="listenBtn">听标准发音</span></span>
                 </button>
                 <span class="vdiv" aria-hidden="true"></span>
-                <p class="lesson-meta"><span class="py">3 fēnzhōng xuéwán dì yī kè</span><span data-i18n="lessonMeta">3 分钟学完第一课</span></p>
+                <p class="lesson-meta"><span class="py">3 fēnzhōng tǐyàn a de fāyīn</span><span data-i18n="lessonMeta">3 分钟体验 a 的发音</span></p>
               </div>
             </div>
           </div>
@@ -2123,11 +2126,11 @@
             st2Name: "日常汉语", st2Desc: "学会常用词句，进行简单交流",
             st3Name: "HSK", st3Desc: "提升汉语能力，衔接HSK考试",
             pathNote: "每个阶段拆成短课，完成当前课程后继续下一课。",
-            lessonTitle: "第一课预览 · 认识 a", lessonTag: "单韵母 a",
+            lessonTitle: "发音体验 · a", lessonTag: "单韵母 a",
             lessonSay: "试着张开嘴，清楚地发出 a。",
             tonesAria: "a 的四个声调，点按试听",
             tone1: "第一声", tone2: "第二声", tone3: "第三声", tone4: "第四声",
-            listenBtn: "听标准发音", lessonMeta: "3 分钟学完第一课",
+            listenBtn: "听标准发音", lessonMeta: "3 分钟体验 a 的发音",
             aBoxAria: "播放 a 的发音",
             footNote: "完成拼音基础后，继续学习日常汉语。",
             footHelp: "帮助中心", footPrivacy: "隐私政策", footContact: "联系我们", footNavAria: "页尾链接",
@@ -2143,7 +2146,7 @@
             showPass: "显示密码", hidePass: "隐藏密码",
             myLearning: "我的学习", myRecords: "学习记录", logout: "退出登录",
             recTitle: "学习记录", recAccount: "账号", recStarted: "已开始",
-            recLesson1Name: "第一课 · 认识 a", recLast: "最近学习",
+            recLesson1Name: "第一课 · 什么是拼音", recLast: "最近学习",
             recEmpty: "暂无学习记录，从第一课开始吧。", closeBtn: "关闭",
             forgotHint: "本地学习版暂不支持找回密码，密码只保存在这台设备的浏览器里。",
             toastWelcome: "欢迎回来，{name}！", toastRegistered: "注册成功，欢迎你，{name}！",
@@ -2172,11 +2175,11 @@
             st2Name: "Everyday Chinese", st2Desc: "Learn common words and phrases for simple conversations",
             st3Name: "HSK", st3Desc: "Build your Chinese skills and connect to the HSK exams",
             pathNote: "Each stage is split into short lessons — finish the current lesson to move on to the next.",
-            lessonTitle: "Lesson 1 preview · Meet the sound a", lessonTag: "Single vowel a",
+            lessonTitle: "Pronunciation experience · a", lessonTag: "Single vowel a",
             lessonSay: "Open your mouth wide and say a clearly.",
             tonesAria: "The four tones of a — tap to listen",
             tone1: "Tone 1", tone2: "Tone 2", tone3: "Tone 3", tone4: "Tone 4",
-            listenBtn: "Hear the standard pronunciation", lessonMeta: "Finish Lesson 1 in 3 minutes",
+            listenBtn: "Hear the standard pronunciation", lessonMeta: "Experience the sound a in 3 minutes",
             aBoxAria: "Play the pronunciation of a",
             footNote: "After the pinyin basics, continue with everyday Chinese.",
             footHelp: "Help Center", footPrivacy: "Privacy Policy", footContact: "Contact Us", footNavAria: "Footer links",
@@ -2192,7 +2195,7 @@
             showPass: "Show password", hidePass: "Hide password",
             myLearning: "My learning", myRecords: "Study records", logout: "Log out",
             recTitle: "Study records", recAccount: "Account", recStarted: "Started",
-            recLesson1Name: "Lesson 1 · Meet the sound a", recLast: "Last studied",
+            recLesson1Name: "Lesson 1 · What is pinyin?", recLast: "Last studied",
             recEmpty: "No study records yet — start with Lesson 1.", closeBtn: "Close",
             forgotHint: "This local study version can't recover passwords; your password is stored only in this device's browser.",
             toastWelcome: "Welcome back, {name}!", toastRegistered: "Signed up — welcome, {name}!",
@@ -2222,11 +2225,11 @@
           st2Name: "Tiếng Trung hằng ngày", st2Desc: "Học từ và câu thông dụng, giao tiếp đơn giản",
           st3Name: "HSK", st3Desc: "Nâng cao năng lực tiếng Trung, hướng tới kỳ thi HSK",
           pathNote: "Mỗi giai đoạn được chia thành các bài ngắn — hoàn thành bài hiện tại để học tiếp bài sau.",
-          lessonTitle: "Xem trước bài 1 · Làm quen với a", lessonTag: "Nguyên âm đơn a",
+          lessonTitle: "Trải nghiệm phát âm · a", lessonTag: "Nguyên âm đơn a",
           lessonSay: "Hãy mở miệng và phát âm a thật rõ ràng.",
           tonesAria: "Bốn thanh điệu của a — chạm để nghe",
           tone1: "Thanh 1", tone2: "Thanh 2", tone3: "Thanh 3", tone4: "Thanh 4",
-          listenBtn: "Nghe phát âm chuẩn", lessonMeta: "Học xong bài 1 trong 3 phút",
+          listenBtn: "Nghe phát âm chuẩn", lessonMeta: "Trải nghiệm âm a trong 3 phút",
           aBoxAria: "Phát âm của a",
           footNote: "Sau khi nắm vững pinyin cơ bản, hãy tiếp tục với tiếng Trung hằng ngày.",
           footHelp: "Trung tâm trợ giúp", footPrivacy: "Chính sách bảo mật", footContact: "Liên hệ", footNavAria: "Liên kết cuối trang",
@@ -2242,7 +2245,7 @@
           showPass: "Hiện mật khẩu", hidePass: "Ẩn mật khẩu",
           myLearning: "Việc học của tôi", myRecords: "Lịch sử học", logout: "Đăng xuất",
           recTitle: "Lịch sử học", recAccount: "Tài khoản", recStarted: "Đã bắt đầu",
-          recLesson1Name: "Bài 1 · Làm quen với a", recLast: "Học gần nhất",
+          recLesson1Name: "Bài 1 · Pinyin là gì?", recLast: "Học gần nhất",
           recEmpty: "Chưa có lịch sử học — hãy bắt đầu từ bài 1.", closeBtn: "Đóng",
           forgotHint: "Phiên bản học cục bộ này không hỗ trợ khôi phục mật khẩu; mật khẩu chỉ được lưu trong trình duyệt của thiết bị này.",
           toastWelcome: "Chào mừng trở lại, {name}!", toastRegistered: "Đăng ký thành công — chào mừng bạn, {name}!",
@@ -2271,11 +2274,11 @@
           st2Name: "ภาษาจีนในชีวิตประจำวัน", st2Desc: "เรียนรู้คำและประโยคที่ใช้บ่อย สื่อสารอย่างง่ายได้",
           st3Name: "HSK", st3Desc: "พัฒนาทักษะภาษาจีนและเตรียมสอบ HSK",
           pathNote: "แต่ละขั้นแบ่งเป็นบทสั้น ๆ เรียนจบบทปัจจุบันแล้วเรียนบทต่อไป",
-          lessonTitle: "ตัวอย่างบทที่ 1 · รู้จัก a", lessonTag: "สระเดี่ยว a",
+          lessonTitle: "ทดลองออกเสียง · a", lessonTag: "สระเดี่ยว a",
           lessonSay: "ลองอ้าปากแล้วออกเสียง a ให้ชัดเจน",
           tonesAria: "วรรณยุกต์ทั้งสี่ของ a — แตะเพื่อฟัง",
           tone1: "เสียงที่ 1", tone2: "เสียงที่ 2", tone3: "เสียงที่ 3", tone4: "เสียงที่ 4",
-          listenBtn: "ฟังเสียงมาตรฐาน", lessonMeta: "เรียนจบบทที่ 1 ใน 3 นาที",
+          listenBtn: "ฟังเสียงมาตรฐาน", lessonMeta: "ทดลองเสียง a ใน 3 นาที",
           aBoxAria: "เล่นเสียงอ่านของ a",
           footNote: "เมื่อเรียนพื้นฐานพินอินจบแล้ว เรียนภาษาจีนในชีวิตประจำวันต่อ",
           footHelp: "ศูนย์ช่วยเหลือ", footPrivacy: "นโยบายความเป็นส่วนตัว", footContact: "ติดต่อเรา", footNavAria: "ลิงก์ท้ายหน้า",
@@ -2291,7 +2294,7 @@
           showPass: "แสดงรหัสผ่าน", hidePass: "ซ่อนรหัสผ่าน",
           myLearning: "การเรียนของฉัน", myRecords: "ประวัติการเรียน", logout: "ออกจากระบบ",
           recTitle: "ประวัติการเรียน", recAccount: "บัญชี", recStarted: "เริ่มแล้ว",
-          recLesson1Name: "บทที่ 1 · รู้จัก a", recLast: "เรียนล่าสุด",
+          recLesson1Name: "บทที่ 1 · พินอินคืออะไร", recLast: "เรียนล่าสุด",
           recEmpty: "ยังไม่มีประวัติการเรียน — เริ่มจากบทที่ 1 กันเถอะ", closeBtn: "ปิด",
           forgotHint: "เวอร์ชันเรียนแบบโลคัลนี้กู้รหัสผ่านไม่ได้ รหัสผ่านจะเก็บไว้ในเบราว์เซอร์ของอุปกรณ์นี้เท่านั้น",
           toastWelcome: "ยินดีต้อนรับกลับ {name}!", toastRegistered: "สมัครสำเร็จ — ยินดีต้อนรับ {name}!",
@@ -2320,11 +2323,11 @@
           st2Name: "Mandarin Sehari-hari", st2Desc: "Pelajari kata dan kalimat umum untuk percakapan sederhana",
           st3Name: "HSK", st3Desc: "Tingkatkan kemampuan Mandarin dan bersiap menuju ujian HSK",
           pathNote: "Setiap tahap dibagi menjadi pelajaran singkat — selesaikan pelajaran saat ini untuk lanjut ke pelajaran berikutnya.",
-          lessonTitle: "Pratinjau Pelajaran 1 · Mengenal a", lessonTag: "Vokal tunggal a",
+          lessonTitle: "Pengalaman pelafalan · a", lessonTag: "Vokal tunggal a",
           lessonSay: "Coba buka mulut Anda dan ucapkan a dengan jelas.",
           tonesAria: "Empat nada dari a — ketuk untuk mendengar",
           tone1: "Nada 1", tone2: "Nada 2", tone3: "Nada 3", tone4: "Nada 4",
-          listenBtn: "Dengar pelafalan standar", lessonMeta: "Selesaikan Pelajaran 1 dalam 3 menit",
+          listenBtn: "Dengar pelafalan standar", lessonMeta: "Rasakan bunyi a dalam 3 menit",
           aBoxAria: "Putar pelafalan a",
           footNote: "Setelah dasar pinyin selesai, lanjutkan ke Mandarin sehari-hari.",
           footHelp: "Pusat Bantuan", footPrivacy: "Kebijakan Privasi", footContact: "Hubungi Kami", footNavAria: "Tautan footer",
@@ -2340,7 +2343,7 @@
           showPass: "Tampilkan kata sandi", hidePass: "Sembunyikan kata sandi",
           myLearning: "Pembelajaran saya", myRecords: "Riwayat belajar", logout: "Keluar",
           recTitle: "Riwayat belajar", recAccount: "Akun", recStarted: "Sudah dimulai",
-          recLesson1Name: "Pelajaran 1 · Mengenal a", recLast: "Terakhir belajar",
+          recLesson1Name: "Pelajaran 1 · Apa itu pinyin?", recLast: "Terakhir belajar",
           recEmpty: "Belum ada riwayat belajar — mulailah dari Pelajaran 1.", closeBtn: "Tutup",
           forgotHint: "Versi belajar lokal ini tidak dapat memulihkan kata sandi; kata sandi hanya tersimpan di peramban perangkat ini.",
           toastWelcome: "Selamat datang kembali, {name}!", toastRegistered: "Pendaftaran berhasil — selamat datang, {name}!",
@@ -2369,11 +2372,11 @@
           st2Name: "နေ့စဉ် တရုတ်စာ", st2Desc: "အသုံးများသော စကားလုံးနှင့် ဝါကျများကို သင်ယူ၍ ရိုးရှင်းစွာ ဆက်သွယ်ပြောဆိုနိုင်ပါ",
           st3Name: "HSK", st3Desc: "တရုတ်စာ စွမ်းရည်ကို မြှင့်တင်၍ HSK စာမေးပွဲနှင့် ချိတ်ဆက်ပါ",
           pathNote: "အဆင့်တိုင်းကို သင်ခန်းစာတိုများအဖြစ် ခွဲထားသည် — လက်ရှိ သင်ခန်းစာ ပြီးမှ နောက်တစ်ခန်းကို ဆက်သင်ပါ။",
-          lessonTitle: "သင်ခန်းစာ ၁ အကြိုကြည့်ရန် · a နှင့် မိတ်ဆက်ပါ", lessonTag: "သရ တစ်ခုတည်း a",
+          lessonTitle: "အသံထွက် အတွေ့အကြုံ · a", lessonTag: "သရ တစ်ခုတည်း a",
           lessonSay: "ပါးစပ်ကို ဖွင့်၍ a ကို ရှင်းလင်းစွာ ထွက်ကြည့်ပါ။",
           tonesAria: "a ၏ အသံနေအသံထား လေးမျိုး — နှိပ်၍ နားထောင်ပါ",
           tone1: "အသံ ၁", tone2: "အသံ ၂", tone3: "အသံ ၃", tone4: "အသံ ၄",
-          listenBtn: "စံအသံထွက်ကို နားထောင်ပါ", lessonMeta: "သင်ခန်းစာ ၁ ကို ၃ မိနစ်အတွင်း သင်ယူပြီးမြောက်ပါ",
+          listenBtn: "စံအသံထွက်ကို နားထောင်ပါ", lessonMeta: "a အသံကို ၃ မိနစ်အတွင်း စမ်းကြည့်ပါ",
           aBoxAria: "a ၏ အသံထွက်ကို ဖွင့်ပါ",
           footNote: "ပင်းယင်း အခြေခံ ပြီးဆုံးပါက နေ့စဉ် တရုတ်စာကို ဆက်လက် သင်ယူပါ။",
           footHelp: "အကူအညီ စင်တာ", footPrivacy: "ကိုယ်ရေး မူဝါဒ", footContact: "ဆက်သွယ်ရန်", footNavAria: "အောက်ခြေ လင့်ခ်များ",
@@ -2389,7 +2392,7 @@
           showPass: "စကားဝှက် ပြပါ", hidePass: "စကားဝှက် ဖျောက်ပါ",
           myLearning: "ကျွန်ုပ်၏ သင်ယူမှု", myRecords: "သင်ယူမှု မှတ်တမ်း", logout: "အကောင့်ထွက်ပါ",
           recTitle: "သင်ယူမှု မှတ်တမ်း", recAccount: "အကောင့်", recStarted: "စတင်ပြီး",
-          recLesson1Name: "သင်ခန်းစာ ၁ · a နှင့် မိတ်ဆက်ပါ", recLast: "နောက်ဆုံး သင်ယူချိန်",
+          recLesson1Name: "သင်ခန်းစာ ၁ · ပင်းယင်းဆိုတာ ဘာလဲ", recLast: "နောက်ဆုံး သင်ယူချိန်",
           recEmpty: "သင်ယူမှု မှတ်တမ်း မရှိသေးပါ — သင်ခန်းစာ ၁ မှ စတင်ပါ။", closeBtn: "ပိတ်ပါ",
           forgotHint: "ဤလိုကယ် သင်ယူမှု ဗားရှင်းတွင် စကားဝှက် ပြန်ယူ၍ မရပါ။ စကားဝှက်ကို ဤစက်ပစ္စည်း၏ ဘရောက်ဇာတွင်သာ သိမ်းထားသည်။",
           toastWelcome: "ပြန်လည် ကြိုဆိုပါတယ်၊ {name}!", toastRegistered: "စာရင်းသွင်းမှု အောင်မြင်သည် — ကြိုဆိုပါတယ်၊ {name}!",
@@ -2418,11 +2421,11 @@
           st2Name: "Chinois du quotidien", st2Desc: "Apprendre les mots et phrases courants pour des échanges simples",
           st3Name: "HSK", st3Desc: "Renforcer votre chinois et faire le lien avec les examens HSK",
           pathNote: "Chaque étape est découpée en leçons courtes — terminez la leçon en cours pour passer à la suivante.",
-          lessonTitle: "Aperçu de la leçon 1 · Découvrir le a", lessonTag: "Voyelle simple a",
+          lessonTitle: "Expérience de prononciation · a", lessonTag: "Voyelle simple a",
           lessonSay: "Ouvrez la bouche et prononcez un a clair.",
           tonesAria: "Les quatre tons du a — touchez pour écouter",
           tone1: "1er ton", tone2: "2e ton", tone3: "3e ton", tone4: "4e ton",
-          listenBtn: "Écouter la prononciation standard", lessonMeta: "Terminez la leçon 1 en 3 minutes",
+          listenBtn: "Écouter la prononciation standard", lessonMeta: "Découvrez le son a en 3 minutes",
           aBoxAria: "Écouter la prononciation du a",
           footNote: "Après les bases du pinyin, continuez avec le chinois du quotidien.",
           footHelp: "Centre d'aide", footPrivacy: "Politique de confidentialité", footContact: "Nous contacter", footNavAria: "Liens de pied de page",
@@ -2438,7 +2441,7 @@
           showPass: "Afficher le mot de passe", hidePass: "Masquer le mot de passe",
           myLearning: "Mon apprentissage", myRecords: "Historique d'étude", logout: "Se déconnecter",
           recTitle: "Historique d'étude", recAccount: "Compte", recStarted: "Commencée",
-          recLesson1Name: "Leçon 1 · Découvrir le a", recLast: "Dernière étude",
+          recLesson1Name: "Leçon 1 · Qu'est-ce que le pinyin ?", recLast: "Dernière étude",
           recEmpty: "Aucun historique pour le moment — commencez par la leçon 1.", closeBtn: "Fermer",
           forgotHint: "Cette version d'étude locale ne peut pas récupérer les mots de passe ; votre mot de passe est stocké uniquement dans le navigateur de cet appareil.",
           toastWelcome: "Bon retour, {name} !", toastRegistered: "Inscription réussie — bienvenue, {name} !",
@@ -2467,11 +2470,11 @@
           st2Name: "الصينية اليومية", st2Desc: "تعلّم الكلمات والعبارات الشائعة للمحادثات البسيطة",
           st3Name: "HSK", st3Desc: "ارتقِ بمستواك في الصينية وارتبط باختبارات HSK",
           pathNote: "كل مرحلة مقسمة إلى دروس قصيرة — أكمل الدرس الحالي لتنتقل إلى الدرس التالي.",
-          lessonTitle: "معاينة الدرس الأول · التعرّف على a", lessonTag: "الصائت المفرد a",
+          lessonTitle: "تجربة النطق · a", lessonTag: "الصائت المفرد a",
           lessonSay: "جرّب أن تفتح فمك وتنطق a بوضوح.",
           tonesAria: "نغمات a الأربع — اضغط للاستماع",
           tone1: "النغمة الأولى", tone2: "النغمة الثانية", tone3: "النغمة الثالثة", tone4: "النغمة الرابعة",
-          listenBtn: "استمع إلى النطق القياسي", lessonMeta: "أنهِ الدرس الأول في 3 دقائق",
+          listenBtn: "استمع إلى النطق القياسي", lessonMeta: "جرّب صوت a في 3 دقائق",
           aBoxAria: "تشغيل نطق a",
           footNote: "بعد إتمام أساسيات البينيين، واصل مع الصينية اليومية.",
           footHelp: "مركز المساعدة", footPrivacy: "سياسة الخصوصية", footContact: "اتصل بنا", footNavAria: "روابط التذييل",
@@ -2487,7 +2490,7 @@
           showPass: "إظهار كلمة المرور", hidePass: "إخفاء كلمة المرور",
           myLearning: "تعلّمي", myRecords: "سجل الدراسة", logout: "تسجيل الخروج",
           recTitle: "سجل الدراسة", recAccount: "الحساب", recStarted: "بدأت",
-          recLesson1Name: "الدرس الأول · التعرّف على a", recLast: "آخر دراسة",
+          recLesson1Name: "الدرس الأول · ما هو البينيين؟", recLast: "آخر دراسة",
           recEmpty: "لا يوجد سجل دراسة بعد — ابدأ بالدرس الأول.", closeBtn: "إغلاق",
           forgotHint: "لا يمكن لنسخة الدراسة المحلية هذه استعادة كلمات المرور؛ كلمة المرور محفوظة فقط في متصفح هذا الجهاز.",
           toastWelcome: "مرحبًا بعودتك، {name}!", toastRegistered: "تم إنشاء الحساب — أهلًا بك، {name}!",
@@ -2516,11 +2519,11 @@
           st2Name: "일상 중국어", st2Desc: "자주 쓰는 단어와 문장을 배워 간단히 대화해요",
           st3Name: "HSK", st3Desc: "중국어 실력을 높여 HSK 시험으로 이어가요",
           pathNote: "각 단계는 짧은 수업으로 나뉘어 있어요. 현재 수업을 마치면 다음 수업으로 이어집니다.",
-          lessonTitle: "첫 수업 미리보기 · a 알아보기", lessonTag: "단모음 a",
+          lessonTitle: "발음 체험 · a", lessonTag: "단모음 a",
           lessonSay: "입을 크게 벌리고 a를 또렷하게 발음해 보세요.",
           tonesAria: "a의 네 가지 성조, 눌러서 들어보기",
           tone1: "1성", tone2: "2성", tone3: "3성", tone4: "4성",
-          listenBtn: "표준 발음 듣기", lessonMeta: "3분 만에 첫 수업 끝내기",
+          listenBtn: "표준 발음 듣기", lessonMeta: "3분 동안 a 발음 체험하기",
           aBoxAria: "a 발음 재생",
           footNote: "병음 기초를 마친 뒤에는 일상 중국어로 이어서 배워요.",
           footHelp: "도움말 센터", footPrivacy: "개인정보 처리방침", footContact: "문의하기", footNavAria: "하단 링크",
@@ -2536,7 +2539,7 @@
           showPass: "비밀번호 표시", hidePass: "비밀번호 숨기기",
           myLearning: "내 학습", myRecords: "학습 기록", logout: "로그아웃",
           recTitle: "학습 기록", recAccount: "계정", recStarted: "시작함",
-          recLesson1Name: "첫 수업 · a 알아보기", recLast: "최근 학습",
+          recLesson1Name: "첫 수업 · 병음이란 무엇인가요", recLast: "최근 학습",
           recEmpty: "아직 학습 기록이 없어요. 첫 수업부터 시작해 보세요.", closeBtn: "닫기",
           forgotHint: "이 로컬 학습 버전에서는 비밀번호를 찾을 수 없어요. 비밀번호는 이 기기의 브라우저에만 저장됩니다.",
           toastWelcome: "다시 오신 것을 환영해요, {name}님!", toastRegistered: "가입이 완료됐어요. 환영해요, {name}님!",
@@ -2565,11 +2568,11 @@
           st2Name: "日常中国語", st2Desc: "よく使う単語や文を学び、簡単な会話ができるように",
           st3Name: "HSK", st3Desc: "中国語の力を伸ばし、HSK試験につなげます",
           pathNote: "各ステージは短いレッスンに分かれています。今のレッスンを終えると次へ進みます。",
-          lessonTitle: "第1課プレビュー · a を知ろう", lessonTag: "単母音 a",
+          lessonTitle: "発音体験 · a", lessonTag: "単母音 a",
           lessonSay: "口を大きく開けて、a をはっきり発音してみましょう。",
           tonesAria: "a の四声、タップして聞けます",
           tone1: "第1声", tone2: "第2声", tone3: "第3声", tone4: "第4声",
-          listenBtn: "標準の発音を聞く", lessonMeta: "3分で第1課を終えよう",
+          listenBtn: "標準の発音を聞く", lessonMeta: "3分で a の発音を体験",
           aBoxAria: "a の発音を再生",
           footNote: "ピンインの基礎を終えたら、日常中国語へ進みます。",
           footHelp: "ヘルプセンター", footPrivacy: "プライバシーポリシー", footContact: "お問い合わせ", footNavAria: "フッターリンク",
@@ -2585,7 +2588,7 @@
           showPass: "パスワードを表示", hidePass: "パスワードを隠す",
           myLearning: "私の学習", myRecords: "学習記録", logout: "ログアウト",
           recTitle: "学習記録", recAccount: "アカウント", recStarted: "開始済み",
-          recLesson1Name: "第1課 · a を知ろう", recLast: "最近の学習",
+          recLesson1Name: "第1課 · ピンインとは？", recLast: "最近の学習",
           recEmpty: "まだ学習記録がありません。第1課から始めましょう。", closeBtn: "閉じる",
           forgotHint: "このローカル学習版ではパスワードを復旧できません。パスワードはこの端末のブラウザにのみ保存されます。",
           toastWelcome: "おかえりなさい、{name}さん！", toastRegistered: "登録が完了しました。ようこそ、{name}さん！",
@@ -2614,11 +2617,11 @@
           st2Name: "Разговорный китайский", st2Desc: "Выучите повседневные слова и фразы для простых бесед",
           st3Name: "HSK", st3Desc: "Развивайте китайский и готовьтесь к экзаменам HSK",
           pathNote: "Каждый этап разбит на короткие уроки — завершите текущий урок, чтобы перейти к следующему.",
-          lessonTitle: "Предпросмотр урока 1 · Знакомимся с a", lessonTag: "Одиночная гласная a",
+          lessonTitle: "Опыт произношения · a", lessonTag: "Одиночная гласная a",
           lessonSay: "Попробуйте широко открыть рот и чётко произнести a.",
           tonesAria: "Четыре тона звука a — нажмите, чтобы послушать",
           tone1: "1-й тон", tone2: "2-й тон", tone3: "3-й тон", tone4: "4-й тон",
-          listenBtn: "Слушать эталонное произношение", lessonMeta: "Пройдите урок 1 за 3 минуты",
+          listenBtn: "Слушать эталонное произношение", lessonMeta: "Попробуйте звук a за 3 минуты",
           aBoxAria: "Воспроизвести произношение a",
           footNote: "После основ пиньиня переходите к разговорному китайскому.",
           footHelp: "Справка", footPrivacy: "Политика конфиденциальности", footContact: "Связаться с нами", footNavAria: "Ссылки в подвале",
@@ -2634,7 +2637,7 @@
           showPass: "Показать пароль", hidePass: "Скрыть пароль",
           myLearning: "Моё обучение", myRecords: "История обучения", logout: "Выйти",
           recTitle: "История обучения", recAccount: "Аккаунт", recStarted: "Начат",
-          recLesson1Name: "Урок 1 · Знакомимся с a", recLast: "Последнее занятие",
+          recLesson1Name: "Урок 1 · Что такое пиньинь?", recLast: "Последнее занятие",
           recEmpty: "Истории обучения пока нет — начните с урока 1.", closeBtn: "Закрыть",
           forgotHint: "В этой локальной учебной версии восстановить пароль нельзя; пароль хранится только в браузере этого устройства.",
           toastWelcome: "С возвращением, {name}!", toastRegistered: "Регистрация завершена — добро пожаловать, {name}!",
@@ -2663,11 +2666,11 @@
           st2Name: "Chino cotidiano", st2Desc: "Aprende palabras y frases comunes para conversaciones sencillas",
           st3Name: "HSK", st3Desc: "Mejora tu chino y conéctalo con los exámenes HSK",
           pathNote: "Cada etapa se divide en lecciones cortas: termina la lección actual para pasar a la siguiente.",
-          lessonTitle: "Vista previa de la lección 1 · Conoce la a", lessonTag: "Vocal simple a",
+          lessonTitle: "Experiencia de pronunciación · a", lessonTag: "Vocal simple a",
           lessonSay: "Abre bien la boca y pronuncia la a con claridad.",
           tonesAria: "Los cuatro tonos de la a: toca para escuchar",
           tone1: "Tono 1", tone2: "Tono 2", tone3: "Tono 3", tone4: "Tono 4",
-          listenBtn: "Escuchar la pronunciación estándar", lessonMeta: "Termina la lección 1 en 3 minutos",
+          listenBtn: "Escuchar la pronunciación estándar", lessonMeta: "Prueba el sonido a en 3 minutos",
           aBoxAria: "Reproducir la pronunciación de la a",
           footNote: "Después de los fundamentos del pinyin, continúa con el chino cotidiano.",
           footHelp: "Centro de ayuda", footPrivacy: "Política de privacidad", footContact: "Contáctanos", footNavAria: "Enlaces del pie de página",
@@ -2683,7 +2686,7 @@
           showPass: "Mostrar contraseña", hidePass: "Ocultar contraseña",
           myLearning: "Mi aprendizaje", myRecords: "Historial de estudio", logout: "Cerrar sesión",
           recTitle: "Historial de estudio", recAccount: "Cuenta", recStarted: "Empezada",
-          recLesson1Name: "Lección 1 · Conoce la a", recLast: "Último estudio",
+          recLesson1Name: "Lección 1 · ¿Qué es el pinyin?", recLast: "Último estudio",
           recEmpty: "Aún no hay historial de estudio: empieza con la lección 1.", closeBtn: "Cerrar",
           forgotHint: "Esta versión local de estudio no puede recuperar contraseñas; tu contraseña se guarda solo en el navegador de este dispositivo.",
           toastWelcome: "¡Hola de nuevo, {name}!", toastRegistered: "Registro completado. ¡Te damos la bienvenida, {name}!",
@@ -2712,11 +2715,11 @@
           st2Name: "Alltagschinesisch", st2Desc: "Gebräuchliche Wörter und Sätze für einfache Gespräche lernen",
           st3Name: "HSK", st3Desc: "Ihr Chinesisch ausbauen und an die HSK-Prüfungen anknüpfen",
           pathNote: "Jede Stufe ist in kurze Lektionen unterteilt – schließen Sie die aktuelle Lektion ab, um zur nächsten zu gelangen.",
-          lessonTitle: "Vorschau Lektion 1 · Das a kennenlernen", lessonTag: "Einfacher Vokal a",
+          lessonTitle: "Aussprache-Erlebnis · a", lessonTag: "Einfacher Vokal a",
           lessonSay: "Öffnen Sie den Mund weit und sprechen Sie das a deutlich aus.",
           tonesAria: "Die vier Töne des a – antippen zum Anhören",
           tone1: "1. Ton", tone2: "2. Ton", tone3: "3. Ton", tone4: "4. Ton",
-          listenBtn: "Standardaussprache anhören", lessonMeta: "Lektion 1 in 3 Minuten abschließen",
+          listenBtn: "Standardaussprache anhören", lessonMeta: "Den Laut a in 3 Minuten erleben",
           aBoxAria: "Aussprache des a abspielen",
           footNote: "Nach den Pinyin-Grundlagen geht es mit Alltagschinesisch weiter.",
           footHelp: "Hilfebereich", footPrivacy: "Datenschutz", footContact: "Kontakt", footNavAria: "Links in der Fußzeile",
@@ -2732,7 +2735,7 @@
           showPass: "Passwort anzeigen", hidePass: "Passwort verbergen",
           myLearning: "Mein Lernen", myRecords: "Lernverlauf", logout: "Abmelden",
           recTitle: "Lernverlauf", recAccount: "Konto", recStarted: "Begonnen",
-          recLesson1Name: "Lektion 1 · Das a kennenlernen", recLast: "Zuletzt gelernt",
+          recLesson1Name: "Lektion 1 · Was ist Pinyin?", recLast: "Zuletzt gelernt",
           recEmpty: "Noch kein Lernverlauf – beginnen Sie mit Lektion 1.", closeBtn: "Schließen",
           forgotHint: "Diese lokale Lernversion kann Passwörter nicht wiederherstellen; Ihr Passwort wird nur im Browser dieses Geräts gespeichert.",
           toastWelcome: "Willkommen zurück, {name}!", toastRegistered: "Registrierung erfolgreich – willkommen, {name}!",
@@ -2761,11 +2764,11 @@
           st2Name: "Chinês do dia a dia", st2Desc: "Aprenda palavras e frases comuns para conversas simples",
           st3Name: "HSK", st3Desc: "Evolua no chinês e conecte-se aos exames HSK",
           pathNote: "Cada etapa é dividida em lições curtas — conclua a lição atual para passar à próxima.",
-          lessonTitle: "Prévia da lição 1 · Conheça o a", lessonTag: "Vogal simples a",
+          lessonTitle: "Experiência de pronúncia · a", lessonTag: "Vogal simples a",
           lessonSay: "Abra bem a boca e pronuncie o a com clareza.",
           tonesAria: "Os quatro tons do a — toque para ouvir",
           tone1: "Tom 1", tone2: "Tom 2", tone3: "Tom 3", tone4: "Tom 4",
-          listenBtn: "Ouvir a pronúncia padrão", lessonMeta: "Conclua a lição 1 em 3 minutos",
+          listenBtn: "Ouvir a pronúncia padrão", lessonMeta: "Experimente o som a em 3 minutos",
           aBoxAria: "Reproduzir a pronúncia do a",
           footNote: "Depois da base do pinyin, continue com o chinês do dia a dia.",
           footHelp: "Central de ajuda", footPrivacy: "Política de privacidade", footContact: "Fale conosco", footNavAria: "Links do rodapé",
@@ -2781,7 +2784,7 @@
           showPass: "Mostrar senha", hidePass: "Ocultar senha",
           myLearning: "Meu aprendizado", myRecords: "Histórico de estudo", logout: "Sair",
           recTitle: "Histórico de estudo", recAccount: "Conta", recStarted: "Iniciada",
-          recLesson1Name: "Lição 1 · Conheça o a", recLast: "Último estudo",
+          recLesson1Name: "Lição 1 · O que é pinyin?", recLast: "Último estudo",
           recEmpty: "Ainda não há histórico de estudo — comece pela lição 1.", closeBtn: "Fechar",
           forgotHint: "Esta versão local de estudo não pode recuperar senhas; sua senha fica salva apenas no navegador deste dispositivo.",
           toastWelcome: "Bem-vindo de volta, {name}!", toastRegistered: "Cadastro concluído — bem-vindo, {name}!",
@@ -2812,6 +2815,56 @@
         Object.keys(RM_I18N).forEach(function (code) {
           if (!I18N[code]) return;
           Object.keys(RM_I18N[code]).forEach(function (k) { I18N[code][k] = RM_I18N[code][k]; });
+        });
+
+        /* ---- "coming soon" strings for roadmap lessons that have no
+           page yet (ids 3–15), merged the same way ---- */
+        var RM_SOON_I18N = {
+          zh: { rmSoon: "即将开放", rmSoonHint: "这一课正在制作中，敬请期待", toastLessonSoon: "“{name}”即将开放，敬请期待" },
+          en: { rmSoon: "Coming soon", rmSoonHint: "This lesson is still being made — stay tuned", toastLessonSoon: "“{name}” is coming soon — stay tuned" },
+          vi: { rmSoon: "Sắp mở", rmSoonHint: "Bài học này đang được thực hiện — hãy chờ đón nhé", toastLessonSoon: "“{name}” sắp mở — hãy chờ đón nhé" },
+          th: { rmSoon: "เร็ว ๆ นี้", rmSoonHint: "บทนี้กำลังจัดทำอยู่ โปรดรอติดตาม", toastLessonSoon: "“{name}” จะเปิดเร็ว ๆ นี้ โปรดรอติดตาม" },
+          id: { rmSoon: "Segera dibuka", rmSoonHint: "Pelajaran ini sedang dibuat — nantikan ya", toastLessonSoon: "“{name}” segera dibuka — nantikan ya" },
+          my: { rmSoon: "မကြာမီ ဖွင့်မည်", rmSoonHint: "ဤသင်ခန်းစာကို ပြုလုပ်နေဆဲဖြစ်သည် — စောင့်ကြည့်ပါ", toastLessonSoon: "“{name}” မကြာမီ ဖွင့်ပါမည် — စောင့်ကြည့်ပါ" },
+          fr: { rmSoon: "Bientôt disponible", rmSoonHint: "Cette leçon est en cours de création — à très vite", toastLessonSoon: "« {name} » arrive bientôt — à très vite" },
+          ar: { rmSoon: "يُفتح قريبًا", rmSoonHint: "هذا الدرس قيد الإعداد — ترقّبوه", toastLessonSoon: "«{name}» يُفتح قريبًا — ترقّبوه" },
+          ko: { rmSoon: "곧 열려요", rmSoonHint: "이 수업은 아직 만드는 중이에요 — 조금만 기다려 주세요", toastLessonSoon: "“{name}” 수업은 곧 열려요 — 조금만 기다려 주세요" },
+          ja: { rmSoon: "近日公開", rmSoonHint: "このレッスンは作成中です — お楽しみに", toastLessonSoon: "「{name}」は近日公開です — お楽しみに" },
+          ru: { rmSoon: "Скоро откроется", rmSoonHint: "Этот урок ещё готовится — следите за обновлениями", toastLessonSoon: "Урок «{name}» скоро откроется — следите за обновлениями" },
+          es: { rmSoon: "Muy pronto", rmSoonHint: "Esta lección aún se está preparando — estate atento", toastLessonSoon: "«{name}» estará disponible muy pronto — estate atento" },
+          de: { rmSoon: "Demnächst verfügbar", rmSoonHint: "Diese Lektion wird noch erstellt — bleiben Sie dran", toastLessonSoon: "„{name}“ ist demnächst verfügbar — bleiben Sie dran" },
+          pt: { rmSoon: "Em breve", rmSoonHint: "Esta lição ainda está sendo preparada — fique atento", toastLessonSoon: "«{name}» estará disponível em breve — fique atento" }
+        };
+        Object.keys(RM_SOON_I18N).forEach(function (code) {
+          if (!I18N[code]) return;
+          Object.keys(RM_SOON_I18N[code]).forEach(function (k) { I18N[code][k] = RM_SOON_I18N[code][k]; });
+        });
+
+        /* ---- completion toast for a lesson whose next lesson is not
+           built yet (lesson 02 → 03, which shows as 即将开放 on the
+           roadmap): same completion wording as toastLessonDone, but
+           the tail says the next lesson is still being made — matching
+           l00NextSoon on the finish card — instead of claiming it is
+           unlocked. Merged the same way. ---- */
+        var RM_DONE_SOON_I18N = {
+          zh: { toastLessonDoneSoon: "完成“{name}”，下一课正在制作中" },
+          en: { toastLessonDoneSoon: "Finished “{name}” — the next lesson is still being made" },
+          vi: { toastLessonDoneSoon: "Đã hoàn thành “{name}” — bài tiếp theo đang được thực hiện" },
+          th: { toastLessonDoneSoon: "เรียนจบ “{name}” แล้ว — บทถัดไปกำลังจัดทำอยู่" },
+          id: { toastLessonDoneSoon: "“{name}” selesai — pelajaran berikutnya sedang dibuat" },
+          my: { toastLessonDoneSoon: "“{name}” ပြီးဆုံးပြီး — နောက်သင်ခန်းစာကို ပြုလုပ်နေဆဲပါ" },
+          fr: { toastLessonDoneSoon: "« {name} » terminé — la leçon suivante est en cours de création" },
+          ar: { toastLessonDoneSoon: "أكملت «{name}» — الدرس التالي قيد الإعداد" },
+          ko: { toastLessonDoneSoon: "“{name}” 완료 — 다음 수업은 아직 만드는 중이에요" },
+          ja: { toastLessonDoneSoon: "「{name}」が完了しました — 次のレッスンは作成中です" },
+          ru: { toastLessonDoneSoon: "Урок «{name}» завершён — следующий урок ещё готовится" },
+          es: { toastLessonDoneSoon: "«{name}» completada: la lección siguiente aún se está preparando" },
+          de: { toastLessonDoneSoon: "„{name}“ abgeschlossen – die nächste Lektion wird noch erstellt" },
+          pt: { toastLessonDoneSoon: "«{name}» concluída — a próxima lição ainda está sendo preparada" }
+        };
+        Object.keys(RM_DONE_SOON_I18N).forEach(function (code) {
+          if (!I18N[code]) return;
+          Object.keys(RM_DONE_SOON_I18N[code]).forEach(function (k) { I18N[code][k] = RM_DONE_SOON_I18N[code][k]; });
         });
 
         /* ---- node 00 "什么是拼音" strings, merged the same way ---- */
@@ -2896,20 +2949,20 @@
            pinyin, the Chinese paragraphs and the chart — is NOT in here:
            it stays the same in every language. */
         var L00_I18N = {
-          zh: { l00Back: "返回学习路径", l00Title: "什么是汉语拼音？", l00MetaMin: "10–12 分钟学完本课", l00Progress: "进度 {done}/{total}", l00Complete: "完成本课", l00Completed: "已完成本课", l00NextLabel: "下一课", l00NextLocked: "完成本课后解锁", l00NextUnlocked: "已解锁", l00StartNext: "开始下一课", l00S1Title: "认识拼音", l00Hello: "Hello!", l00WhatQ: "什么是汉语拼音？", l00WhatAux: "What is Pinyin? Pinyin is a system that uses Latin letters and tone marks to show how Mandarin Chinese is pronounced.", l00S2Title: "为什么要学习拼音？", l00Why1: "Learn how to pronounce Chinese words.", l00Why2: "Learn how to read Chinese characters aloud.", l00Why3: "Type Chinese characters on your phone or computer.", l00S3Title: "发现生活中的拼音", l00LifeIntroAux: "In university life in China, you will come across many new words.", l00W1: "School", l00W2: "Cafeteria", l00W3: "Dormitory", l00W4: "Subway", l00LifeNoteAux: "These are common words you will learn later. You don't need to remember them now — just observe the relationship between the characters and their pinyin.", l00S4Title: "认识拼音的组成", l00S4IntroAux: "Let's take “妈” (mā) as an example:", l00S4NoteAux: "Different tones can change the meaning of a word, so learning pinyin is not only about recognising the letters — you also need to learn to tell the tones apart.", l00S5Title: "拼音总表", l00ChartHintAux: "You don't need to memorise the whole chart now. Just take a look at what pinyin looks like — after we meet a, we will learn it lesson by lesson." },
-          en: { l00Back: "Back to learning path", l00Title: "What Is Pinyin?", l00MetaMin: "Finish this lesson in 10–12 minutes", l00Progress: "Progress {done}/{total}", l00Complete: "Finish this lesson", l00Completed: "Lesson completed", l00NextLabel: "Next lesson", l00NextLocked: "Finish this lesson to unlock it", l00NextUnlocked: "Unlocked", l00StartNext: "Start the next lesson", l00S1Title: "Meet Pinyin", l00Hello: "Hello!", l00WhatQ: "What is Hanyu Pinyin?", l00WhatAux: "What is Pinyin? Pinyin is a system that uses Latin letters and tone marks to show how Mandarin Chinese is pronounced.", l00S2Title: "Why learn pinyin?", l00Why1: "Learn how to pronounce Chinese words.", l00Why2: "Learn how to read Chinese characters aloud.", l00Why3: "Type Chinese characters on your phone or computer.", l00S3Title: "Pinyin in daily life", l00LifeIntroAux: "In university life in China, you will come across many new words.", l00W1: "School", l00W2: "Cafeteria", l00W3: "Dormitory", l00W4: "Subway", l00LifeNoteAux: "These are common words you will learn later. You don't need to remember them now — just observe the relationship between the characters and their pinyin.", l00S4Title: "What a Pinyin Syllable Is Made Of", l00S4IntroAux: "Let's take “妈” (mā) as an example:", l00S4NoteAux: "Different tones can change the meaning of a word, so learning pinyin is not only about recognising the letters — you also need to learn to tell the tones apart.", l00S5Title: "Pinyin Chart", l00ChartHintAux: "You don't need to memorise the whole chart now. Just take a look at what pinyin looks like — after we meet a, we will learn it lesson by lesson." },
-          vi: { l00Back: "Quay lại lộ trình học", l00Title: "Pinyin là gì?", l00MetaMin: "Học xong bài này trong 10–12 phút", l00Progress: "Tiến độ {done}/{total}", l00Complete: "Hoàn thành bài này", l00Completed: "Đã hoàn thành bài này", l00NextLabel: "Bài tiếp theo", l00NextLocked: "Hoàn thành bài này để mở khóa", l00NextUnlocked: "Đã mở khóa", l00StartNext: "Bắt đầu bài tiếp theo", l00S1Title: "Làm quen với pinyin", l00Hello: "Xin chào!", l00WhatQ: "Hán ngữ pinyin là gì?", l00WhatAux: "Pinyin là gì? Pinyin là hệ thống dùng chữ cái Latinh và dấu thanh điệu để ghi cách phát âm tiếng Trung phổ thông.", l00S2Title: "Vì sao nên học pinyin?", l00Why1: "Học cách phát âm từ tiếng Trung.", l00Why2: "Học cách đọc chữ Hán thành tiếng.", l00Why3: "Gõ chữ Hán trên điện thoại hoặc máy tính.", l00S3Title: "Khám phá pinyin trong đời sống", l00LifeIntroAux: "Trong đời sống đại học ở Trung Quốc, bạn sẽ gặp nhiều từ mới.", l00W1: "Trường học", l00W2: "Nhà ăn", l00W3: "Ký túc xá", l00W4: "Tàu điện ngầm", l00LifeNoteAux: "Đây là những từ thông dụng chúng ta sẽ học sau này. Bây giờ chưa cần ghi nhớ, chỉ cần quan sát mối quan hệ giữa chữ Hán và pinyin.", l00S4Title: "Cấu tạo của pinyin", l00S4IntroAux: "Lấy “妈” (mā) làm ví dụ:", l00S4NoteAux: "Thanh điệu khác nhau có thể làm thay đổi nghĩa của từ, vì vậy học pinyin không chỉ là nhận biết chữ cái mà còn phải học phân biệt thanh điệu.", l00S5Title: "Bảng pinyin đầy đủ", l00ChartHintAux: "Bây giờ chưa cần ghi nhớ cả bảng, hãy xem pinyin trông như thế nào trước — sau khi làm quen với a, chúng ta sẽ học từng bài một." },
-          th: { l00Back: "กลับไปเส้นทางการเรียน", l00Title: "พินอินคืออะไร?", l00MetaMin: "เรียนจบบทนี้ใน 10–12 นาที", l00Progress: "ความคืบหน้า {done}/{total}", l00Complete: "จบบทนี้", l00Completed: "เรียนจบบทนี้แล้ว", l00NextLabel: "บทถัดไป", l00NextLocked: "เรียนบทนี้ให้จบเพื่อปลดล็อก", l00NextUnlocked: "ปลดล็อกแล้ว", l00StartNext: "เริ่มบทถัดไป", l00S1Title: "รู้จักพินอิน", l00Hello: "สวัสดี!", l00WhatQ: "พินอินภาษาจีนคืออะไร?", l00WhatAux: "พินอินคืออะไร? พินอินเป็นระบบที่ใช้ตัวอักษรละตินและเครื่องหมายวรรณยุกต์เพื่อแสดงการออกเสียงภาษาจีนกลาง", l00S2Title: "ทำไมต้องเรียนพินอิน?", l00Why1: "เรียนรู้วิธีออกเสียงคำภาษาจีน", l00Why2: "เรียนรู้วิธีอ่านตัวอักษรจีนออกเสียง", l00Why3: "พิมพ์ตัวอักษรจีนบนโทรศัพท์หรือคอมพิวเตอร์", l00S3Title: "ค้นพบพินอินในชีวิตประจำวัน", l00LifeIntroAux: "ในชีวิตมหาวิทยาลัยที่ประเทศจีน คุณจะได้พบคำใหม่มากมาย", l00W1: "โรงเรียน", l00W2: "โรงอาหาร", l00W3: "หอพัก", l00W4: "รถไฟใต้ดิน", l00LifeNoteAux: "คำเหล่านี้เป็นคำที่ใช้บ่อยซึ่งเราจะเรียนกันต่อไป ตอนนี้ยังไม่ต้องจำ เพียงสังเกตความสัมพันธ์ระหว่างตัวอักษรจีนกับพินอิน", l00S4Title: "ส่วนประกอบของพินอิน", l00S4IntroAux: "ดูตัวอย่าง “妈” (mā):", l00S4NoteAux: "วรรณยุกต์ที่ต่างกันอาจเปลี่ยนความหมายของคำได้ ดังนั้นการเรียนพินอินไม่ใช่แค่รู้จักตัวอักษร แต่ต้องแยกแยะวรรณยุกต์ได้ด้วย", l00S5Title: "ตารางพินอินทั้งหมด", l00ChartHintAux: "ตอนนี้ยังไม่ต้องจำทั้งตาราง ดูให้รู้ก่อนว่าพินอินหน้าตาเป็นอย่างไร หลังจากรู้จัก a แล้วเราจะเรียนกันทีละบท" },
-          id: { l00Back: "Kembali ke jalur belajar", l00Title: "Apa itu Pinyin?", l00MetaMin: "Selesaikan pelajaran ini dalam 10–12 menit", l00Progress: "Kemajuan {done}/{total}", l00Complete: "Selesaikan pelajaran ini", l00Completed: "Pelajaran selesai", l00NextLabel: "Pelajaran berikutnya", l00NextLocked: "Selesaikan pelajaran ini untuk membukanya", l00NextUnlocked: "Sudah terbuka", l00StartNext: "Mulai pelajaran berikutnya", l00S1Title: "Mengenal pinyin", l00Hello: "Halo!", l00WhatQ: "Apa itu Hanyu Pinyin?", l00WhatAux: "Apa itu Pinyin? Pinyin adalah sistem yang menggunakan huruf Latin dan tanda nada untuk menunjukkan cara pengucapan bahasa Mandarin.", l00S2Title: "Mengapa belajar pinyin?", l00Why1: "Belajar mengucapkan kata-kata Mandarin.", l00Why2: "Belajar membaca aksara Mandarin dengan bersuara.", l00Why3: "Mengetik aksara Mandarin di ponsel atau komputer.", l00S3Title: "Menemukan pinyin dalam kehidupan sehari-hari", l00LifeIntroAux: "Dalam kehidupan kampus di Tiongkok, Anda akan menemukan banyak kata baru.", l00W1: "Sekolah", l00W2: "Kantin", l00W3: "Asrama", l00W4: "Kereta bawah tanah", l00LifeNoteAux: "Ini adalah kata-kata umum yang akan kita pelajari nanti. Sekarang Anda tidak perlu menghafalnya — cukup amati hubungan antara aksara dan pinyin-nya.", l00S4Title: "Susunan pinyin", l00S4IntroAux: "Ambil contoh “妈” (mā):", l00S4NoteAux: "Nada yang berbeda dapat mengubah arti kata, jadi belajar pinyin bukan hanya mengenal huruf, tetapi juga belajar membedakan nada.", l00S5Title: "Tabel Pinyin Lengkap", l00ChartHintAux: "Sekarang Anda tidak perlu menghafal seluruh tabel. Lihat dulu seperti apa pinyin itu — setelah mengenal a, kita akan mempelajarinya pelajaran demi pelajaran." },
-          my: { l00Back: "သင်ယူမှု လမ်းကြောင်းသို့ ပြန်သွားပါ", l00Title: "ပင်းယင်းဆိုတာ ဘာလဲ?", l00MetaMin: "ဤသင်ခန်းစာကို ၁၀–၁၂ မိနစ်အတွင်း သင်ယူပြီးမြောက်ပါ", l00Progress: "တိုးတက်မှု {done}/{total}", l00Complete: "ဤသင်ခန်းစာကို ပြီးဆုံးပါ", l00Completed: "ဤသင်ခန်းစာ ပြီးဆုံးပြီး", l00NextLabel: "နောက် သင်ခန်းစာ", l00NextLocked: "ဖွင့်ရန် ဤသင်ခန်းစာကို ပြီးဆုံးပါ", l00NextUnlocked: "ဖွင့်ပြီးပါပြီ", l00StartNext: "နောက် သင်ခန်းစာကို စတင်ပါ", l00S1Title: "ပင်းယင်းနှင့် မိတ်ဆက်ပါ", l00Hello: "မင်္ဂလာပါ!", l00WhatQ: "တရုတ် ပင်းယင်းဆိုတာ ဘာလဲ?", l00WhatAux: "ပင်းယင်းဆိုတာ ဘာလဲ? ပင်းယင်းသည် လက်တင်အက္ခရာနှင့် အသံနေအသံထား သင်္ကေတများကို သုံး၍ တရုတ်စကား အသံထွက်ကို ပြသသော စနစ်တစ်ခု ဖြစ်သည်။", l00S2Title: "ပင်းယင်းကို ဘာကြောင့် သင်ယူရတာလဲ?", l00Why1: "တရုတ်စကားလုံးများ အသံထွက်နည်းကို သင်ယူပါ။", l00Why2: "တရုတ်စာလုံးများကို အသံထွက် ဖတ်နည်းကို သင်ယူပါ။", l00Why3: "ဖုန်း သို့မဟုတ် ကွန်ပျူတာတွင် တရုတ်စာလုံးများ ရိုက်ထည့်ပါ။", l00S3Title: "နေ့စဉ်ဘဝထဲက ပင်းယင်းကို ရှာဖွေပါ", l00LifeIntroAux: "တရုတ်နိုင်ငံ တက္ကသိုလ်ဘဝတွင် စကားလုံးအသစ်များစွာနှင့် ထိတွေ့ရပါမည်။", l00W1: "ကျောင်း", l00W2: "စားသောက်ခန်း", l00W3: "အဆောင်", l00W4: "မြေအောက်ရထား", l00LifeNoteAux: "ဤစကားလုံးများသည် နောင်တွင် သင်ယူရမည့် အသုံးများသော စကားလုံးများ ဖြစ်သည်။ ယခု အလွတ်ကျက်ရန် မလိုပါ၊ တရုတ်စာလုံးနှင့် ပင်းယင်း၏ ဆက်နွယ်မှုကို လေ့လာကြည့်ရုံသာ ဖြစ်သည်။", l00S4Title: "ပင်းယင်း၏ ဖွဲ့စည်းပုံ", l00S4IntroAux: "“妈” (mā) ကို ဥပမာအဖြစ် ကြည့်ပါ:", l00S4NoteAux: "အသံနေအသံထား ကွဲပြားပါက စကားလုံး၏ အဓိပ္ပာယ် ပြောင်းလဲနိုင်သောကြောင့် ပင်းယင်း သင်ယူခြင်းသည် အက္ခရာများကို သိရုံသာမက အသံနေအသံထားများကို ခွဲခြားတတ်ရန်လည်း လိုအပ်သည်။", l00S5Title: "ပင်းယင်း ဇယား အပြည့်အစုံ", l00ChartHintAux: "ယခု ဇယားတစ်ခုလုံးကို အလွတ်ကျက်ရန် မလိုပါ။ ပင်းယင်း ဘယ်လိုပုံစံရှိသည်ကို အရင် ကြည့်ပါ — a နှင့် မိတ်ဆက်ပြီးနောက် တစ်ခန်းချင်း သင်ယူသွားပါမည်။" },
-          fr: { l00Back: "Retour au parcours d'apprentissage", l00Title: "Qu'est-ce que le pinyin ?", l00MetaMin: "Terminez cette leçon en 10–12 minutes", l00Progress: "Progression {done}/{total}", l00Complete: "Terminer cette leçon", l00Completed: "Leçon terminée", l00NextLabel: "Leçon suivante", l00NextLocked: "Terminez cette leçon pour la débloquer", l00NextUnlocked: "Débloquée", l00StartNext: "Commencer la leçon suivante", l00S1Title: "Découvrir le pinyin", l00Hello: "Bonjour !", l00WhatQ: "Qu'est-ce que le Hanyu Pinyin ?", l00WhatAux: "Qu'est-ce que le pinyin ? Le pinyin est un système qui utilise l'alphabet latin et des marques de ton pour montrer comment se prononce le chinois mandarin.", l00S2Title: "Pourquoi apprendre le pinyin ?", l00Why1: "Apprendre à prononcer les mots chinois.", l00Why2: "Apprendre à lire les caractères chinois à voix haute.", l00Why3: "Saisir des caractères chinois sur votre téléphone ou votre ordinateur.", l00S3Title: "Le pinyin dans la vie quotidienne", l00LifeIntroAux: "Dans la vie universitaire en Chine, vous rencontrerez beaucoup de mots nouveaux.", l00W1: "École", l00W2: "Cantine", l00W3: "Dortoir", l00W4: "Métro", l00LifeNoteAux: "Ce sont des mots courants que nous apprendrons plus tard. Vous n'avez pas besoin de les mémoriser maintenant — observez simplement le lien entre les caractères et leur pinyin.", l00S4Title: "De quoi se compose le pinyin", l00S4IntroAux: "Prenons « 妈 » (mā) comme exemple :", l00S4NoteAux: "Des tons différents peuvent changer le sens d'un mot ; apprendre le pinyin, ce n'est donc pas seulement connaître les lettres, il faut aussi apprendre à distinguer les tons.", l00S5Title: "Tableau complet du pinyin", l00ChartHintAux: "Vous n'avez pas besoin de mémoriser tout le tableau maintenant. Regardez simplement à quoi ressemble le pinyin — après avoir découvert le a, nous l'apprendrons leçon par leçon." },
-          ar: { l00Back: "العودة إلى مسار التعلم", l00Title: "ما هو البينيين؟", l00MetaMin: "أنهِ هذا الدرس في 10–12 دقيقة", l00Progress: "التقدّم {done}/{total}", l00Complete: "إنهاء هذا الدرس", l00Completed: "اكتمل هذا الدرس", l00NextLabel: "الدرس التالي", l00NextLocked: "أكمل هذا الدرس لفتحه", l00NextUnlocked: "مفتوح", l00StartNext: "ابدأ الدرس التالي", l00S1Title: "التعرّف على البينيين", l00Hello: "مرحبًا!", l00WhatQ: "ما هو هانيو بينيين؟", l00WhatAux: "ما هو البينيين؟ البينيين نظام يستخدم الحروف اللاتينية وعلامات النغمات لبيان كيفية نطق الصينية الماندرين.", l00S2Title: "لماذا نتعلّم البينيين؟", l00Why1: "تعلّم كيفية نطق الكلمات الصينية.", l00Why2: "تعلّم كيفية قراءة المقاطع الصينية بصوت عالٍ.", l00Why3: "كتابة المقاطع الصينية على هاتفك أو حاسوبك.", l00S3Title: "اكتشف البينيين في الحياة اليومية", l00LifeIntroAux: "في الحياة الجامعية في الصين، ستقابل الكثير من الكلمات الجديدة.", l00W1: "مدرسة", l00W2: "مقصف", l00W3: "سكن جامعي", l00W4: "مترو الأنفاق", l00LifeNoteAux: "هذه كلمات شائعة سنتعلمها لاحقًا. لا تحتاج إلى حفظها الآن — لاحظ فقط العلاقة بين المقاطع والبينيين الخاص بها.", l00S4Title: "مكوّنات البينيين", l00S4IntroAux: "لنأخذ «妈» (mā) مثالًا:", l00S4NoteAux: "قد تغيّر النغمات المختلفة معنى الكلمة، لذا فإن تعلّم البينيين لا يقتصر على معرفة الحروف، بل يجب أيضًا تعلّم التمييز بين النغمات.", l00S5Title: "جدول البينيين الكامل", l00ChartHintAux: "لا تحتاج إلى حفظ الجدول كله الآن. انظر فقط إلى شكل البينيين — وبعد أن نتعرّف على a، سنتعلمه درسًا بعد درس." },
-          ko: { l00Back: "학습 경로로 돌아가기", l00Title: "병음이란 무엇인가요?", l00MetaMin: "10–12분 만에 이 수업 끝내기", l00Progress: "진도 {done}/{total}", l00Complete: "이 수업 마치기", l00Completed: "이 수업을 마쳤어요", l00NextLabel: "다음 수업", l00NextLocked: "이 수업을 마치면 열려요", l00NextUnlocked: "열림", l00StartNext: "다음 수업 시작하기", l00S1Title: "병음 알아보기", l00Hello: "안녕하세요!", l00WhatQ: "한어병음이란 무엇인가요?", l00WhatAux: "병음이란 무엇인가요? 병음은 라틴 문자와 성조 부호를 사용해 중국어 발음을 나타내는 체계예요.", l00S2Title: "왜 병음을 배워야 할까요?", l00Why1: "중국어 단어 발음법을 배워요.", l00Why2: "한자를 소리 내어 읽는 법을 배워요.", l00Why3: "휴대폰이나 컴퓨터로 한자를 입력해요.", l00S3Title: "생활 속 병음 발견하기", l00LifeIntroAux: "중국의 대학 생활에서는 새로운 단어를 많이 만나게 돼요.", l00W1: "학교", l00W2: "식당", l00W3: "기숙사", l00W4: "지하철", l00LifeNoteAux: "이 단어들은 앞으로 배울 자주 쓰는 단어예요. 지금 외울 필요는 없고, 한자와 병음의 관계를 살펴보기만 하면 돼요.", l00S4Title: "병음의 구성 알아보기", l00S4IntroAux: "“妈”(mā)를 예로 들어 볼게요:", l00S4NoteAux: "성조가 다르면 단어의 뜻이 달라질 수 있어요. 그래서 병음 학습은 문자를 아는 것뿐 아니라 성조를 구별하는 법도 배워야 해요.", l00S5Title: "병음 전체 표", l00ChartHintAux: "지금 표 전체를 외울 필요는 없어요. 병음이 어떻게 생겼는지 먼저 살펴보세요. a를 알아본 뒤 한 과씩 배워 나갈 거예요." },
-          ja: { l00Back: "学習パスに戻る", l00Title: "ピンインとは？", l00MetaMin: "10〜12分でこのレッスンを終えよう", l00Progress: "進捗 {done}/{total}", l00Complete: "このレッスンを完了する", l00Completed: "このレッスンは完了済みです", l00NextLabel: "次のレッスン", l00NextLocked: "このレッスンを終えると開きます", l00NextUnlocked: "解放済み", l00StartNext: "次のレッスンを始める", l00S1Title: "ピンインを知ろう", l00Hello: "こんにちは！", l00WhatQ: "漢語ピンインとは？", l00WhatAux: "ピンインとは？ピンインは、ラテン文字と声調記号を使って中国語（普通話）の発音を表す仕組みです。", l00S2Title: "なぜピンインを学ぶの？", l00Why1: "中国語の単語の発音を学びます。", l00Why2: "漢字を声に出して読む方法を学びます。", l00Why3: "スマホやパソコンで漢字を入力します。", l00S3Title: "生活の中のピンインを見つけよう", l00LifeIntroAux: "中国の大学生活では、たくさんの新しい言葉に出会います。", l00W1: "学校", l00W2: "食堂", l00W3: "寮", l00W4: "地下鉄", l00LifeNoteAux: "これらはこれから学ぶよく使う言葉です。今は覚えなくて大丈夫です。漢字とピンインの関係を観察してみましょう。", l00S4Title: "ピンインの成り立ち", l00S4IntroAux: "「妈」（mā）を例に見てみましょう：", l00S4NoteAux: "声調が違うと単語の意味が変わることがあります。だからピンインの学習は、文字を覚えるだけでなく、声調を聞き分けることも大切です。", l00S5Title: "ピンイン総表", l00ChartHintAux: "今は表全体を覚えなくて大丈夫です。まずピンインがどんなものか見てみましょう。a を知ったあと、1課ずつ学んでいきます。" },
-          ru: { l00Back: "Вернуться к маршруту обучения", l00Title: "Что такое пиньинь?", l00MetaMin: "Пройдите этот урок за 10–12 минут", l00Progress: "Прогресс {done}/{total}", l00Complete: "Завершить урок", l00Completed: "Урок завершён", l00NextLabel: "Следующий урок", l00NextLocked: "Завершите этот урок, чтобы открыть его", l00NextUnlocked: "Открыт", l00StartNext: "Начать следующий урок", l00S1Title: "Знакомимся с пиньинем", l00Hello: "Привет!", l00WhatQ: "Что такое ханьюй пиньинь?", l00WhatAux: "Что такое пиньинь? Пиньинь — это система, которая использует латинские буквы и знаки тонов, чтобы показать, как произносится китайский язык (путунхуа).", l00S2Title: "Зачем учить пиньинь?", l00Why1: "Научиться произносить китайские слова.", l00Why2: "Научиться читать китайские иероглифы вслух.", l00Why3: "Печатать китайские иероглифы на телефоне или компьютере.", l00S3Title: "Пиньинь в повседневной жизни", l00LifeIntroAux: "В университетской жизни в Китае вы встретите много новых слов.", l00W1: "Школа", l00W2: "Столовая", l00W3: "Общежитие", l00W4: "Метро", l00LifeNoteAux: "Это распространённые слова, которые мы выучим позже. Сейчас запоминать их не нужно — просто понаблюдайте за связью между иероглифами и их пиньинем.", l00S4Title: "Из чего состоит пиньинь", l00S4IntroAux: "Возьмём в качестве примера «妈» (mā):", l00S4NoteAux: "Разные тоны могут менять значение слова, поэтому изучение пиньиня — это не только знание букв, но и умение различать тоны.", l00S5Title: "Полная таблица пиньиня", l00ChartHintAux: "Сейчас запоминать всю таблицу не нужно. Просто посмотрите, как выглядит пиньинь, — после знакомства с a мы будем учить его урок за уроком." },
-          es: { l00Back: "Volver a la ruta de aprendizaje", l00Title: "¿Qué es el pinyin?", l00MetaMin: "Termina esta lección en 10–12 minutos", l00Progress: "Progreso {done}/{total}", l00Complete: "Terminar esta lección", l00Completed: "Lección completada", l00NextLabel: "Lección siguiente", l00NextLocked: "Termina esta lección para desbloquearla", l00NextUnlocked: "Desbloqueada", l00StartNext: "Empezar la lección siguiente", l00S1Title: "Conoce el pinyin", l00Hello: "¡Hola!", l00WhatQ: "¿Qué es el Hanyu Pinyin?", l00WhatAux: "¿Qué es el pinyin? El pinyin es un sistema que utiliza letras latinas y marcas de tono para mostrar cómo se pronuncia el chino mandarín.", l00S2Title: "¿Por qué aprender pinyin?", l00Why1: "Aprende a pronunciar palabras chinas.", l00Why2: "Aprende a leer los caracteres chinos en voz alta.", l00Why3: "Escribe caracteres chinos en tu teléfono u ordenador.", l00S3Title: "Descubre el pinyin en la vida diaria", l00LifeIntroAux: "En la vida universitaria en China encontrarás muchas palabras nuevas.", l00W1: "Escuela", l00W2: "Comedor", l00W3: "Residencia", l00W4: "Metro", l00LifeNoteAux: "Son palabras comunes que aprenderemos más adelante. No necesitas memorizarlas ahora: solo observa la relación entre los caracteres y su pinyin.", l00S4Title: "De qué se compone el pinyin", l00S4IntroAux: "Tomemos «妈» (mā) como ejemplo:", l00S4NoteAux: "Los tonos diferentes pueden cambiar el significado de una palabra, así que aprender pinyin no es solo conocer las letras: también hay que aprender a distinguir los tonos.", l00S5Title: "Tabla completa de pinyin", l00ChartHintAux: "No necesitas memorizar toda la tabla ahora. Solo mira qué aspecto tiene el pinyin: después de conocer la a, lo aprenderemos lección a lección." },
-          de: { l00Back: "Zurück zum Lernpfad", l00Title: "Was ist Pinyin?", l00MetaMin: "Diese Lektion in 10–12 Minuten abschließen", l00Progress: "Fortschritt {done}/{total}", l00Complete: "Diese Lektion abschließen", l00Completed: "Lektion abgeschlossen", l00NextLabel: "Nächste Lektion", l00NextLocked: "Schließen Sie diese Lektion ab, um sie freizuschalten", l00NextUnlocked: "Freigeschaltet", l00StartNext: "Nächste Lektion starten", l00S1Title: "Pinyin kennenlernen", l00Hello: "Hallo!", l00WhatQ: "Was ist Hanyu Pinyin?", l00WhatAux: "Was ist Pinyin? Pinyin ist ein System, das lateinische Buchstaben und Tonzeichen verwendet, um zu zeigen, wie Mandarin-Chinesisch ausgesprochen wird.", l00S2Title: "Warum Pinyin lernen?", l00Why1: "Lernen, wie man chinesische Wörter ausspricht.", l00Why2: "Lernen, chinesische Schriftzeichen laut zu lesen.", l00Why3: "Chinesische Schriftzeichen auf dem Handy oder Computer tippen.", l00S3Title: "Pinyin im Alltag entdecken", l00LifeIntroAux: "Im Universitätsleben in China werden Sie vielen neuen Wörtern begegnen.", l00W1: "Schule", l00W2: "Mensa", l00W3: "Wohnheim", l00W4: "U-Bahn", l00LifeNoteAux: "Das sind gebräuchliche Wörter, die wir später lernen werden. Sie müssen sie jetzt nicht auswendig lernen – beobachten Sie nur, wie Schriftzeichen und Pinyin zusammenhängen.", l00S4Title: "Woraus Pinyin besteht", l00S4IntroAux: "Nehmen wir „妈“ (mā) als Beispiel:", l00S4NoteAux: "Unterschiedliche Töne können die Bedeutung eines Wortes verändern. Pinyin zu lernen heißt also nicht nur, die Buchstaben zu kennen, sondern auch, die Töne zu unterscheiden.", l00S5Title: "Die vollständige Pinyin-Tabelle", l00ChartHintAux: "Sie müssen jetzt nicht die ganze Tabelle auswendig lernen. Schauen Sie sich nur an, wie Pinyin aussieht – nachdem wir das a kennengelernt haben, lernen wir es Lektion für Lektion." },
-          pt: { l00Back: "Voltar à rota de aprendizagem", l00Title: "O que é pinyin?", l00MetaMin: "Conclua esta lição em 10–12 minutos", l00Progress: "Progresso {done}/{total}", l00Complete: "Concluir esta lição", l00Completed: "Lição concluída", l00NextLabel: "Próxima lição", l00NextLocked: "Conclua esta lição para desbloqueá-la", l00NextUnlocked: "Desbloqueada", l00StartNext: "Começar a próxima lição", l00S1Title: "Conheça o pinyin", l00Hello: "Olá!", l00WhatQ: "O que é o Hanyu Pinyin?", l00WhatAux: "O que é pinyin? O pinyin é um sistema que usa letras latinas e marcas de tom para mostrar como se pronuncia o chinês mandarim.", l00S2Title: "Por que aprender pinyin?", l00Why1: "Aprenda a pronunciar palavras chinesas.", l00Why2: "Aprenda a ler caracteres chineses em voz alta.", l00Why3: "Digite caracteres chineses no celular ou no computador.", l00S3Title: "Descubra o pinyin na vida diária", l00LifeIntroAux: "Na vida universitária na China, você encontrará muitas palavras novas.", l00W1: "Escola", l00W2: "Refeitório", l00W3: "Dormitório", l00W4: "Metrô", l00LifeNoteAux: "São palavras comuns que aprenderemos mais tarde. Você não precisa memorizá-las agora — apenas observe a relação entre os caracteres e o pinyin.", l00S4Title: "Do que o pinyin é composto", l00S4IntroAux: "Vamos tomar “妈” (mā) como exemplo:", l00S4NoteAux: "Tons diferentes podem mudar o significado de uma palavra, por isso aprender pinyin não é só conhecer as letras — também é preciso aprender a distinguir os tons.", l00S5Title: "Tabela completa de pinyin", l00ChartHintAux: "Você não precisa memorizar a tabela inteira agora. Apenas veja como o pinyin é — depois de conhecer o a, aprenderemos lição a lição." }
+          zh: { l00Back: "返回学习路径", l00Title: "什么是汉语拼音？", l00MetaMin: "10–12 分钟学完本课", l00Progress: "进度 {done}/{total}", l00Complete: "完成本课", l00Completed: "已完成本课", l00NextLabel: "下一课", l00NextLocked: "完成本课后解锁", l00NextUnlocked: "已解锁", l00NextSoon: "下一课正在制作中", l00StartNext: "开始下一课", l00S1Title: "认识拼音", l00Hello: "Hello!", l00WhatQ: "什么是汉语拼音？", l00WhatAux: "What is Pinyin? Pinyin is a system that uses Latin letters and tone marks to show how Mandarin Chinese is pronounced.", l00S2Title: "为什么要学习拼音？", l00Why1: "Learn how to pronounce Chinese words.", l00Why2: "Learn how to read Chinese characters aloud.", l00Why3: "Type Chinese characters on your phone or computer.", l00S3Title: "发现生活中的拼音", l00LifeIntroAux: "In university life in China, you will come across many new words.", l00W1: "School", l00W2: "Cafeteria", l00W3: "Dormitory", l00W4: "Subway", l00LifeNoteAux: "These are common words you will learn later. You don't need to remember them now — just observe the relationship between the characters and their pinyin.", l00S4Title: "认识拼音的组成", l00S4IntroAux: "Let's take “妈” (mā) as an example:", l00S4NoteAux: "Different tones can change the meaning of a word, so learning pinyin is not only about recognising the letters — you also need to learn to tell the tones apart.", l00S5Title: "拼音总表", l00ChartHintAux: "You don't need to memorise the whole chart now. Just take a look at what pinyin looks like — after we meet a, we will learn it lesson by lesson." },
+          en: { l00Back: "Back to learning path", l00Title: "What Is Pinyin?", l00MetaMin: "Finish this lesson in 10–12 minutes", l00Progress: "Progress {done}/{total}", l00Complete: "Finish this lesson", l00Completed: "Lesson completed", l00NextLabel: "Next lesson", l00NextLocked: "Finish this lesson to unlock it", l00NextUnlocked: "Unlocked", l00NextSoon: "The next lesson is still being made", l00StartNext: "Start the next lesson", l00S1Title: "Meet Pinyin", l00Hello: "Hello!", l00WhatQ: "What is Hanyu Pinyin?", l00WhatAux: "What is Pinyin? Pinyin is a system that uses Latin letters and tone marks to show how Mandarin Chinese is pronounced.", l00S2Title: "Why learn pinyin?", l00Why1: "Learn how to pronounce Chinese words.", l00Why2: "Learn how to read Chinese characters aloud.", l00Why3: "Type Chinese characters on your phone or computer.", l00S3Title: "Pinyin in daily life", l00LifeIntroAux: "In university life in China, you will come across many new words.", l00W1: "School", l00W2: "Cafeteria", l00W3: "Dormitory", l00W4: "Subway", l00LifeNoteAux: "These are common words you will learn later. You don't need to remember them now — just observe the relationship between the characters and their pinyin.", l00S4Title: "What a Pinyin Syllable Is Made Of", l00S4IntroAux: "Let's take “妈” (mā) as an example:", l00S4NoteAux: "Different tones can change the meaning of a word, so learning pinyin is not only about recognising the letters — you also need to learn to tell the tones apart.", l00S5Title: "Pinyin Chart", l00ChartHintAux: "You don't need to memorise the whole chart now. Just take a look at what pinyin looks like — after we meet a, we will learn it lesson by lesson." },
+          vi: { l00Back: "Quay lại lộ trình học", l00Title: "Pinyin là gì?", l00MetaMin: "Học xong bài này trong 10–12 phút", l00Progress: "Tiến độ {done}/{total}", l00Complete: "Hoàn thành bài này", l00Completed: "Đã hoàn thành bài này", l00NextLabel: "Bài tiếp theo", l00NextLocked: "Hoàn thành bài này để mở khóa", l00NextUnlocked: "Đã mở khóa", l00NextSoon: "Bài tiếp theo đang được thực hiện", l00StartNext: "Bắt đầu bài tiếp theo", l00S1Title: "Làm quen với pinyin", l00Hello: "Xin chào!", l00WhatQ: "Hán ngữ pinyin là gì?", l00WhatAux: "Pinyin là gì? Pinyin là hệ thống dùng chữ cái Latinh và dấu thanh điệu để ghi cách phát âm tiếng Trung phổ thông.", l00S2Title: "Vì sao nên học pinyin?", l00Why1: "Học cách phát âm từ tiếng Trung.", l00Why2: "Học cách đọc chữ Hán thành tiếng.", l00Why3: "Gõ chữ Hán trên điện thoại hoặc máy tính.", l00S3Title: "Khám phá pinyin trong đời sống", l00LifeIntroAux: "Trong đời sống đại học ở Trung Quốc, bạn sẽ gặp nhiều từ mới.", l00W1: "Trường học", l00W2: "Nhà ăn", l00W3: "Ký túc xá", l00W4: "Tàu điện ngầm", l00LifeNoteAux: "Đây là những từ thông dụng chúng ta sẽ học sau này. Bây giờ chưa cần ghi nhớ, chỉ cần quan sát mối quan hệ giữa chữ Hán và pinyin.", l00S4Title: "Cấu tạo của pinyin", l00S4IntroAux: "Lấy “妈” (mā) làm ví dụ:", l00S4NoteAux: "Thanh điệu khác nhau có thể làm thay đổi nghĩa của từ, vì vậy học pinyin không chỉ là nhận biết chữ cái mà còn phải học phân biệt thanh điệu.", l00S5Title: "Bảng pinyin đầy đủ", l00ChartHintAux: "Bây giờ chưa cần ghi nhớ cả bảng, hãy xem pinyin trông như thế nào trước — sau khi làm quen với a, chúng ta sẽ học từng bài một." },
+          th: { l00Back: "กลับไปเส้นทางการเรียน", l00Title: "พินอินคืออะไร?", l00MetaMin: "เรียนจบบทนี้ใน 10–12 นาที", l00Progress: "ความคืบหน้า {done}/{total}", l00Complete: "จบบทนี้", l00Completed: "เรียนจบบทนี้แล้ว", l00NextLabel: "บทถัดไป", l00NextLocked: "เรียนบทนี้ให้จบเพื่อปลดล็อก", l00NextUnlocked: "ปลดล็อกแล้ว", l00NextSoon: "บทถัดไปกำลังจัดทำอยู่", l00StartNext: "เริ่มบทถัดไป", l00S1Title: "รู้จักพินอิน", l00Hello: "สวัสดี!", l00WhatQ: "พินอินภาษาจีนคืออะไร?", l00WhatAux: "พินอินคืออะไร? พินอินเป็นระบบที่ใช้ตัวอักษรละตินและเครื่องหมายวรรณยุกต์เพื่อแสดงการออกเสียงภาษาจีนกลาง", l00S2Title: "ทำไมต้องเรียนพินอิน?", l00Why1: "เรียนรู้วิธีออกเสียงคำภาษาจีน", l00Why2: "เรียนรู้วิธีอ่านตัวอักษรจีนออกเสียง", l00Why3: "พิมพ์ตัวอักษรจีนบนโทรศัพท์หรือคอมพิวเตอร์", l00S3Title: "ค้นพบพินอินในชีวิตประจำวัน", l00LifeIntroAux: "ในชีวิตมหาวิทยาลัยที่ประเทศจีน คุณจะได้พบคำใหม่มากมาย", l00W1: "โรงเรียน", l00W2: "โรงอาหาร", l00W3: "หอพัก", l00W4: "รถไฟใต้ดิน", l00LifeNoteAux: "คำเหล่านี้เป็นคำที่ใช้บ่อยซึ่งเราจะเรียนกันต่อไป ตอนนี้ยังไม่ต้องจำ เพียงสังเกตความสัมพันธ์ระหว่างตัวอักษรจีนกับพินอิน", l00S4Title: "ส่วนประกอบของพินอิน", l00S4IntroAux: "ดูตัวอย่าง “妈” (mā):", l00S4NoteAux: "วรรณยุกต์ที่ต่างกันอาจเปลี่ยนความหมายของคำได้ ดังนั้นการเรียนพินอินไม่ใช่แค่รู้จักตัวอักษร แต่ต้องแยกแยะวรรณยุกต์ได้ด้วย", l00S5Title: "ตารางพินอินทั้งหมด", l00ChartHintAux: "ตอนนี้ยังไม่ต้องจำทั้งตาราง ดูให้รู้ก่อนว่าพินอินหน้าตาเป็นอย่างไร หลังจากรู้จัก a แล้วเราจะเรียนกันทีละบท" },
+          id: { l00Back: "Kembali ke jalur belajar", l00Title: "Apa itu Pinyin?", l00MetaMin: "Selesaikan pelajaran ini dalam 10–12 menit", l00Progress: "Kemajuan {done}/{total}", l00Complete: "Selesaikan pelajaran ini", l00Completed: "Pelajaran selesai", l00NextLabel: "Pelajaran berikutnya", l00NextLocked: "Selesaikan pelajaran ini untuk membukanya", l00NextUnlocked: "Sudah terbuka", l00NextSoon: "Pelajaran berikutnya sedang dibuat", l00StartNext: "Mulai pelajaran berikutnya", l00S1Title: "Mengenal pinyin", l00Hello: "Halo!", l00WhatQ: "Apa itu Hanyu Pinyin?", l00WhatAux: "Apa itu Pinyin? Pinyin adalah sistem yang menggunakan huruf Latin dan tanda nada untuk menunjukkan cara pengucapan bahasa Mandarin.", l00S2Title: "Mengapa belajar pinyin?", l00Why1: "Belajar mengucapkan kata-kata Mandarin.", l00Why2: "Belajar membaca aksara Mandarin dengan bersuara.", l00Why3: "Mengetik aksara Mandarin di ponsel atau komputer.", l00S3Title: "Menemukan pinyin dalam kehidupan sehari-hari", l00LifeIntroAux: "Dalam kehidupan kampus di Tiongkok, Anda akan menemukan banyak kata baru.", l00W1: "Sekolah", l00W2: "Kantin", l00W3: "Asrama", l00W4: "Kereta bawah tanah", l00LifeNoteAux: "Ini adalah kata-kata umum yang akan kita pelajari nanti. Sekarang Anda tidak perlu menghafalnya — cukup amati hubungan antara aksara dan pinyin-nya.", l00S4Title: "Susunan pinyin", l00S4IntroAux: "Ambil contoh “妈” (mā):", l00S4NoteAux: "Nada yang berbeda dapat mengubah arti kata, jadi belajar pinyin bukan hanya mengenal huruf, tetapi juga belajar membedakan nada.", l00S5Title: "Tabel Pinyin Lengkap", l00ChartHintAux: "Sekarang Anda tidak perlu menghafal seluruh tabel. Lihat dulu seperti apa pinyin itu — setelah mengenal a, kita akan mempelajarinya pelajaran demi pelajaran." },
+          my: { l00Back: "သင်ယူမှု လမ်းကြောင်းသို့ ပြန်သွားပါ", l00Title: "ပင်းယင်းဆိုတာ ဘာလဲ?", l00MetaMin: "ဤသင်ခန်းစာကို ၁၀–၁၂ မိနစ်အတွင်း သင်ယူပြီးမြောက်ပါ", l00Progress: "တိုးတက်မှု {done}/{total}", l00Complete: "ဤသင်ခန်းစာကို ပြီးဆုံးပါ", l00Completed: "ဤသင်ခန်းစာ ပြီးဆုံးပြီး", l00NextLabel: "နောက် သင်ခန်းစာ", l00NextLocked: "ဖွင့်ရန် ဤသင်ခန်းစာကို ပြီးဆုံးပါ", l00NextUnlocked: "ဖွင့်ပြီးပါပြီ", l00NextSoon: "နောက်သင်ခန်းစာကို ပြုလုပ်နေဆဲပါ", l00StartNext: "နောက် သင်ခန်းစာကို စတင်ပါ", l00S1Title: "ပင်းယင်းနှင့် မိတ်ဆက်ပါ", l00Hello: "မင်္ဂလာပါ!", l00WhatQ: "တရုတ် ပင်းယင်းဆိုတာ ဘာလဲ?", l00WhatAux: "ပင်းယင်းဆိုတာ ဘာလဲ? ပင်းယင်းသည် လက်တင်အက္ခရာနှင့် အသံနေအသံထား သင်္ကေတများကို သုံး၍ တရုတ်စကား အသံထွက်ကို ပြသသော စနစ်တစ်ခု ဖြစ်သည်။", l00S2Title: "ပင်းယင်းကို ဘာကြောင့် သင်ယူရတာလဲ?", l00Why1: "တရုတ်စကားလုံးများ အသံထွက်နည်းကို သင်ယူပါ။", l00Why2: "တရုတ်စာလုံးများကို အသံထွက် ဖတ်နည်းကို သင်ယူပါ။", l00Why3: "ဖုန်း သို့မဟုတ် ကွန်ပျူတာတွင် တရုတ်စာလုံးများ ရိုက်ထည့်ပါ။", l00S3Title: "နေ့စဉ်ဘဝထဲက ပင်းယင်းကို ရှာဖွေပါ", l00LifeIntroAux: "တရုတ်နိုင်ငံ တက္ကသိုလ်ဘဝတွင် စကားလုံးအသစ်များစွာနှင့် ထိတွေ့ရပါမည်။", l00W1: "ကျောင်း", l00W2: "စားသောက်ခန်း", l00W3: "အဆောင်", l00W4: "မြေအောက်ရထား", l00LifeNoteAux: "ဤစကားလုံးများသည် နောင်တွင် သင်ယူရမည့် အသုံးများသော စကားလုံးများ ဖြစ်သည်။ ယခု အလွတ်ကျက်ရန် မလိုပါ၊ တရုတ်စာလုံးနှင့် ပင်းယင်း၏ ဆက်နွယ်မှုကို လေ့လာကြည့်ရုံသာ ဖြစ်သည်။", l00S4Title: "ပင်းယင်း၏ ဖွဲ့စည်းပုံ", l00S4IntroAux: "“妈” (mā) ကို ဥပမာအဖြစ် ကြည့်ပါ:", l00S4NoteAux: "အသံနေအသံထား ကွဲပြားပါက စကားလုံး၏ အဓိပ္ပာယ် ပြောင်းလဲနိုင်သောကြောင့် ပင်းယင်း သင်ယူခြင်းသည် အက္ခရာများကို သိရုံသာမက အသံနေအသံထားများကို ခွဲခြားတတ်ရန်လည်း လိုအပ်သည်။", l00S5Title: "ပင်းယင်း ဇယား အပြည့်အစုံ", l00ChartHintAux: "ယခု ဇယားတစ်ခုလုံးကို အလွတ်ကျက်ရန် မလိုပါ။ ပင်းယင်း ဘယ်လိုပုံစံရှိသည်ကို အရင် ကြည့်ပါ — a နှင့် မိတ်ဆက်ပြီးနောက် တစ်ခန်းချင်း သင်ယူသွားပါမည်။" },
+          fr: { l00Back: "Retour au parcours d'apprentissage", l00Title: "Qu'est-ce que le pinyin ?", l00MetaMin: "Terminez cette leçon en 10–12 minutes", l00Progress: "Progression {done}/{total}", l00Complete: "Terminer cette leçon", l00Completed: "Leçon terminée", l00NextLabel: "Leçon suivante", l00NextLocked: "Terminez cette leçon pour la débloquer", l00NextUnlocked: "Débloquée", l00NextSoon: "La leçon suivante est en cours de création", l00StartNext: "Commencer la leçon suivante", l00S1Title: "Découvrir le pinyin", l00Hello: "Bonjour !", l00WhatQ: "Qu'est-ce que le Hanyu Pinyin ?", l00WhatAux: "Qu'est-ce que le pinyin ? Le pinyin est un système qui utilise l'alphabet latin et des marques de ton pour montrer comment se prononce le chinois mandarin.", l00S2Title: "Pourquoi apprendre le pinyin ?", l00Why1: "Apprendre à prononcer les mots chinois.", l00Why2: "Apprendre à lire les caractères chinois à voix haute.", l00Why3: "Saisir des caractères chinois sur votre téléphone ou votre ordinateur.", l00S3Title: "Le pinyin dans la vie quotidienne", l00LifeIntroAux: "Dans la vie universitaire en Chine, vous rencontrerez beaucoup de mots nouveaux.", l00W1: "École", l00W2: "Cantine", l00W3: "Dortoir", l00W4: "Métro", l00LifeNoteAux: "Ce sont des mots courants que nous apprendrons plus tard. Vous n'avez pas besoin de les mémoriser maintenant — observez simplement le lien entre les caractères et leur pinyin.", l00S4Title: "De quoi se compose le pinyin", l00S4IntroAux: "Prenons « 妈 » (mā) comme exemple :", l00S4NoteAux: "Des tons différents peuvent changer le sens d'un mot ; apprendre le pinyin, ce n'est donc pas seulement connaître les lettres, il faut aussi apprendre à distinguer les tons.", l00S5Title: "Tableau complet du pinyin", l00ChartHintAux: "Vous n'avez pas besoin de mémoriser tout le tableau maintenant. Regardez simplement à quoi ressemble le pinyin — après avoir découvert le a, nous l'apprendrons leçon par leçon." },
+          ar: { l00Back: "العودة إلى مسار التعلم", l00Title: "ما هو البينيين؟", l00MetaMin: "أنهِ هذا الدرس في 10–12 دقيقة", l00Progress: "التقدّم {done}/{total}", l00Complete: "إنهاء هذا الدرس", l00Completed: "اكتمل هذا الدرس", l00NextLabel: "الدرس التالي", l00NextLocked: "أكمل هذا الدرس لفتحه", l00NextUnlocked: "مفتوح", l00NextSoon: "الدرس التالي قيد الإعداد", l00StartNext: "ابدأ الدرس التالي", l00S1Title: "التعرّف على البينيين", l00Hello: "مرحبًا!", l00WhatQ: "ما هو هانيو بينيين؟", l00WhatAux: "ما هو البينيين؟ البينيين نظام يستخدم الحروف اللاتينية وعلامات النغمات لبيان كيفية نطق الصينية الماندرين.", l00S2Title: "لماذا نتعلّم البينيين؟", l00Why1: "تعلّم كيفية نطق الكلمات الصينية.", l00Why2: "تعلّم كيفية قراءة المقاطع الصينية بصوت عالٍ.", l00Why3: "كتابة المقاطع الصينية على هاتفك أو حاسوبك.", l00S3Title: "اكتشف البينيين في الحياة اليومية", l00LifeIntroAux: "في الحياة الجامعية في الصين، ستقابل الكثير من الكلمات الجديدة.", l00W1: "مدرسة", l00W2: "مقصف", l00W3: "سكن جامعي", l00W4: "مترو الأنفاق", l00LifeNoteAux: "هذه كلمات شائعة سنتعلمها لاحقًا. لا تحتاج إلى حفظها الآن — لاحظ فقط العلاقة بين المقاطع والبينيين الخاص بها.", l00S4Title: "مكوّنات البينيين", l00S4IntroAux: "لنأخذ «妈» (mā) مثالًا:", l00S4NoteAux: "قد تغيّر النغمات المختلفة معنى الكلمة، لذا فإن تعلّم البينيين لا يقتصر على معرفة الحروف، بل يجب أيضًا تعلّم التمييز بين النغمات.", l00S5Title: "جدول البينيين الكامل", l00ChartHintAux: "لا تحتاج إلى حفظ الجدول كله الآن. انظر فقط إلى شكل البينيين — وبعد أن نتعرّف على a، سنتعلمه درسًا بعد درس." },
+          ko: { l00Back: "학습 경로로 돌아가기", l00Title: "병음이란 무엇인가요?", l00MetaMin: "10–12분 만에 이 수업 끝내기", l00Progress: "진도 {done}/{total}", l00Complete: "이 수업 마치기", l00Completed: "이 수업을 마쳤어요", l00NextLabel: "다음 수업", l00NextLocked: "이 수업을 마치면 열려요", l00NextUnlocked: "열림", l00NextSoon: "다음 수업은 아직 만드는 중이에요", l00StartNext: "다음 수업 시작하기", l00S1Title: "병음 알아보기", l00Hello: "안녕하세요!", l00WhatQ: "한어병음이란 무엇인가요?", l00WhatAux: "병음이란 무엇인가요? 병음은 라틴 문자와 성조 부호를 사용해 중국어 발음을 나타내는 체계예요.", l00S2Title: "왜 병음을 배워야 할까요?", l00Why1: "중국어 단어 발음법을 배워요.", l00Why2: "한자를 소리 내어 읽는 법을 배워요.", l00Why3: "휴대폰이나 컴퓨터로 한자를 입력해요.", l00S3Title: "생활 속 병음 발견하기", l00LifeIntroAux: "중국의 대학 생활에서는 새로운 단어를 많이 만나게 돼요.", l00W1: "학교", l00W2: "식당", l00W3: "기숙사", l00W4: "지하철", l00LifeNoteAux: "이 단어들은 앞으로 배울 자주 쓰는 단어예요. 지금 외울 필요는 없고, 한자와 병음의 관계를 살펴보기만 하면 돼요.", l00S4Title: "병음의 구성 알아보기", l00S4IntroAux: "“妈”(mā)를 예로 들어 볼게요:", l00S4NoteAux: "성조가 다르면 단어의 뜻이 달라질 수 있어요. 그래서 병음 학습은 문자를 아는 것뿐 아니라 성조를 구별하는 법도 배워야 해요.", l00S5Title: "병음 전체 표", l00ChartHintAux: "지금 표 전체를 외울 필요는 없어요. 병음이 어떻게 생겼는지 먼저 살펴보세요. a를 알아본 뒤 한 과씩 배워 나갈 거예요." },
+          ja: { l00Back: "学習パスに戻る", l00Title: "ピンインとは？", l00MetaMin: "10〜12分でこのレッスンを終えよう", l00Progress: "進捗 {done}/{total}", l00Complete: "このレッスンを完了する", l00Completed: "このレッスンは完了済みです", l00NextLabel: "次のレッスン", l00NextLocked: "このレッスンを終えると開きます", l00NextUnlocked: "解放済み", l00NextSoon: "次のレッスンは作成中です", l00StartNext: "次のレッスンを始める", l00S1Title: "ピンインを知ろう", l00Hello: "こんにちは！", l00WhatQ: "漢語ピンインとは？", l00WhatAux: "ピンインとは？ピンインは、ラテン文字と声調記号を使って中国語（普通話）の発音を表す仕組みです。", l00S2Title: "なぜピンインを学ぶの？", l00Why1: "中国語の単語の発音を学びます。", l00Why2: "漢字を声に出して読む方法を学びます。", l00Why3: "スマホやパソコンで漢字を入力します。", l00S3Title: "生活の中のピンインを見つけよう", l00LifeIntroAux: "中国の大学生活では、たくさんの新しい言葉に出会います。", l00W1: "学校", l00W2: "食堂", l00W3: "寮", l00W4: "地下鉄", l00LifeNoteAux: "これらはこれから学ぶよく使う言葉です。今は覚えなくて大丈夫です。漢字とピンインの関係を観察してみましょう。", l00S4Title: "ピンインの成り立ち", l00S4IntroAux: "「妈」（mā）を例に見てみましょう：", l00S4NoteAux: "声調が違うと単語の意味が変わることがあります。だからピンインの学習は、文字を覚えるだけでなく、声調を聞き分けることも大切です。", l00S5Title: "ピンイン総表", l00ChartHintAux: "今は表全体を覚えなくて大丈夫です。まずピンインがどんなものか見てみましょう。a を知ったあと、1課ずつ学んでいきます。" },
+          ru: { l00Back: "Вернуться к маршруту обучения", l00Title: "Что такое пиньинь?", l00MetaMin: "Пройдите этот урок за 10–12 минут", l00Progress: "Прогресс {done}/{total}", l00Complete: "Завершить урок", l00Completed: "Урок завершён", l00NextLabel: "Следующий урок", l00NextLocked: "Завершите этот урок, чтобы открыть его", l00NextUnlocked: "Открыт", l00NextSoon: "Следующий урок ещё готовится", l00StartNext: "Начать следующий урок", l00S1Title: "Знакомимся с пиньинем", l00Hello: "Привет!", l00WhatQ: "Что такое ханьюй пиньинь?", l00WhatAux: "Что такое пиньинь? Пиньинь — это система, которая использует латинские буквы и знаки тонов, чтобы показать, как произносится китайский язык (путунхуа).", l00S2Title: "Зачем учить пиньинь?", l00Why1: "Научиться произносить китайские слова.", l00Why2: "Научиться читать китайские иероглифы вслух.", l00Why3: "Печатать китайские иероглифы на телефоне или компьютере.", l00S3Title: "Пиньинь в повседневной жизни", l00LifeIntroAux: "В университетской жизни в Китае вы встретите много новых слов.", l00W1: "Школа", l00W2: "Столовая", l00W3: "Общежитие", l00W4: "Метро", l00LifeNoteAux: "Это распространённые слова, которые мы выучим позже. Сейчас запоминать их не нужно — просто понаблюдайте за связью между иероглифами и их пиньинем.", l00S4Title: "Из чего состоит пиньинь", l00S4IntroAux: "Возьмём в качестве примера «妈» (mā):", l00S4NoteAux: "Разные тоны могут менять значение слова, поэтому изучение пиньиня — это не только знание букв, но и умение различать тоны.", l00S5Title: "Полная таблица пиньиня", l00ChartHintAux: "Сейчас запоминать всю таблицу не нужно. Просто посмотрите, как выглядит пиньинь, — после знакомства с a мы будем учить его урок за уроком." },
+          es: { l00Back: "Volver a la ruta de aprendizaje", l00Title: "¿Qué es el pinyin?", l00MetaMin: "Termina esta lección en 10–12 minutos", l00Progress: "Progreso {done}/{total}", l00Complete: "Terminar esta lección", l00Completed: "Lección completada", l00NextLabel: "Lección siguiente", l00NextLocked: "Termina esta lección para desbloquearla", l00NextUnlocked: "Desbloqueada", l00NextSoon: "La lección siguiente aún se está preparando", l00StartNext: "Empezar la lección siguiente", l00S1Title: "Conoce el pinyin", l00Hello: "¡Hola!", l00WhatQ: "¿Qué es el Hanyu Pinyin?", l00WhatAux: "¿Qué es el pinyin? El pinyin es un sistema que utiliza letras latinas y marcas de tono para mostrar cómo se pronuncia el chino mandarín.", l00S2Title: "¿Por qué aprender pinyin?", l00Why1: "Aprende a pronunciar palabras chinas.", l00Why2: "Aprende a leer los caracteres chinos en voz alta.", l00Why3: "Escribe caracteres chinos en tu teléfono u ordenador.", l00S3Title: "Descubre el pinyin en la vida diaria", l00LifeIntroAux: "En la vida universitaria en China encontrarás muchas palabras nuevas.", l00W1: "Escuela", l00W2: "Comedor", l00W3: "Residencia", l00W4: "Metro", l00LifeNoteAux: "Son palabras comunes que aprenderemos más adelante. No necesitas memorizarlas ahora: solo observa la relación entre los caracteres y su pinyin.", l00S4Title: "De qué se compone el pinyin", l00S4IntroAux: "Tomemos «妈» (mā) como ejemplo:", l00S4NoteAux: "Los tonos diferentes pueden cambiar el significado de una palabra, así que aprender pinyin no es solo conocer las letras: también hay que aprender a distinguir los tonos.", l00S5Title: "Tabla completa de pinyin", l00ChartHintAux: "No necesitas memorizar toda la tabla ahora. Solo mira qué aspecto tiene el pinyin: después de conocer la a, lo aprenderemos lección a lección." },
+          de: { l00Back: "Zurück zum Lernpfad", l00Title: "Was ist Pinyin?", l00MetaMin: "Diese Lektion in 10–12 Minuten abschließen", l00Progress: "Fortschritt {done}/{total}", l00Complete: "Diese Lektion abschließen", l00Completed: "Lektion abgeschlossen", l00NextLabel: "Nächste Lektion", l00NextLocked: "Schließen Sie diese Lektion ab, um sie freizuschalten", l00NextUnlocked: "Freigeschaltet", l00NextSoon: "Die nächste Lektion wird noch erstellt", l00StartNext: "Nächste Lektion starten", l00S1Title: "Pinyin kennenlernen", l00Hello: "Hallo!", l00WhatQ: "Was ist Hanyu Pinyin?", l00WhatAux: "Was ist Pinyin? Pinyin ist ein System, das lateinische Buchstaben und Tonzeichen verwendet, um zu zeigen, wie Mandarin-Chinesisch ausgesprochen wird.", l00S2Title: "Warum Pinyin lernen?", l00Why1: "Lernen, wie man chinesische Wörter ausspricht.", l00Why2: "Lernen, chinesische Schriftzeichen laut zu lesen.", l00Why3: "Chinesische Schriftzeichen auf dem Handy oder Computer tippen.", l00S3Title: "Pinyin im Alltag entdecken", l00LifeIntroAux: "Im Universitätsleben in China werden Sie vielen neuen Wörtern begegnen.", l00W1: "Schule", l00W2: "Mensa", l00W3: "Wohnheim", l00W4: "U-Bahn", l00LifeNoteAux: "Das sind gebräuchliche Wörter, die wir später lernen werden. Sie müssen sie jetzt nicht auswendig lernen – beobachten Sie nur, wie Schriftzeichen und Pinyin zusammenhängen.", l00S4Title: "Woraus Pinyin besteht", l00S4IntroAux: "Nehmen wir „妈“ (mā) als Beispiel:", l00S4NoteAux: "Unterschiedliche Töne können die Bedeutung eines Wortes verändern. Pinyin zu lernen heißt also nicht nur, die Buchstaben zu kennen, sondern auch, die Töne zu unterscheiden.", l00S5Title: "Die vollständige Pinyin-Tabelle", l00ChartHintAux: "Sie müssen jetzt nicht die ganze Tabelle auswendig lernen. Schauen Sie sich nur an, wie Pinyin aussieht – nachdem wir das a kennengelernt haben, lernen wir es Lektion für Lektion." },
+          pt: { l00Back: "Voltar à rota de aprendizagem", l00Title: "O que é pinyin?", l00MetaMin: "Conclua esta lição em 10–12 minutos", l00Progress: "Progresso {done}/{total}", l00Complete: "Concluir esta lição", l00Completed: "Lição concluída", l00NextLabel: "Próxima lição", l00NextLocked: "Conclua esta lição para desbloqueá-la", l00NextUnlocked: "Desbloqueada", l00NextSoon: "A próxima lição ainda está sendo preparada", l00StartNext: "Começar a próxima lição", l00S1Title: "Conheça o pinyin", l00Hello: "Olá!", l00WhatQ: "O que é o Hanyu Pinyin?", l00WhatAux: "O que é pinyin? O pinyin é um sistema que usa letras latinas e marcas de tom para mostrar como se pronuncia o chinês mandarim.", l00S2Title: "Por que aprender pinyin?", l00Why1: "Aprenda a pronunciar palavras chinesas.", l00Why2: "Aprenda a ler caracteres chineses em voz alta.", l00Why3: "Digite caracteres chineses no celular ou no computador.", l00S3Title: "Descubra o pinyin na vida diária", l00LifeIntroAux: "Na vida universitária na China, você encontrará muitas palavras novas.", l00W1: "Escola", l00W2: "Refeitório", l00W3: "Dormitório", l00W4: "Metrô", l00LifeNoteAux: "São palavras comuns que aprenderemos mais tarde. Você não precisa memorizá-las agora — apenas observe a relação entre os caracteres e o pinyin.", l00S4Title: "Do que o pinyin é composto", l00S4IntroAux: "Vamos tomar “妈” (mā) como exemplo:", l00S4NoteAux: "Tons diferentes podem mudar o significado de uma palavra, por isso aprender pinyin não é só conhecer as letras — também é preciso aprender a distinguir os tons.", l00S5Title: "Tabela completa de pinyin", l00ChartHintAux: "Você não precisa memorizar a tabela inteira agora. Apenas veja como o pinyin é — depois de conhecer o a, aprenderemos lição a lição." }
         };
         /* Chart group headings of section 05: names and counts go through
            the same [data-l00aux] language switch as the rest of lesson 00,
@@ -3427,13 +3480,16 @@
 
         /* ================= start learning =================
            DEV MODE: no login gate in the development stage — "开始第一课"
-           goes straight to the first lesson whether signed in or not.
-           Login / sign-up remain available from the top bar. To restore
-           the launch behaviour ("正式开始学习要注册登录"), reinstate the
-           currentUser() check here, in showRoadmap(), and in the roadmap
-           "start" handler below. */
-        document.getElementById("ctaStart").addEventListener("click", function () {
+           goes straight into lesson 01 （什么是拼音， the first lesson
+           on the roadmap) whether signed in or not; it no longer just
+           scrolls to the homepage 发音体验 preview. Login / sign-up
+           remain available from the top bar. To restore the launch
+           behaviour ("正式开始学习要注册登录"), reinstate the
+           currentUser() check here and in showRoadmap(). */
+        document.getElementById("ctaStart").addEventListener("click", function (e) {
+          e.preventDefault();
           markStarted();
+          showLesson00();
         });
 
         /* ================= pronunciation audio ================= */
@@ -3482,6 +3538,13 @@
           for (var i = 0; i < RM_ITEMS.length; i++) { if (RM_ITEMS[i].id === id) return RM_ITEMS[i].key; }
           return "rmL1";
         }
+        /* Lessons that actually have a page. Every other lesson on
+           the track is shown as 即将开放 (coming soon): it renders no
+           start button and can never be written into rmDone, so the
+           stage progress only ever counts lessons that were really
+           studied and finished inside their own pages. When a new
+           lesson page ships, add its id here. */
+        var RM_LIVE = { 1: true, 2: true };
         /* interface-pinyin lines for the roadmap's right-hand area, keyed
            by the same i18n keys as the Chinese strings they annotate.
            Learning content inside a title (the a / o / e / i / u / ü
@@ -3516,11 +3579,14 @@
           rmViewResult: "Chákàn jiéguǒ",
           rmRedo: "Chóngxiū kèchéng",
           rmStart: "Kāishǐ xuéxí",
-          rmUnlockHint: "Wánchéng shàng yī kè jí kě jiěsuǒ"
+          rmUnlockHint: "Wánchéng shàng yī kè jí kě jiěsuǒ",
+          rmSoon: "Jíjiāng kāifàng",
+          rmSoonHint: "Zhè yī kè zhèngzài zhìzuò zhōng，jìng qǐng qīdài"
         };
         var SVG_CHECK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 6.5"/></svg>';
         var SVG_CHECK_SM = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 12.5 10 18 19.5 6.5"/></svg>';
         var SVG_LOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="5" y="10.5" width="14" height="9.5" rx="2.5"/><path d="M8 10.5V8a4 4 0 0 1 8 0v2.5"/></svg>';
+        var SVG_CLOCK = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>';
         function setNavActive(which) {
           var links = { home: "navHomeLink", courses: "navCoursesLink", path: "navPathLink" };
           Object.keys(links).forEach(function (k) {
@@ -3572,9 +3638,15 @@
              lessons so the stage progress counts lessons only. A
              leftover 16 means the practice had been completed under
              the old scheme — carry that over as the practice's own
-             completion flag (p.l16.completed) before dropping it. */
+             completion flag (p.l16.completed) before dropping it.
+             Only lessons with a real page (RM_LIVE) may count as
+             completed at all: ids 3–15 have no page, so a stored
+             completion for one of them could only have come from the
+             old roadmap click that marked a lesson done without any
+             studying — dropping those keeps the progress number
+             meaningful (completion = learning evidence). */
           var validIds = {};
-          RM_ITEMS.forEach(function (it) { validIds[it.id] = true; });
+          RM_ITEMS.forEach(function (it) { if (RM_LIVE[it.id]) validIds[it.id] = true; });
           var cleaned = p.rmDone.filter(function (id) { return validIds[id]; });
           if (cleaned.length !== p.rmDone.length) {
             if (p.rmDone.indexOf(16) !== -1) {
@@ -3663,7 +3735,7 @@
           RM_ITEMS.forEach(function (item, idx) {
             var key = item.key;
             var id = item.id;
-            var status = done.indexOf(id) !== -1 ? "done" : (id === currentId ? "current" : "locked");
+            var status = done.indexOf(id) !== -1 ? "done" : (!RM_LIVE[id] ? "soon" : (id === currentId ? "current" : "locked"));
             if (item.unit !== lastUnit) {
               lastUnit = item.unit;
               var uh = document.createElement("div");
@@ -3707,6 +3779,11 @@
                 lk2.innerHTML = SVG_LOCK; lk2.firstChild.classList.add("rm-lock");
                 circle.appendChild(lk2);
               }
+              if (status === "soon") {
+                var ck2 = document.createElement("span");
+                ck2.innerHTML = SVG_CLOCK; ck2.firstChild.classList.add("rm-lock");
+                circle.appendChild(ck2);
+              }
             }
             node.appendChild(circle);
 
@@ -3720,8 +3797,9 @@
             st.className = "rm-status " + status;
             if (status === "done") { var ci = document.createElement("span"); ci.innerHTML = SVG_CHECK_SM; ci.firstChild.style.width = "14px"; ci.firstChild.style.height = "14px"; st.appendChild(ci); }
             if (status === "locked") { var li = document.createElement("span"); li.innerHTML = SVG_LOCK; li.firstChild.style.width = "14px"; li.firstChild.style.height = "14px"; st.appendChild(li); }
+            if (status === "soon") { var si = document.createElement("span"); si.innerHTML = SVG_CLOCK; si.firstChild.style.width = "14px"; si.firstChild.style.height = "14px"; st.appendChild(si); }
             var stt = document.createElement("span"); st.appendChild(stt);
-            var stKey = status === "done" ? "rmDone" : (status === "current" ? "rmCurrent" : "rmLocked");
+            var stKey = status === "done" ? "rmDone" : (status === "current" ? "rmCurrent" : (status === "soon" ? "rmSoon" : "rmLocked"));
             biTextPy(stt, t(stKey), I18N.zh[stKey], RM_PY[stKey]);
             card.appendChild(st);
 
@@ -3756,6 +3834,11 @@
               biTextPy(sb, t("rmStart"), I18N.zh.rmStart, RM_PY.rmStart);
               acts2.appendChild(sb);
               card.appendChild(acts2);
+            } else if (status === "soon") {
+              var hintS = document.createElement("p");
+              hintS.className = "rm-hint";
+              biTextPy(hintS, t("rmSoonHint"), I18N.zh.rmSoonHint, RM_PY.rmSoonHint);
+              card.appendChild(hintS);
             } else {
               var hint = document.createElement("p");
               hint.className = "rm-hint";
@@ -3828,14 +3911,20 @@
           if (nn) biText(nn, o.nameMain, o.nameZh);
           var ns = document.getElementById(o.stateId);
           if (ns) {
-            ns.classList.toggle("unlocked", o.isDone);
+            /* nextPending: the next lesson is not built yet (it shows
+               as 即将开放 on the roadmap), so the state line must not
+               claim it is unlocked — it reads “下一课正在制作中” with
+               the same clock icon the roadmap uses, done or not. */
+            var pending = !!o.nextPending;
+            ns.classList.toggle("unlocked", o.isDone && !pending);
             ns.innerHTML = "";
             var ic = document.createElement("span");
-            ic.innerHTML = o.isDone ? SVG_CHECK_SM : SVG_LOCK;
+            ic.innerHTML = pending ? SVG_CLOCK : (o.isDone ? SVG_CHECK_SM : SVG_LOCK);
             ic.firstChild.style.width = "15px"; ic.firstChild.style.height = "15px";
             ns.appendChild(ic);
             var nst = document.createElement("span"); ns.appendChild(nst);
-            biText(nst, o.isDone ? t("l00NextUnlocked") : t("l00NextLocked"), o.isDone ? I18N.zh.l00NextUnlocked : I18N.zh.l00NextLocked);
+            if (pending) biText(nst, t("l00NextSoon"), I18N.zh.l00NextSoon);
+            else biText(nst, o.isDone ? t("l00NextUnlocked") : t("l00NextLocked"), o.isDone ? I18N.zh.l00NextUnlocked : I18N.zh.l00NextLocked);
           }
           var go = document.getElementById(o.goId);
           if (go) {
@@ -4452,6 +4541,7 @@
           var can02 = l02CanComplete();
           renderFinishBlock({
             isDone: isDone, canComplete: can02, gateReady: can02 || isDone,
+            nextPending: true,
             btnId: "l02CompleteBtn",
             gateId: "l02GateHint", gateReadyKey: "l02GateReady", gateHintKey: "l02GateHint",
             nameId: "l02NextName", nameMain: "03 · " + t("l02NextShort"), nameZh: "03 · " + I18N.zh.l02NextShort,
@@ -4495,7 +4585,7 @@
           if (d.indexOf(2) < 0) { d.push(2); setRmDone(d); }
           renderLesson02State();
           renderRoadmap();
-          showToast(t("toastLessonDone").replace("{name}", t("rmL2")));
+          showToast(t("toastLessonDoneSoon").replace("{name}", t("rmL2")));
         });
         document.getElementById("l02NextGo").addEventListener("click", function () { showRoadmap(); });
 
@@ -5610,15 +5700,12 @@
           if (id === 1) { showLesson00(); return; }
           if (id === 2) { showLesson02(); return; }
           if (act === "start") {
-            /* DEV MODE: guests can start/complete lessons too; progress
-               is kept under the local guest profile (see progressEmail). */
-            var done = getRmDone();
-            if (done.indexOf(id) === -1) done.push(id);
-            setRmDone(done);
-            renderRoadmap();
-            showToast(done.length >= RM_ITEMS.length
-              ? t("toastAllDone")
-              : t("toastLessonDone").replace("{name}", name));
+            /* Lessons without a page (ids 3–15) render no start button,
+               so a click can only land here defensively: say the lesson
+               is coming soon instead of writing a completion that was
+               never studied. Completions are written only by a real
+               lesson page's own finish block. */
+            showToast(t("toastLessonSoon").replace("{name}", name));
           } else if (act === "result") {
             showToast(t("toastResult").replace("{name}", name));
           } else if (act === "redo") {
