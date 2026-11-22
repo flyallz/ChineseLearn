@@ -1,6 +1,6 @@
 # 开发规范 CONTRIBUTING — 汉语起步 Hanyu Start
 
-**修订：** 2026-11-20 v1.1，基于项目审查：单人小改动可简化流程、补 Windows 命令、目录标注已存在 / 规划中。
+**修订：** 2026-11-23 v1.2，明确最小工程结构、V0.0 模拟教师页、公开课程资源与私有录音边界。
 
 适用：当前 1 人开发，未来最多 4 人。负责人保留最终架构决策和生产发布权。
 
@@ -19,26 +19,40 @@
 
 ## 2. 仓库结构（目标 Monorepo）
 
-```
-flyallz/ChineseLearn
-├── index.html              # [已存在] 原型单文件版（已冻结，做回归对照用，别删）
-├── README.md               # [已存在] 项目入口：这是什么、怎么跑、去哪看文档
-├── CONTRIBUTING.md         # [已存在] 本文件
-├── docs/
-│   ├── PRD-V2.2.md         # [已存在] 冻结版需求基线
-│   ├── TD-01-first-lesson-audit.md   # [规划中] 第一课审计，TD-01
-│   ├── TD-02-event-contract.md       # [已存在] 事件与 API 契约，v1.1
-│   ├── TD-03-database.md             # [规划中] 最小数据库设计，TD-03
-│   └── decisions/          # [已存在] ADR：一条决策一小段，写清为什么（已有 ADR-001 仓库暂时公开）
-├── frontend/               # [规划中] React + TypeScript + Vite（V0.0 起）
-├── backend/                # [规划中] FastAPI + Alembic（V0.0 起）
-├── courses/                # [规划中] 课程 JSON：内容与组件分离
-├── contracts/              # [规划中] 事件与 API 的 Schema（唯一事实来源）
-├── infra/                  # [规划中] Nginx、备份/恢复脚本、部署说明
-└── .github/                # [规划中] PR 模板、CI 检查
+```text
+ChineseLearn/
+├── index.html                    # [已存在] 冻结原型，供视觉与交互回归
+├── README.md
+├── CONTRIBUTING.md
+├── .env.example                 # [P0] 只列变量名和安全示例
+├── frontend/                    # [P0/V0.0] React + TypeScript + Vite
+│   ├── public/media/            # [按需] 公开的课程插图和标准发音
+│   └── src/
+│       ├── app/                 # 入口、路由、全局设置
+│       ├── pages/               # 首页、模拟学生页、模拟教师页
+│       ├── features/learning/   # 学习事件发送与补传
+│       ├── components/          # 仅提取当前课程实际复用的组件
+│       ├── i18n/                # 界面文案与语言选择
+│       └── styles/              # 设计变量与基础样式
+├── backend/                     # [P0/V0.0] FastAPI + Alembic
+│   ├── app/
+│   │   ├── main.py
+│   │   ├── core/                # 配置、数据库连接与通用错误
+│   │   └── modules/
+│   │       ├── sessions/        # 模拟学习会话
+│   │       └── events/          # 写入、查询与 SSE
+│   ├── migrations/
+│   └── tests/
+├── contracts/events/v1/         # [V0.0] 事件 JSON Schema
+├── courses/                     # [V0.1] 真实课程内容、翻译、资源清单
+├── docs/                        # PRD、TD、ADR
+├── infra/                       # [按部署阶段] 配置、备份与恢复
+└── .github/workflows/           # [工程建立后] 类型检查与测试
 ```
 
-现在已存在的是原型 + docs（PRD-V2.2、TD-02），其余标 [规划中] 的按路线图 P0 / V0.0 再建，不提前搭空架子。新开发者不要以为工程已经建好了。
+V0.0 的教师页仅供模拟身份查看事件；真实教师、班级与账号功能到 V0.2 按需增加。正式课程媒体中的公开插图和标准发音可放 `frontend/public/media/`；学生录音属于私有数据，V0.2 按授权流程上传 COS，不能放进公开静态目录或 Git 仓库。
+
+项目按阶段创建真实需要的目录，不提前搭空模块。TD-02 解释业务规则，`contracts/events/v1/` 提供机器可校验的事件结构；实现与测试必须对照 Schema。HTTP API 由后端生成 OpenAPI，避免在多处手写相互矛盾的定义。契约变更仍按第 5 节走 Issue 与 PR。
 
 ## 3. 本地怎么跑
 
