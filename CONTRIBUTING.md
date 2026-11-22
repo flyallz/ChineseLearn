@@ -27,8 +27,8 @@ flyallz/ChineseLearn
 ├── docs/
 │   ├── PRD-V2.2.md         # [已存在] 冻结版需求基线
 │   ├── TD-01-first-lesson-audit.md   # [规划中] 第一课审计，TD-01
-│   ├── TD-02-event-contract.md       # [已存在] 事件与 API 契约，v1.1
-│   ├── TD-03-database.md             # [规划中] 最小数据库设计，TD-03
+│   ├── TD-02-event-contract.md       # [已存在] 事件与 API 契约，v1.2
+│   ├── TD-03-database.md             # [已存在] 最小数据库设计，TD-03 v1.0
 │   └── decisions/          # [已存在] ADR：一条决策一小段，写清为什么（已有 ADR-001 仓库暂时公开）
 ├── frontend/               # [规划中] React + TypeScript + Vite（V0.0 起）
 ├── backend/                # [规划中] FastAPI + Alembic（V0.0 起）
@@ -38,7 +38,7 @@ flyallz/ChineseLearn
 └── .github/                # [规划中] PR 模板、CI 检查
 ```
 
-现在已存在的是原型 + docs（PRD-V2.2、TD-02），其余标 [规划中] 的按路线图 P0 / V0.0 再建，不提前搭空架子。新开发者不要以为工程已经建好了。
+现在已存在的是原型 + docs（PRD-V2.2、TD-02、TD-03、ADR-001），其余标 [规划中] 的按路线图 P0 / V0.0 再建，不提前搭空架子。新开发者不要以为工程已经建好了。
 
 ## 3. 本地怎么跑
 
