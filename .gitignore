@@ -1,0 +1,55 @@
+# 环境变量与密钥 —— 绝不提交真实值，只提交 .env.example 模板
+.env
+.env.local
+.env.*.local
+!.env.example
+
+# Python / FastAPI
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+.pytest_cache/
+.coverage
+htmlcov/
+.mypy_cache/
+.ruff_cache/
+
+# Node / React + TypeScript + Vite
+node_modules/
+dist/
+dist-ssr/
+*.local
+vite.config.*.timestamp-*
+
+# 构建与日志
+*.log
+logs/
+*.pid
+*.seed
+
+# 数据库与备份（本地开发库与备份文件不进仓库）
+*.sqlite
+*.sqlite3
+*.dump
+*.sql.gz
+backups/
+*.bak
+
+# 系统与编辑器
+.DS_Store
+Thumbs.db
+Desktop.ini
+.vscode/*
+!.vscode/extensions.json
+.idea/
+*.swp
+*.swo
+*~
+
+# 其他本地文件
+*.tmp
+*.temp

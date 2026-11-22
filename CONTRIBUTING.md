@@ -29,7 +29,7 @@ flyallz/ChineseLearn
 │   ├── TD-01-first-lesson-audit.md   # [规划中] 第一课审计，TD-01
 │   ├── TD-02-event-contract.md       # [已存在] 事件与 API 契约，v1.1
 │   ├── TD-03-database.md             # [规划中] 最小数据库设计，TD-03
-│   └── decisions/          # [规划中] ADR：一条决策一小段，写清为什么
+│   └── decisions/          # [已存在] ADR：一条决策一小段，写清为什么（已有 ADR-001 仓库暂时公开）
 ├── frontend/               # [规划中] React + TypeScript + Vite（V0.0 起）
 ├── backend/                # [规划中] FastAPI + Alembic（V0.0 起）
 ├── courses/                # [规划中] 课程 JSON：内容与组件分离
