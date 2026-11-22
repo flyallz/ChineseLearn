@@ -62,7 +62,7 @@ V0.0 的教师页仅供模拟身份查看事件；真实教师、班级与账号
 
 ```bash
 # 前端（macOS / Linux / Windows 通用）
-cd frontend && npm install && npm run dev
+cd frontend && pnpm install && pnpm dev
 ```
 
 ```bash

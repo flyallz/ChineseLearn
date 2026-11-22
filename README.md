@@ -28,6 +28,31 @@
 
 当前仓库里的 `index.html` 是已冻结的原型单文件版，做回归对照用，别删。重构按 V2.2 路线图走：P0 工程准备 → V0.0 最小学习事件闭环 → V0.1 第一课真实迁移。
 
+## 正式工程：P0 起点
+
+- `frontend/` 是 React + TypeScript + Vite 的新工程，已迁入首页结构、原型主插图和单韵母 `a` 的试听资源。当前只有首页预览，完整课程尚未迁移。
+- `backend/` 是 FastAPI 起点，目前仅提供 `GET /api/health`。事件 API、PostgreSQL 表和教师实时页属于 V0.0，在 TD-03 数据设计完成后实施。
+- `index.html` 仍是原型参照；新工程不会把原型里的浏览器本地账号机制带入正式产品。
+
+启动前端（Node 需符合 Vite 当前版本要求）：
+
+```bash
+cd frontend
+pnpm install
+pnpm dev
+```
+
+启动后端：
+
+```bash
+cd backend
+python3 -m venv .venv
+.venv/bin/pip install -r requirements-dev.txt
+.venv/bin/uvicorn app.main:app --reload
+```
+
+当前阶段的检查：在 `frontend/` 执行 `pnpm typecheck && pnpm build`，在 `backend/` 执行 `.venv/bin/pytest && .venv/bin/ruff check . && .venv/bin/black --check .`。本机没有 PostgreSQL 时仍可完成 P0 检查；V0.0 的事件验收必须使用真实 PostgreSQL。
+
 ## 使用方法
 
 本地直接双击打开 `index.html` 即可用，无需安装、无需联网部署（发音音频、插图已内嵌在页面里）。
